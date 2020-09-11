@@ -1,5 +1,5 @@
 # little_rag_doll
- game 2D, pixel, platformer 
+ game offline 2D, pixel, platformer 
 
 # Unity version 
 2019.3.0f1
