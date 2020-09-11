@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float hormove = 0f;
     private bool isJumping = false;
+    private bool isDucking = false;    
 
     // Update is called once per frame
     void Update()
@@ -25,10 +26,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Duck"))
         {
+            isDucking = true;
             animator.SetBool("isDucking",true);
         }
         if (Input.GetButtonUp("Duck"))
         {
+            isDucking = false;
             animator.SetBool("isDucking",false);
         }
 
@@ -46,6 +49,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        controller2D.Move(hormove * Time.fixedDeltaTime, false, isJumping);
+        controller2D.Move(hormove * Time.fixedDeltaTime, isDucking, isJumping);
     }
 }
