@@ -5,6 +5,9 @@
 2019.3.0f1
 
 # link tham khảo
+setup Unity với GitHub
+https://www.youtube.com/watch?v=qpXxcvS-g3g
+
 làm tilemap cho các Scene: 
 https://www.youtube.com/watch?v=ryISV_nH8qw
 
