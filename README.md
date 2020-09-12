@@ -9,7 +9,7 @@ setup Unity với GitHub
 https://www.youtube.com/watch?v=qpXxcvS-g3g
 
 làm tilemap cho các Scene: 
-https://www.youtube.com/watch?v=ryISV_nH8qw
+https://www.youtube.com/watch?v=ryISV_nH8qw /n
 https://www.youtube.com/watch?v=RDpVn9dcbSs
 
 Cách bay của Fairy:
