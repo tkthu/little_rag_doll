@@ -2,7 +2,7 @@
  game offline 2D, pixel, platformer 
 
 # Unity version 
-2019.3.0f1
+2019.3.0f6
 
 # link tham khảo
 setup Unity với GitHub <br/>
