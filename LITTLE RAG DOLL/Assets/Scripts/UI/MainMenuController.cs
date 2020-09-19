@@ -29,5 +29,6 @@ public class MainMenuController : MonoBehaviour
     public void btn_QuitHandler()
     {
         Debug.Log("vua nhan nut Quit to Desktop");
+        Application.Quit();
     }
 }
