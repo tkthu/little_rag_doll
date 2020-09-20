@@ -114,17 +114,17 @@ public class MenuScript : MonoBehaviour
                 break;
             case "map":
                 GameManager.GM.map = newKey; //set jump to new keycode
-                buttonText.text = GameManager.GM.jump.ToString(); //set button text to new key
+                buttonText.text = GameManager.GM.map.ToString(); //set button text to new key
                 PlayerPrefs.SetString("mapKey", GameManager.GM.map.ToString()); //save new key to playerprefs
                 break;
             case "attack":
                 GameManager.GM.attack = newKey; //set jump to new keycode
-                buttonText.text = GameManager.GM.jump.ToString(); //set button text to new key
+                buttonText.text = GameManager.GM.attack.ToString(); //set button text to new key
                 PlayerPrefs.SetString("attackKey", GameManager.GM.attack.ToString()); //save new key to playerprefs
                 break;
-            case "eatShootKey":
+            case "eatShoot":
                 GameManager.GM.eatShoot = newKey; //set jump to new keycode
-                buttonText.text = GameManager.GM.jump.ToString(); //set button text to new key
+                buttonText.text = GameManager.GM.eatShoot.ToString(); //set button text to new key
                 PlayerPrefs.SetString("eatShootKey", GameManager.GM.eatShoot.ToString()); //save new key to playerprefs
                 break;
         }

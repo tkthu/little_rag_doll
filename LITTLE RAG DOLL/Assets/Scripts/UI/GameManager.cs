@@ -38,14 +38,4 @@ public class GameManager : MonoBehaviour
 		right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
 
 	}
-
-	void Start()
-	{
-
-	}
-
-	void Update()
-	{
-
-	}
 }
