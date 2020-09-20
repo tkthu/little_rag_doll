@@ -6,11 +6,11 @@ public class OptionsSceneController : MonoBehaviour
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
     public int[] screenWidths;
-    int activeScreenResIndex;
+    int activeScreenResIndex = 0;
 
     void Start()
     {
-        activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
+        activeScreenResIndex = PlayerPrefs.GetInt("Screen res index");
         bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
 
         volumeSliders[0].value = AudioManager.instance.masterVolumePercent;
@@ -26,12 +26,10 @@ public class OptionsSceneController : MonoBehaviour
 
     public void btn_BackMainMenu()
     {
-        Debug.Log("vua nhan nut Back cua Scene Options");
         SceneManager.LoadScene("MainMenu");
     }
     public void btn_Controls ()
     {
-        Debug.Log("vua nhan nut Controls cua Scene Options");
         SceneManager.LoadScene("ControlsScene");
     }
 
@@ -43,7 +41,9 @@ public class OptionsSceneController : MonoBehaviour
             float aspecRatio = 16 / 9f;
             Screen.SetResolution(screenWidths[i], (int)(screenWidths[i]/aspecRatio), false);
             PlayerPrefs.SetInt("Screen res index", activeScreenResIndex);
+            PlayerPrefs.Save();
         }
+        
     }
 
     public void SetFullScreen(bool isFullscreen)
