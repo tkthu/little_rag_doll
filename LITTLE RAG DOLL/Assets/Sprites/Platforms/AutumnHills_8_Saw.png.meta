@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: 3040437804099871160
     second: AutumnHills_8_Saw_3
+  - first:
+      213: -8276671795114158591
+    second: AutumnHills_8_Saw_0
+  - first:
+      213: -8215023400292672209
+    second: AutumnHills_8_Saw_1
+  - first:
+      213: -8779642709686807362
+    second: AutumnHills_8_Saw_2
+  - first:
+      213: -5420177432959608128
+    second: AutumnHills_8_Saw_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -112,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b0e7ed7b13797645896933e4c1a8780
-      internalID: -5885927738135098358
+      spriteID: 106d9b1aada532d80800000000000000
+      internalID: -8276671795114158591
       vertices: []
       indices: 
       edges: []
@@ -133,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb3d11afaa7181d468d7d45574b7e61b
-      internalID: 8631820096837780969
+      spriteID: f2d98041ebf5efd80800000000000000
+      internalID: -8215023400292672209
       vertices: []
       indices: 
       edges: []
@@ -143,7 +155,7 @@ TextureImporter:
       name: AutumnHills_8_Saw_2
       rect:
         serializedVersion: 2
-        x: 121
+        x: 120
         y: 0
         width: 60
         height: 60
@@ -154,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e510872f08d4fe245bab3398c8b30b5d
-      internalID: -3522886515170698007
+      spriteID: eb4154ad871782680800000000000000
+      internalID: -8779642709686807362
       vertices: []
       indices: 
       edges: []
@@ -175,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f702ba06b2eea2644b65b4e959118116
-      internalID: 3040437804099871160
+      spriteID: 0ca9ad09759a7c4b0800000000000000
+      internalID: -5420177432959608128
       vertices: []
       indices: 
       edges: []
