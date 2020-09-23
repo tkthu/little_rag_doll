@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +17,19 @@ public class MainMenuController : MonoBehaviour
     }
 
     public void btn_PlayHandler()
-    {
-        Debug.Log("vua nhan nut Play");
+    {        
         SceneManager.LoadScene("SampleScene");
-        
+        GameManager.GM.player.SetActive(true);
     }
     public void btn_OptionsHandler()
     {
-        Debug.Log("vua nhan nut Options");
         SceneManager.LoadScene("OptionsScene");
     }
     public void btn_QuitHandler()
     {
-        Debug.Log("vua nhan nut Quit to Desktop");
         Application.Quit();
     }
+    
+
+
 }
