@@ -16,6 +16,6 @@ public class ControlsSceneController : MonoBehaviour
     public void btn_BackHandler()
     {
         Debug.Log("vua nhan nut Back cua Scene Controls");
-        SceneManager.LoadScene("OptionsScene");
+        GameManager.GM.loadScene(SceneName.ControlsScene);
     }
 }
