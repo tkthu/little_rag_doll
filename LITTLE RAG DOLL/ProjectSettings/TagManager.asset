@@ -11,6 +11,7 @@ TagManager:
   - StraightBullet
   - BounceBullet
   - ExplodeBullet
+  - SceneTrigger
   layers:
   - Default
   - TransparentFX

@@ -3,27 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public GameObject player;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void btn_PlayHandler()
-    {        
-        SceneManager.LoadScene("SampleScene");
-        GameManager.GM.player.SetActive(true);
+    {
+        GameManager.GM.loadScene(SceneName.Scene_8);
     }
     public void btn_OptionsHandler()
     {
-        SceneManager.LoadScene("OptionsScene");
+        GameManager.GM.loadScene(SceneName.OptionsScene);
     }
     public void btn_QuitHandler()
     {

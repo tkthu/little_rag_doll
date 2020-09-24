@@ -449,7 +449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59b8d34172567347a54f04be9dc6a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2151621879023751995, guid: 7139829cb624b4545a3cd674c7f726ea, type: 3}
 --- !u!114 &269167187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,6 +905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 844644201}
   - component: {fileID: 844644200}
+  - component: {fileID: 844644202}
   m_Layer: 0
   m_Name: _GM
   m_TagString: Untagged
@@ -926,16 +926,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2151621879023751995, guid: 7139829cb624b4545a3cd674c7f726ea, type: 3}
-  StraightBullets: {fileID: 0}
-  StraightBulletsNo: 20
-  PlayerStraightBullets: {fileID: 0}
-  PlayerStraightBulletsNo: 20
-  BounceBullets: {fileID: 0}
-  BounceBulletssNo: 20
-  PlayerBounceBullets: {fileID: 0}
-  PlayerBounceBulletsNo: 20
-  PlayerExplodeBullets: {fileID: 0}
-  PlayerExplodeBulletsNo: 2
+  StraightBulletsNo: 15
+  BounceBulletsNo: 15
+  PlayerStraightBulletsNo: 15
+  PlayerBounceBulletsNo: 15
+  PlayerExplodeBulletsNo: 5
+  PlayerPistilsNo: 5
+  PlayerBatterysNo: 5
+  PlayerBatteryDeadsNo: 5
 --- !u!4 &844644201
 Transform:
   m_ObjectHideFlags: 0
@@ -950,6 +948,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844644202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844644199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7e240717ede3f4a96d5f604e096b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1358271796
 GameObject:
   m_ObjectHideFlags: 0
