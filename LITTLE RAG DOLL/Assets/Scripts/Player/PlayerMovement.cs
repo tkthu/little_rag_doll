@@ -77,8 +77,11 @@ public class PlayerMovement : MonoBehaviour
 
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(hormove * 50 * Time.deltaTime, vermove * 50 * Time.deltaTime);
         }
+
+        animator.SetBool("isGrounded", controller2D.m_Grounded);
+        headAnimator.SetBool("isGrounded", controller2D.m_Grounded);
         
-        
+
 
     }
     public void OnLanding()
