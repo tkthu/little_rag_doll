@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Landing
+  m_Name: Head_Jumping
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -5111381322581893728, guid: aefe65859e8041445ae01da31ab49bd3,
+      value: {fileID: -3975740620788105284, guid: d177ba21f0e07ca42818dde32e51e316,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -41,7 +41,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -5111381322581893728, guid: aefe65859e8041445ae01da31ab49bd3, type: 3}
+    - {fileID: -3975740620788105284, guid: d177ba21f0e07ca42818dde32e51e316, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -52,7 +52,7 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
