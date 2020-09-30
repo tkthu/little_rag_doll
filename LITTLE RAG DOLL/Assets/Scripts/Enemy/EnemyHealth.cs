@@ -12,16 +12,14 @@ public class EnemyHealth : MonoBehaviour
         HP = HPmax;
     }
 
-    void takeDamage(int damage)
+    public void takeDamage(int damage)
     {
         HP = HP - damage;
         if(HP<=0)
-        {
             die();
-        }
     }
 
-    void die()
+    private void die()
     {
         gameObject.SetActive(false);
     }
