@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 2410bfd0e6ca11a4882f5cb26b05ff38
+guid: cca307d7f7dad0141a7446745339dc3d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8894292379520181888
-    second: right_duck_attack__SpriteSheet_0
+      213: -595336043175795812
+    second: right_head_climb__SpriteSheet_0
   - first:
-      213: 7542715242563181336
-    second: right_duck_attack__SpriteSheet_1
+      213: 4528282417168667117
+    second: right_head_climb__SpriteSheet_1
   - first:
-      213: 4776853596715493203
-    second: right_duck_attack__SpriteSheet_2
+      213: -6873474696247202931
+    second: right_head_climb__SpriteSheet_2
   - first:
-      213: 8228325573936696998
-    second: right_duck_attack__SpriteSheet_3
+      213: -4480518507634432151
+    second: right_head_climb__SpriteSheet_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -94,11 +94,59 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: right_duck_attack__SpriteSheet_0
+      name: right_head_climb__SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8caa6e0d040dad0449191da6b826fecb
-      internalID: -8894292379520181888
+      spriteID: c932580e501fcb7f0800000000000000
+      internalID: -595336043175795812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_duck_attack__SpriteSheet_1
+      name: right_head_climb__SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -133,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93c4dba8370fc054e88d667da0bf9abc
-      internalID: 7542715242563181336
+      spriteID: de15cf5ddd0b7de30800000000000000
+      internalID: 4528282417168667117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_duck_attack__SpriteSheet_2
+      name: right_head_climb__SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -154,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91ecf41103b94d348b5e5f6526bf4f00
-      internalID: 4776853596715493203
+      spriteID: d8bac855e238c90a0800000000000000
+      internalID: -6873474696247202931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_duck_attack__SpriteSheet_3
+      name: right_head_climb__SpriteSheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -175,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d1d59401fa00884b83a7a4b342b9df5
-      internalID: 8228325573936696998
+      spriteID: 967e2e6f72002d1c0800000000000000
+      internalID: -4480518507634432151
       vertices: []
       indices: 
       edges: []

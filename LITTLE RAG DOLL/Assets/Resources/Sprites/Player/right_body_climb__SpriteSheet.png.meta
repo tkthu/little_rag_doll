@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: fd1bcaf7029583c4d889415ad0736db3
+guid: 7a8301a0b02a828489d872dbe4ad6218
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 365552102352282404
-    second: right_run_attack__SpriteSheet_0
+      213: -4363388081208289144
+    second: right_body_climb__SpriteSheet_0
   - first:
-      213: 5426801899617427155
-    second: right_run_attack__SpriteSheet_1
+      213: -1114825950401968570
+    second: right_body_climb__SpriteSheet_1
   - first:
-      213: -9085233607887891402
-    second: right_run_attack__SpriteSheet_2
+      213: -829937112942152713
+    second: right_body_climb__SpriteSheet_2
   - first:
-      213: 732011988232358606
-    second: right_run_attack__SpriteSheet_3
+      213: -4051792796275627854
+    second: right_body_climb__SpriteSheet_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -94,11 +94,59 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: right_run_attack__SpriteSheet_0
+      name: right_body_climb__SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -106,20 +154,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a458c07bda04b24c93297953e86712b
-      internalID: 365552102352282404
+      spriteID: 888186a88a12273c0800000000000000
+      internalID: -4363388081208289144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_run_attack__SpriteSheet_1
+      name: right_body_climb__SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -127,20 +175,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb8b877f098dad1458e464e7e8f05d03
-      internalID: 5426801899617427155
+      spriteID: 64647e764b75780f0800000000000000
+      internalID: -1114825950401968570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_run_attack__SpriteSheet_2
+      name: right_body_climb__SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -148,20 +196,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3211fa49695948f4dbee633b1b4f52db
-      internalID: -9085233607887891402
+      spriteID: 7f37b2dc7987b74f0800000000000000
+      internalID: -829937112942152713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_run_attack__SpriteSheet_3
+      name: right_body_climb__SpriteSheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -169,14 +217,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de5c551dfd981d64d97f21f2c4d9b757
-      internalID: 732011988232358606
+      spriteID: 2b8218a4be325c7c0800000000000000
+      internalID: -4051792796275627854
       vertices: []
       indices: 
       edges: []
