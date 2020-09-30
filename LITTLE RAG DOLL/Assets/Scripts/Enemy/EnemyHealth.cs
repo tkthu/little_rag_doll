@@ -5,7 +5,12 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public int HPmax;
-    public int HP;
+    private int HP;
+
+    private void Awake()
+    {
+        HP = HPmax;
+    }
 
     void takeDamage(int damage)
     {
