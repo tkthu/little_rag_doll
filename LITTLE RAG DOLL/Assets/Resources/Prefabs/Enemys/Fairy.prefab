@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3014926981600917146}
   - component: {fileID: 3014926981600917147}
   - component: {fileID: 3014926981600917145}
-  m_Layer: 0
+  - component: {fileID: -107143933181396908}
+  m_Layer: 10
   m_Name: Fairy
-  m_TagString: Untagged
+  m_TagString: Fairy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,3 +103,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-107143933181396908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014926981600917148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dc33f3a8103664bb833cb739be831b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPmax: 0
