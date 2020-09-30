@@ -12,11 +12,12 @@ public class PlayerMovement : MonoBehaviour
     public Animator headAnimator;
 
     private float hormove = 0f;
+    private float vermove = 0f;
     private bool isJumping = false;
     private bool isDucking = false;
 
-    private float attackTimeRate = 0.5f; // 5 secs
-    private float attackTimeLimit = 0; // 1 secs
+    private float attackTimeRate = 0.5f;
+    private float attackTimeLimit = 0; 
 
     private bool debug = false;
     // Update is called once per frame
@@ -33,9 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (!debug)
         {
-            hormove = Input.GetAxisRaw("Horizontal") * runSpeed;        
+            hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            vermove = Input.GetAxisRaw("Vertical") * runSpeed;
+            
             animator.SetFloat("speed", Mathf.Abs(hormove));
             headAnimator.SetFloat("speed", Mathf.Abs(hormove));
+
+            animator.SetFloat("speedY", Mathf.Abs(vermove));
+            headAnimator.SetFloat("speedY", Mathf.Abs(vermove));
 
             if (Input.GetButtonDown("Attack"))
             {
@@ -44,10 +50,8 @@ public class PlayerMovement : MonoBehaviour
                 attack.SetActive(true);
                 attackTimeLimit = Time.time + attackTimeRate;
             }
-            if (Time.time >= attackTimeLimit)
-            {            
+            if (Time.time >= attackTimeLimit)        
                 attack.SetActive(false);
-            }            
 
             if (Input.GetButtonDown("Duck"))
             {
@@ -72,12 +76,23 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
-            float vermove = Input.GetAxisRaw("Vertical") * runSpeed;
-
+            vermove = Input.GetAxisRaw("Vertical") * runSpeed;
 
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(hormove * 50 * Time.deltaTime, vermove * 50 * Time.deltaTime);
         }
-        
+
+        animator.SetBool("isGrounded", controller2D.m_Grounded);
+        headAnimator.SetBool("isGrounded", controller2D.m_Grounded);
+        if(controller2D.m_Walled && ((controller2D.m_FacingRight && hormove > 0) || (!controller2D.m_FacingRight && hormove < 0)))
+        {
+            animator.SetBool("isClinging", true);
+            headAnimator.SetBool("isClinging", true);
+        }
+        else
+        {
+            animator.SetBool("isClinging", false);
+            headAnimator.SetBool("isClinging", false);
+        }
         
 
     }
@@ -90,6 +105,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        controller2D.Move(hormove * Time.fixedDeltaTime, isDucking, isJumping);
+        controller2D.Move(hormove * Time.fixedDeltaTime, vermove * Time.fixedDeltaTime, isDucking, isJumping);
     }
 }
