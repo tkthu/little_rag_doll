@@ -23,9 +23,9 @@ TagManager:
   - 
   - Player
   - Ground
-  - EneBullets
-  - PlayerBullets
   - Enemies
+  - PlayerBullets
+  - EneBullets
   - 
   - 
   - 
