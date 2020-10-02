@@ -65,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
         if (isAttacking && isClinging)
             vermove = 0;
 
+        
         if (Input.GetButtonDown("Jump"))
             isJumping = true;
 
@@ -86,7 +87,8 @@ public class PlayerMovement : MonoBehaviour
         setAnimParameter("isGrounded", controller2D.m_Grounded);
         setAnimParameter("isClinging", isClinging);
         setAnimParameter("isClimbing", isClimbing);
-        setAnimParameter("isSliding", isSliding);
+        setAnimParameter("isSliding", isSliding); 
+        setAnimParameter("isAttacking", isAttacking); 
     }
 
     private void setAnimParameter(string name,bool value)

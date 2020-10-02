@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
@@ -37,6 +38,7 @@ public class CharacterController2D : MonoBehaviour
 	private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
+		bool wasWalled = m_Walled;
 		m_Grounded = false;
 		m_Walled = false;
 
@@ -51,7 +53,12 @@ public class CharacterController2D : MonoBehaviour
 		// check if cling to wall
 		Collider2D[] wallColliders = Physics2D.OverlapCircleAll(Face.position, k_ColliderRadius, m_WhatIsGround);
 		if (wallColliders.Length > 0)
-			m_Walled = true;		
+        {
+			m_Walled = true;
+			if (!wasWalled)
+				OnLandEvent.Invoke();
+		}
+					
 	}
 
 
@@ -70,16 +77,30 @@ public class CharacterController2D : MonoBehaviour
 		}
 		if (m_Walled)
         {
-			if (moveX > 0 && m_FacingRight || moveX < 0 && !m_FacingRight)
-			{
+            if (cling)
+            {
 				m_Rigidbody2D.velocity = Vector2.zero;
 				m_Rigidbody2D.gravityScale = 0;
-				targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveY * 10f);
-				m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
-			}		
+				if (jump)
+				{
+					int dir = m_FacingRight ? 1 : -1;
+					targetVelocity = m_Rigidbody2D.position + new Vector2(-dir * 5f, 2f);
+					StopCoroutine("wallJump");
+					StartCoroutine("wallJump", targetVelocity);
+					Debug.Log(jump);
 					
+				}else if (climb)
+				{
+					targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveY * 10f);
+					m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+				}
+				else if (slide)
+				{
+					targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveY * 15f);
+					m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+				}				
+			}			
 		}
-
 
 		if (moveX > 0 && !m_FacingRight)
 			Flip();
@@ -87,9 +108,19 @@ public class CharacterController2D : MonoBehaviour
 			Flip();
 
 	}
+	IEnumerator wallJump(Vector2 targetVelocity)
+	{
+		while (Vector2.Distance(m_Rigidbody2D.position, targetVelocity) > 1f)
+        {
+			Debug.Log(m_Rigidbody2D.position + " " + targetVelocity);
+			m_Rigidbody2D.position = Vector2.SmoothDamp(m_Rigidbody2D.position, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			yield return null;
+		}
+		yield return null;
+	}
 
 
-	private void Flip()
+private void Flip()
 	{
 		m_FacingRight = !m_FacingRight;
 		Vector2 theScale = transform.localScale;
