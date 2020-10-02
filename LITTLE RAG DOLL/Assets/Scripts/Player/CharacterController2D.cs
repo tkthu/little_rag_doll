@@ -14,16 +14,14 @@ public class CharacterController2D : MonoBehaviour
 	const float k_ColliderRadius = .02f; // Radius of the overlap circle to determine if grounded
 	[HideInInspector] public bool m_Grounded;            // Whether or not the player is grounded.
 	[HideInInspector] public bool m_Walled;            // Whether or not the player is grounded.
-	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-	private Rigidbody2D m_Rigidbody2D;
 	[HideInInspector] public bool m_FacingRight = true;  // For determining which way the player is currently facing.
+	private Rigidbody2D m_Rigidbody2D;	
 	private Vector2 m_Velocity = Vector2.zero;
 
 	[Header("Events")]
 	[Space]
 
 	public UnityEvent OnLandEvent;
-	public UnityEvent OnClingEvent;
 
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
@@ -34,41 +32,30 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
-		if (OnClingEvent == null)
-			OnClingEvent = new UnityEvent();
 	}
 
 	private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
-		bool wasWalled = m_Walled;
 		m_Grounded = false;
 		m_Walled = false;
 
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_ColliderRadius, m_WhatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
-		{
+		if(colliders.Length > 0)
+        {
 			m_Grounded = true;
 			if (!wasGrounded)
-            {
 				OnLandEvent.Invoke();
-				break;
-			}
-				
 		}
 
 		// check if cling to wall
 		Collider2D[] wallColliders = Physics2D.OverlapCircleAll(Face.position, k_ColliderRadius, m_WhatIsGround);
-		for (int i = 0; i < wallColliders.Length; i++)
-		{
-			m_Walled = true;
-			if (!wasWalled)
-				OnClingEvent.Invoke();
-		}		
+		if (wallColliders.Length > 0)
+			m_Walled = true;		
 	}
 
 
-	public void Move(float moveX, float moveY, bool crouch, bool jump, bool cling)
+	public void Move(float moveX, float moveY, bool crouch, bool jump, bool cling, bool climb, bool slide)
 	{
 		Vector2 targetVelocity = new Vector2(moveX * 10f, m_Rigidbody2D.velocity.y);
 		m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);

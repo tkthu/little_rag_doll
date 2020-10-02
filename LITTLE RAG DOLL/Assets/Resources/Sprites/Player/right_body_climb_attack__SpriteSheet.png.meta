@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 83c68e7f7ac5bf640a14055402cc2981
+guid: 39d14002be6628f4f8589b376d3f8585
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7317826744808663830
-    second: right_climb_attack__SpriteSheet_0
+      213: -2839245521009452336
+    second: right_body_climb_attack__SpriteSheet_0
   - first:
-      213: -537971207129729979
-    second: right_climb_attack__SpriteSheet_1
+      213: -57521258876016803
+    second: right_body_climb_attack__SpriteSheet_1
   - first:
-      213: -6705079987140600579
-    second: right_climb_attack__SpriteSheet_2
+      213: -1302827395720606372
+    second: right_body_climb_attack__SpriteSheet_2
   - first:
-      213: -5185335236680264814
-    second: right_climb_attack__SpriteSheet_3
+      213: -2741500195213636703
+    second: right_body_climb_attack__SpriteSheet_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -43,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -52,12 +52,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -146,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: right_climb_attack__SpriteSheet_0
+      name: right_body_climb_attack__SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61b6c2427a42e8560800000000000000
-      internalID: 7317826744808663830
+      spriteID: 0dadc1add39f898d0800000000000000
+      internalID: -2839245521009452336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_climb_attack__SpriteSheet_1
+      name: right_body_climb_attack__SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 544f4a3990eb888f0800000000000000
-      internalID: -537971207129729979
+      spriteID: d5769a548b4a33ff0800000000000000
+      internalID: -57521258876016803
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_climb_attack__SpriteSheet_2
+      name: right_body_climb_attack__SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfc57e7d645c2f2a0800000000000000
-      internalID: -6705079987140600579
+      spriteID: c5d0d62e26d6bede0800000000000000
+      internalID: -1302827395720606372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right_climb_attack__SpriteSheet_3
+      name: right_body_climb_attack__SpriteSheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -223,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2935b58431df908b0800000000000000
-      internalID: -5185335236680264814
+      spriteID: 1ab80a8f81c34f9d0800000000000000
+      internalID: -2741500195213636703
       vertices: []
       indices: 
       edges: []
