@@ -23,11 +23,10 @@ public class CharacterController2D : MonoBehaviour
 	[Space]
 
 	public UnityEvent OnLandEvent;
+	public UnityEvent OnClingEvent;
 
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
-
-	public BoolEvent OnCrouchEvent;
 
 	private void Awake()
 	{
@@ -35,13 +34,14 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
-		if (OnCrouchEvent == null)
-			OnCrouchEvent = new BoolEvent();
+		if (OnClingEvent == null)
+			OnClingEvent = new UnityEvent();
 	}
 
 	private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
+		bool wasWalled = m_Walled;
 		m_Grounded = false;
 		m_Walled = false;
 
@@ -50,17 +50,25 @@ public class CharacterController2D : MonoBehaviour
 		{
 			m_Grounded = true;
 			if (!wasGrounded)
+            {
 				OnLandEvent.Invoke();
+				break;
+			}
+				
 		}
 
 		// check if cling to wall
 		Collider2D[] wallColliders = Physics2D.OverlapCircleAll(Face.position, k_ColliderRadius, m_WhatIsGround);
 		for (int i = 0; i < wallColliders.Length; i++)
+		{
 			m_Walled = true;
+			if (!wasWalled)
+				OnClingEvent.Invoke();
+		}		
 	}
 
 
-	public void Move(float moveX, float moveY, bool crouch, bool jump)
+	public void Move(float moveX, float moveY, bool crouch, bool jump, bool cling)
 	{
 		Vector2 targetVelocity = new Vector2(moveX * 10f, m_Rigidbody2D.velocity.y);
 		m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);

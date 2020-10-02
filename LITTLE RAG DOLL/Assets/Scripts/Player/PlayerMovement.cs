@@ -14,97 +14,71 @@ public class PlayerMovement : MonoBehaviour
     private float hormove = 0f;
     private float vermove = 0f;
     private bool isJumping = false;
+    private bool isClinging = false;
     private bool isDucking = false;
 
     private float attackTimeRate = 0.5f;
     private float attackTimeLimit = 0; 
 
-    private bool debug = false;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            debug = !debug;
-            if(debug) Debug.Log("Debug mode: on");
-            else Debug.Log("Debug mode: off");
-
-        }
-
-
-        if (!debug)
-        {
-            hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
-            vermove = Input.GetAxisRaw("Vertical") * runSpeed;
+        hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        vermove = Input.GetAxisRaw("Vertical") * runSpeed;
             
-            animator.SetFloat("speed", Mathf.Abs(hormove));
-            headAnimator.SetFloat("speed", Mathf.Abs(hormove));
+        animator.SetFloat("speed", Mathf.Abs(hormove));
+        headAnimator.SetFloat("speed", Mathf.Abs(hormove));
 
-            animator.SetFloat("speedY", Mathf.Abs(vermove));
-            headAnimator.SetFloat("speedY", Mathf.Abs(vermove));
+        animator.SetFloat("speedY", Mathf.Abs(vermove));
+        headAnimator.SetFloat("speedY", Mathf.Abs(vermove));
 
-            if (Input.GetButtonDown("Attack"))
-            {
-                animator.SetTrigger("trgAttack");
-                headAnimator.SetTrigger("trgAttack");
-                attack.SetActive(true);
-                attackTimeLimit = Time.time + attackTimeRate;
-            }
-            if (Time.time >= attackTimeLimit)        
-                attack.SetActive(false);
-
-            if (Input.GetButtonDown("Duck"))
-            {
-                isDucking = true;
-                animator.SetBool("isDucking",true);
-                headAnimator.SetBool("isDucking",true);
-            }
-            if (Input.GetButtonUp("Duck"))
-            {
-                isDucking = false;
-                animator.SetBool("isDucking",false);
-                headAnimator.SetBool("isDucking",false);
-            }
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                isJumping = true;
-                animator.SetBool("isJumping", true);
-                headAnimator.SetBool("isJumping", true);
-            }
-        }
-        else
+        if (Input.GetButtonDown("Attack") && !attack.activeSelf)
         {
-            hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
-            vermove = Input.GetAxisRaw("Vertical") * runSpeed;
-
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(hormove * 50 * Time.deltaTime, vermove * 50 * Time.deltaTime);
+            animator.SetTrigger("trgAttack");
+            headAnimator.SetTrigger("trgAttack");
+            attack.SetActive(true);
+            attackTimeLimit = Time.time + attackTimeRate;
         }
+        if (Time.time >= attackTimeLimit)        
+            attack.SetActive(false);
 
+        if (Input.GetButtonDown("Duck"))
+            isDucking = true;
+        if (Input.GetButtonUp("Duck"))
+            isDucking = false;
+
+        if (Input.GetButtonDown("Jump"))
+            isJumping = true;
+
+        if (!controller2D.m_Walled)
+            isClinging = false;
+
+        animator.SetBool("isDucking", isDucking);
+        headAnimator.SetBool("isDucking", isDucking);
+        animator.SetBool("isJumping", isJumping);
+        headAnimator.SetBool("isJumping", isJumping);
         animator.SetBool("isGrounded", controller2D.m_Grounded);
         headAnimator.SetBool("isGrounded", controller2D.m_Grounded);
-        if(controller2D.m_Walled && ((controller2D.m_FacingRight && hormove > 0) || (!controller2D.m_FacingRight && hormove < 0)))
-        {
-            animator.SetBool("isClinging", true);
-            headAnimator.SetBool("isClinging", true);
-        }
-        else
-        {
-            animator.SetBool("isClinging", false);
-            headAnimator.SetBool("isClinging", false);
-        }
-        
+        animator.SetBool("isClinging", isClinging);
+        headAnimator.SetBool("isClinging", isClinging);       
 
     }
     public void OnLanding()
     {
         isJumping = false;
-        animator.SetBool("isJumping", false);
-        headAnimator.SetBool("isJumping", false);
+        animator.SetBool("isJumping", isJumping);
+        headAnimator.SetBool("isJumping", isJumping);
+
+    }
+    public void OnClinging()
+    {
+        isClinging = true;
+        animator.SetBool("isClinging", isClinging);
+        headAnimator.SetBool("isClinging", isClinging);
 
     }
     void FixedUpdate()
     {
-        controller2D.Move(hormove * Time.fixedDeltaTime, vermove * Time.fixedDeltaTime, isDucking, isJumping);
+        controller2D.Move(hormove * Time.fixedDeltaTime, vermove * Time.fixedDeltaTime, isDucking, isJumping, isClinging);
     }
 }
