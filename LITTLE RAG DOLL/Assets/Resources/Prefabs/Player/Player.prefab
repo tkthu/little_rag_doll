@@ -465,10 +465,14 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 512
+  m_WhatIsThem:
+    serializedVersion: 2
+    m_Bits: 8192
   m_GroundCheck: {fileID: 2151621878045384742}
   m_CeilingCheck: {fileID: 2151621878033897308}
   Face: {fileID: 6539098612449153329}
   m_Grounded: 0
+  m_Themed: 0
   m_Walled: 0
   m_FacingRight: 1
   OnLandEvent:
