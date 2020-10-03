@@ -26,11 +26,11 @@ public class OptionsSceneController : MonoBehaviour
 
     public void btn_BackMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        GameManager.GM.loadScene(SceneName.MainMenu);
     }
     public void btn_Controls ()
     {
-        SceneManager.LoadScene("ControlsScene");
+        GameManager.GM.loadScene(SceneName.ControlsScene);
     }
 
     public void SetScreenResolution(int i)
