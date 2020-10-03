@@ -19,26 +19,35 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;	
 	private Vector2 m_Velocity = Vector2.zero;
 
+	//private float wallJumpTime = 0.04f;
+
+	private float wallJumpTime = 0.02f;
+
+	private bool wallJumping = false;
+
 	[Header("Events")]
 	[Space]
 
 	public UnityEvent OnLandEvent;
+	public UnityEvent OnClingEvent;
 
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
 
 	private void Awake()
 	{
+		
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
+		if (OnClingEvent == null)
+			OnClingEvent = new UnityEvent();
 	}
 
 	private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
-		bool wasWalled = m_Walled;
 		m_Grounded = false;
 		m_Walled = false;
 
@@ -55,51 +64,55 @@ public class CharacterController2D : MonoBehaviour
 		if (wallColliders.Length > 0)
         {
 			m_Walled = true;
-			if (!wasWalled)
-				OnLandEvent.Invoke();
 		}
 					
 	}
 
 
-	public void Move(float moveX, float moveY, bool crouch, bool jump, bool cling, bool climb, bool slide)
+	public void Move(float moveX, float moveY, bool crouch, bool jump, bool highJump, bool cling, bool climb, bool slide, bool wallJump)
 	{
-		Vector2 targetVelocity = new Vector2(moveX * 10f, m_Rigidbody2D.velocity.y);
+		Vector2 targetVelocity;
+		targetVelocity = new Vector2(moveX * 10f, m_Rigidbody2D.velocity.y);
 		m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 		m_Rigidbody2D.gravityScale = 3;
+		
 
-		if (m_Grounded)
+		if (highJump && !wallJumping)
 		{
+			m_Rigidbody2D.velocity = new Vector2(0f, m_JumpForce);
+		}
+		if (m_Grounded)
+		{			
 			if (jump)
-				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+				m_Rigidbody2D.velocity = new Vector2(0f, m_JumpForce);
 			else if (crouch)
 				m_Rigidbody2D.velocity = Vector2.zero;
-		}
-		if (m_Walled)
+		}else if (m_Walled)
         {
-            if (cling)
+			if (cling && !wallJumping)
             {
 				m_Rigidbody2D.velocity = Vector2.zero;
 				m_Rigidbody2D.gravityScale = 0;
-				if (jump)
-				{
-					int dir = m_FacingRight ? 1 : -1;
-					targetVelocity = m_Rigidbody2D.position + new Vector2(-dir * 5f, 2f);
-					StopCoroutine("wallJump");
-					StartCoroutine("wallJump", targetVelocity);
-					Debug.Log(jump);
-					
-				}else if (climb)
+				if (climb)
 				{
 					targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveY * 10f);
-					m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+					m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);					
 				}
 				else if (slide)
 				{
 					targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveY * 15f);
 					m_Rigidbody2D.velocity = Vector2.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 				}				
-			}			
+			}
+		}
+
+		if (wallJump && !wallJumping)
+		{
+			wallJumping = true;
+			Invoke("setWallJumpingToFalse", wallJumpTime);
+			int dir = m_FacingRight ? 1 : -1;
+			m_Rigidbody2D.velocity = new Vector2(-dir * 10f, 7f);
+			Debug.Log("first"+m_Rigidbody2D.velocity);
 		}
 
 		if (moveX > 0 && !m_FacingRight)
@@ -108,6 +121,13 @@ public class CharacterController2D : MonoBehaviour
 			Flip();
 
 	}
+    private void setWallJumpingToFalse()
+    {
+		wallJumping = false;
+		OnClingEvent.Invoke();
+	}
+
+	/*
 	IEnumerator wallJump(Vector2 targetVelocity)
 	{
 		while (Vector2.Distance(m_Rigidbody2D.position, targetVelocity) > 1f)
@@ -119,8 +139,8 @@ public class CharacterController2D : MonoBehaviour
 		yield return null;
 	}
 
-
-private void Flip()
+	*/
+	private void Flip()
 	{
 		m_FacingRight = !m_FacingRight;
 		Vector2 theScale = transform.localScale;
