@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         isClinging = false;
         isClimbing = false;
         isSliding = false;
-        if (controller2D.m_Walled && !controller2D.m_Grounded)
+        if (controller2D.m_Walled && !controller2D.m_Grounded && !controller2D.m_Themed)
         {
             isClinging = true;
             hormove = 0;

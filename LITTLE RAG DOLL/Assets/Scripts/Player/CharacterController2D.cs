@@ -7,6 +7,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
+	[SerializeField] private LayerMask m_WhatIsThem;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 	[SerializeField] private Transform Face;
@@ -14,6 +15,7 @@ public class CharacterController2D : MonoBehaviour
 
 	const float k_ColliderRadius = .02f; // Radius of the overlap circle to determine if grounded
 	[HideInInspector] public bool m_Grounded;            // Whether or not the player is grounded.
+	[HideInInspector] public bool m_Themed;            // Whether or not the player is grounded.
 	[HideInInspector] public bool m_Walled;            // Whether or not the player is grounded.
 	[HideInInspector] public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Rigidbody2D m_Rigidbody2D;	
@@ -50,6 +52,7 @@ public class CharacterController2D : MonoBehaviour
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 		m_Walled = false;
+		m_Themed = false;
 
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_ColliderRadius, m_WhatIsGround);
 		if(colliders.Length > 0)
@@ -65,7 +68,16 @@ public class CharacterController2D : MonoBehaviour
         {
 			m_Walled = true;
 		}
-					
+
+		Collider2D[] themColliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_ColliderRadius, m_WhatIsThem);
+		if (themColliders.Length > 0)
+		{
+			m_Themed = true;			
+			m_Grounded = true;			
+			if (!wasGrounded)
+				OnLandEvent.Invoke();
+		}
+
 	}
 
 
