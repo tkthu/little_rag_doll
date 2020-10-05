@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3014926981600917147}
   - component: {fileID: 3014926981600917145}
   - component: {fileID: -107143933181396908}
+  - component: {fileID: -4827031729258179280}
   m_Layer: 10
   m_Name: Fairy
   m_TagString: Fairy
@@ -115,4 +116,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dc33f3a8103664bb833cb739be831b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPmax: 0
+  HPmax: 1
+--- !u!114 &-4827031729258179280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014926981600917148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd447ae9d41612a4f9e4e57e134da537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.65
