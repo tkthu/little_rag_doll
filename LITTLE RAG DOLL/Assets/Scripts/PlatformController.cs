@@ -32,8 +32,7 @@ public class PlatformController : MonoBehaviour
                 waitTime -= Time.deltaTime;
             }
         }
-        // Press K to Jump
-        if (Input.GetKey(KeyCode.K))
+        else
         {
             effector.rotationalOffset = 0;
         }
