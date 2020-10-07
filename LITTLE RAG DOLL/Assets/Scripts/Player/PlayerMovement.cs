@@ -13,98 +13,162 @@ public class PlayerMovement : MonoBehaviour
 
     private float hormove = 0f;
     private float vermove = 0f;
-    private bool isJumping = false;
+    private bool isRunning = false;
     private bool isDucking = false;
+    private bool isJumping = false;
+    private bool isClinging = false;
+    private bool isClimbing = false;
+    private bool isSliding = false;
+    private bool isAttacking = false;
+    private bool isWallJumping = false;
 
-    private float attackTimeRate = 0.5f;
+    private bool highJump = false;
+    private float jumpCounter = 0;
+    public float jumpTime = 0.35f;
+
+
+
+    private float attackTimeRate = 0.3f;
     private float attackTimeLimit = 0; 
 
-    private bool debug = false;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            debug = !debug;
-            if(debug) Debug.Log("Debug mode: on");
-            else Debug.Log("Debug mode: off");
+        #region RunHandler
+        hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        vermove = Input.GetAxisRaw("Vertical") * runSpeed;
 
+        isRunning = false;
+        if (hormove != 0 && controller2D.m_Grounded)
+            isRunning = true;
+        #endregion
+
+        #region DuckHandler
+        isDucking = false;
+        if (Input.GetButton("Duck") && controller2D.m_Grounded)
+            isDucking = true;
+        #endregion
+
+        #region JumpHandler
+        if (Input.GetButtonDown("Jump") && controller2D.m_Grounded)
+        {
+            isJumping = true;
+            highJump = true;
+            jumpCounter = jumpTime;
+        }
+        else if (Input.GetButtonDown("Jump") && isClinging && !isWallJumping)
+        {
+            isWallJumping = true;
+            highJump = true;
+            jumpCounter = jumpTime;
         }
 
 
-        if (!debug)
+        if (Input.GetButtonUp("Jump"))
         {
-            hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
-            vermove = Input.GetAxisRaw("Vertical") * runSpeed;
-            
-            animator.SetFloat("speed", Mathf.Abs(hormove));
-            headAnimator.SetFloat("speed", Mathf.Abs(hormove));
-
-            animator.SetFloat("speedY", Mathf.Abs(vermove));
-            headAnimator.SetFloat("speedY", Mathf.Abs(vermove));
-
-            if (Input.GetButtonDown("Attack"))
+            highJump = false;
+        }
+        if (Input.GetButton("Jump") && highJump)
+        {
+            if (jumpCounter > 0)
             {
-                animator.SetTrigger("trgAttack");
-                headAnimator.SetTrigger("trgAttack");
-                attack.SetActive(true);
-                attackTimeLimit = Time.time + attackTimeRate;
+                jumpCounter -= Time.deltaTime;
             }
-            if (Time.time >= attackTimeLimit)        
-                attack.SetActive(false);
-
-            if (Input.GetButtonDown("Duck"))
+            else
             {
-                isDucking = true;
-                animator.SetBool("isDucking",true);
-                headAnimator.SetBool("isDucking",true);
-            }
-            if (Input.GetButtonUp("Duck"))
-            {
-                isDucking = false;
-                animator.SetBool("isDucking",false);
-                headAnimator.SetBool("isDucking",false);
-            }
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                isJumping = true;
-                animator.SetBool("isJumping", true);
-                headAnimator.SetBool("isJumping", true);
+                highJump = false;
             }
         }
-        else
-        {
-            hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
-            vermove = Input.GetAxisRaw("Vertical") * runSpeed;
 
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(hormove * 50 * Time.deltaTime, vermove * 50 * Time.deltaTime);
-        }
-
-        animator.SetBool("isGrounded", controller2D.m_Grounded);
-        headAnimator.SetBool("isGrounded", controller2D.m_Grounded);
-        if(controller2D.m_Walled && ((controller2D.m_FacingRight && hormove > 0) || (!controller2D.m_FacingRight && hormove < 0)))
-        {
-            animator.SetBool("isClinging", true);
-            headAnimator.SetBool("isClinging", true);
-        }
-        else
-        {
-            animator.SetBool("isClinging", false);
-            headAnimator.SetBool("isClinging", false);
-        }
+        
         
 
+        if (isWallJumping)
+        {
+            hormove = 0;
+        }
+        #endregion
+
+        #region AttackHandler
+
+        if (Input.GetButtonDown("Attack") && !attack.activeSelf)
+        {
+            isAttacking = true;
+            setAnimParameter("trgAttack");
+            attack.SetActive(true);
+            attackTimeLimit = Time.time + attackTimeRate;
+            attack.transform.localPosition = new Vector2(0.5f, 0);
+            attack.transform.localScale = new Vector2(1, 1);
+            if (isDucking)
+                attack.transform.localPosition = new Vector2(0.5f, -0.4f);
+            else if (isClinging)
+            {
+                attack.transform.localScale = new Vector2(-1, 1);
+                attack.transform.localPosition = new Vector2(-0.5f, 0);
+            }
+                
+        }
+        if (Time.time >= attackTimeLimit)
+        {
+            isAttacking = false;
+            attack.SetActive(false);
+        }
+
+        if (isAttacking && isClinging)
+            vermove = 0;
+        #endregion        
+
+        #region ClingHandler
+
+        isClinging = false;
+        isClimbing = false;
+        isSliding = false;
+        if (controller2D.m_Walled && !controller2D.m_Grounded && !controller2D.m_Themed)
+        {
+            isClinging = true;
+            hormove = 0;
+            if (vermove > 0)
+                isClimbing = true;
+            else if(vermove < 0)
+                isSliding = true;
+        }
+        #endregion
+
+        #region UpdateAnimtion
+        setAnimParameter("isRunning", isRunning);
+        setAnimParameter("isDucking", isDucking);
+        setAnimParameter("isJumping", isJumping);
+        setAnimParameter("isGrounded", controller2D.m_Grounded);
+        setAnimParameter("isClinging", isClinging);
+        setAnimParameter("isClimbing", isClimbing);
+        setAnimParameter("isSliding", isSliding); 
+        setAnimParameter("isAttacking", isAttacking);
+        #endregion
+    }
+
+    private void setAnimParameter(string name,bool value)
+    {
+        animator.SetBool(name, value);
+        headAnimator.SetBool(name, value);
+    }
+    private void setAnimParameter(string name)
+    {
+        animator.SetTrigger(name);
+        headAnimator.SetTrigger(name);
     }
     public void OnLanding()
     {
         isJumping = false;
-        animator.SetBool("isJumping", false);
-        headAnimator.SetBool("isJumping", false);
-
+        setAnimParameter("isJumping", isJumping);
     }
+    public void OnClinging()
+    {
+        isWallJumping = false;
+        setAnimParameter("isJumping", isJumping);
+    }
+
     void FixedUpdate()
     {
-        controller2D.Move(hormove * Time.fixedDeltaTime, vermove * Time.fixedDeltaTime, isDucking, isJumping);
+        controller2D.Move(hormove * Time.fixedDeltaTime, vermove * Time.fixedDeltaTime, isDucking, isJumping, highJump , isClinging, isClimbing, isSliding, isWallJumping);
     }
 }
