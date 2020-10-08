@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8497156247368900594}
   - component: {fileID: 7450383773773188063}
   - component: {fileID: 4522872400586503845}
+  - component: {fileID: -6841647114474092871}
   m_Layer: 10
   m_Name: BubbleBlower
   m_TagString: BubbleBlower
@@ -116,3 +117,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPmax: 1
+--- !u!114 &-6841647114474092871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551266216237954583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dadd3cf8bb29f543b350f5ff1878f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
