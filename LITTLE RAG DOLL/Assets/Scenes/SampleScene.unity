@@ -188,7 +188,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6841647114474092871, guid: fb67d68ef81ae3944a2d95c4d31032fb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fb67d68ef81ae3944a2d95c4d31032fb, type: 3}
 --- !u!1001 &469433828
 PrefabInstance:
@@ -392,6 +393,26 @@ MonoBehaviour:
   PlayerPistilsNo: 5
   PlayerBatterysNo: 5
   PlayerBatteryDeadsNo: 5
+--- !u!1 &701294122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 551266216237954583, guid: fb67d68ef81ae3944a2d95c4d31032fb,
+    type: 3}
+  m_PrefabInstance: {fileID: 35975772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &701294123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701294122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c217c2d61eeaf46af1ae9cf34854c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0.5
+  animator: {fileID: 0}
 --- !u!1001 &719310484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -554,7 +575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e805778dc2891e43b5e45c4f56c692b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
 --- !u!50 &1537787058
 Rigidbody2D:
   serializedVersion: 4

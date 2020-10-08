@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StraightBulletMovement : MonoBehaviour
 {
-    private float speed = 10;
+    private float speed = 1;
     // Start is called before the first frame update
     void Update()
     {
