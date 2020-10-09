@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
 public class FairyMovement : MonoBehaviour
 {
@@ -9,25 +6,55 @@ public class FairyMovement : MonoBehaviour
     private Rigidbody2D fairyBody;
     private Transform target;
     private GameObject player;
-    private Vector2 moveDirection;
 
-    // Start is called before the first frame update
+    private Vector2 steering;
+    private float desiredSpeed;
+    private Vector2 currentVelocity;
+    private Vector2 desiredVelocity;
+
+    private bool isSprinting = false;
+
     void Start()
     {
         if (GameManager.GM != null)
             player = GameManager.GM.player;
         else
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-            fairyBody = GetComponent<Rigidbody2D>();
-        }
+            player = GameObject.FindGameObjectWithTag("Player");    
+
+        fairyBody = GetComponent<Rigidbody2D>();
         target = player.transform;
     }
-        // Update is called once per frame
 
     void FixedUpdate()
+    {       
+        bool wasSprinting = isSprinting;
+
+        if(Vector3.Distance(fairyBody.position, target.position) < 2)
+            isSprinting = true;
+
+        if (isSprinting && !wasSprinting )
+        {
+            seek();
+            currentVelocity = currentVelocity + steering / fairyBody.mass;
+            currentVelocity.Normalize();
+            currentVelocity *= desiredSpeed;
+            fairyBody.AddForce(currentVelocity ,ForceMode2D.Impulse);
+        }
+        if (!isSprinting)
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+
+        if (fairyBody.velocity.magnitude < 1)
+            isSprinting = false;       
+        
+    }
+
+    
+    void seek()
     {
-        moveDirection = (target.position - transform.position).normalized * speed * Time.deltaTime;
-        fairyBody.AddForce(moveDirection * 50f);
+        desiredVelocity = (target.position - transform.position);
+        desiredVelocity.Normalize();
+        desiredVelocity *= speed;
+        steering = desiredVelocity - currentVelocity;
+        desiredSpeed = speed;
     }
 }

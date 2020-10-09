@@ -15,29 +15,30 @@ public class GameManager : MonoBehaviour
 	public KeyCode right { get; set; }
 	public int score { get; set; }
 
-	public GameObject player;
+	[HideInInspector] public GameObject player;
 
 	// Enemys bullets
 	private List<GameObject> pooledStraightBullets;
-	public int StraightBulletsNo = 15;	
+	private int StraightBulletsNo = 15;	
 	private List<GameObject> pooledBounceBullets;
-	public int BounceBulletsNo = 15;
+	private int BounceBulletsNo = 15;
 
 	// Player bullets
 	private List<GameObject> pooledPlayerStraightBullets;
-	public int PlayerStraightBulletsNo = 15;
+	private int PlayerStraightBulletsNo = 15;
 	private List<GameObject> pooledPlayerBounceBullets;
-	public int PlayerBounceBulletsNo = 15;
+	private int PlayerBounceBulletsNo = 15;
 	private List<GameObject> pooledPlayerExplodeBullets;
-	public int PlayerExplodeBulletsNo = 5;
+	private int PlayerExplodeBulletsNo = 5;
 	private List<GameObject> pooledPlayerPistils;
-	public int PlayerPistilsNo = 5;
+	private int PlayerPistilsNo = 5;
 	private List<GameObject> pooledPlayerBatterys;
-	public int PlayerBatterysNo = 5;
+	private int PlayerBatterysNo = 5;
 	private List<GameObject> pooledPlayerBatteryDeads;
-	public int PlayerBatteryDeadsNo = 5;
+	private int PlayerBatteryDeadsNo = 5;
 
-	SceneLoader sceneLoader;
+	private SceneLoader sceneLoader;
+
 
 	void Awake()
 	{
@@ -62,11 +63,14 @@ public class GameManager : MonoBehaviour
 		right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
 
 		sceneLoader = GetComponent<SceneLoader>();
+
 	}
 
-	public void startGame()
+
+    public void startGame()
     {
-		player = Instantiate(player);
+		GameObject playerPrefabs = Resources.Load<GameObject>("Prefabs/Player/Player");
+		player = Instantiate(playerPrefabs);
 		player.SetActive(false);
 		DontDestroyOnLoad(player);
 
