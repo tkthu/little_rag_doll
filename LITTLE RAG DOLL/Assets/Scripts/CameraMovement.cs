@@ -2,7 +2,7 @@
 
 public class CameraMovement : MonoBehaviour
 {
-    public float camSmooth = 0.05f;
+    public float camSmooth = 5;
 
     private GameObject player;
     private GameObject holder;
@@ -35,13 +35,9 @@ public class CameraMovement : MonoBehaviour
                 {
                     bool eneInCamera = eneScrPoint.x > -0.125 && eneScrPoint.x < 1.125 && eneScrPoint.y > -0.125 && eneScrPoint.y < 1.125;
                     if (eneInCamera)
-                    {
-                        eneHealth.isFreezed = false;                        
-                    }
+                        eneHealth.isFreezed = false;             
                     else
-                    {
                         eneHealth.respawn();
-                    }
                 }
 
             }
@@ -50,14 +46,8 @@ public class CameraMovement : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 playerPos = player.GetComponent<Transform>().position;
-        Vector3 playerScrPoint = cam.WorldToViewportPoint(playerPos);
-        bool camYNeedToMove = playerScrPoint.y < 0.25 || playerScrPoint.y > 0.75;
-        Vector3 targetPos = new Vector3(playerPos.x, camTrans.position.y , -10);
-        if (camYNeedToMove)
-        {
-            targetPos = new Vector3(playerPos.x, playerPos.y, -10);
-        }
-        camTrans.position = Vector3.Lerp(camTrans.position,targetPos, camSmooth);
+        Vector3 targetPos = new Vector3(playerPos.x, playerPos.y, -10);
+        camTrans.position = Vector3.Lerp(camTrans.position,targetPos, camSmooth*Time.deltaTime);
             
     }
 }

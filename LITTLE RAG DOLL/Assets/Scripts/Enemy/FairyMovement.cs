@@ -14,6 +14,8 @@ public class FairyMovement : MonoBehaviour
 
     private bool isSprinting = false;
 
+    private EnemyHealth eneHealth;
+
     void Start()
     {
         if (GameManager.GM != null)
@@ -23,28 +25,32 @@ public class FairyMovement : MonoBehaviour
 
         fairyBody = GetComponent<Rigidbody2D>();
         target = player.transform;
+        eneHealth = GetComponent<EnemyHealth>();
     }
 
     void FixedUpdate()
-    {       
-        bool wasSprinting = isSprinting;
-
-        if(Vector3.Distance(fairyBody.position, target.position) < 2)
-            isSprinting = true;
-
-        if (isSprinting && !wasSprinting )
+    {
+        if (eneHealth != null && !eneHealth.isFreezed) //neu Player khong bi dong cung
         {
-            seek();
-            currentVelocity = currentVelocity + steering / fairyBody.mass;
-            currentVelocity.Normalize();
-            currentVelocity *= desiredSpeed;
-            fairyBody.AddForce(currentVelocity ,ForceMode2D.Impulse);
-        }
-        if (!isSprinting)
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+            bool wasSprinting = isSprinting;
 
-        if (fairyBody.velocity.magnitude < 1)
-            isSprinting = false;       
+            if (Vector3.Distance(fairyBody.position, target.position) < 2)
+                isSprinting = true;
+
+            if (isSprinting && !wasSprinting)
+            {
+                seek();
+                currentVelocity = currentVelocity + steering / fairyBody.mass;
+                currentVelocity.Normalize();
+                currentVelocity *= desiredSpeed;
+                fairyBody.AddForce(currentVelocity, ForceMode2D.Impulse);
+            }
+            if (!isSprinting)
+                transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+
+            if (fairyBody.velocity.magnitude < 1)
+                isSprinting = false;
+        }        
         
     }
 

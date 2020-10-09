@@ -13,7 +13,6 @@ public class EnemyHealth : MonoBehaviour
     {
         respawnPos = transform.position;
         isFreezed = true;
-        gameObject.SetActive(false);
         HP = HPmax;
     }
 

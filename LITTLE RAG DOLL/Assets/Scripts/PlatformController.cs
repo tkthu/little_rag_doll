@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
     private PlatformEffector2D effector;
-    public float waitTime;
+    private float waitTime;
+    public float delay = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +17,14 @@ public class PlatformController : MonoBehaviour
         // Press S to go down
         if(Input.GetKeyUp(KeyCode.S))
         {
-            waitTime = 0.2f;
+            waitTime = delay;
         }
         if(Input.GetKey(KeyCode.S))
         {
             if(waitTime <= 0)
             {
                 effector.rotationalOffset = 180f;
-                waitTime = 0.2f;
+                waitTime = delay;
             }
             else
             {
