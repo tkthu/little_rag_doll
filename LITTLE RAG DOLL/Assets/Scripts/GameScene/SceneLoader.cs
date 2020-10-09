@@ -25,7 +25,7 @@ public enum SceneName
 
 public class SceneLoader : MonoBehaviour
 {
-    string previousSceneName;
+    string previousSceneName = "";
 
     // Start is called before the first frame update
     void Awake()
@@ -46,12 +46,18 @@ public class SceneLoader : MonoBehaviour
             if (go != GameManager.GM.player)
                 Destroy(go);
         }
-        
+
+        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))// for testing
+        {
+            GameManager.GM.startGame();
+            GameManager.GM.player.SetActive(true);
+        }
+
         if (equal(previousSceneName, SceneName.MainMenu))
         {
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
-            if(equal(currentScene, SceneName.SampleScene))
+            if (equal(currentScene, SceneName.SampleScene))
                 GameManager.GM.player.transform.position = new Vector2(0, 0);
             else if(equal(currentScene, SceneName.Scene_8)) 
                 GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
