@@ -4,39 +4,28 @@ using UnityEngine;
 
 public class BubbleBlowerTrigger : MonoBehaviour
 {
-    //Quan sát target, player
-    private Transform target;
+    //Xu li chuyen doi animation
+    private Animator anim;
+    public bool statusAnimation;
     private GameObject player;
 
-    //Xử lí bắn đạn
-    private float speed = 0.5f;
-    private GameObject bullet;
-
-    public float delayTime = 0.5f;
-
-    //Xử lí chuyển đổi annimator
-    public Animator animator;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        GameManager.GM.startGame();
-        if (GameManager.GM != null)
-            player = GameManager.GM.player;
-        else
-            player = GameObject.FindGameObjectWithTag("Player");
-        target = player.transform;
+        statusAnimation = false;
+        anim = GetComponent<Animator>();
+        player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        //Xử lí bắn đạn cho enemy
-        bullet = GameManager.GM.getStraightBullets();
-        if (bullet != null)
+        Vector2 direction = player.transform.position - transform.position;
+        if (direction.x < 0 || direction.y < 0)
         {
-            bullet.transform.position = target.transform.position;
-            bullet.transform.rotation = target.transform.rotation;
-            bullet.SetActive(true);
+            anim.SetBool("PlayerRange", true);
+            statusAnimation = true;
+        } else
+        {
+            anim.SetBool("PlayerRange", false);
         }
     }
 }
