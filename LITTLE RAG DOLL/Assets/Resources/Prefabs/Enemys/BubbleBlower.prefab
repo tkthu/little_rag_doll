@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusAnimation: 0
+  bulletStraight: {fileID: 0}
 --- !u!1 &2330472487921820344
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +163,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5108291619051597123}
-  - component: {fileID: 4495760106952274921}
   m_Layer: 0
   m_Name: GunStraightBullet
   m_TagString: Untagged
@@ -184,18 +184,3 @@ Transform:
   m_Father: {fileID: 8744424674103152866}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4495760106952274921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2330472487921820344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8deb4d6c0956a4c968d1050f36ce55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletStraight: {fileID: 966353312924707340, guid: 549bfa177e2c9e54f8b3fce8cee2d136,
-    type: 3}
-  BubbleTrigger: {fileID: 132058513}
