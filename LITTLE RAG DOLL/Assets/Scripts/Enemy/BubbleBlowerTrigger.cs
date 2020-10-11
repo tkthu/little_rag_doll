@@ -18,12 +18,14 @@ public class BubbleBlowerTrigger : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        player = GameObject.Find("Player");
+        if (GameManager.GM != null)
+            player = GameManager.GM.player;
+        else
+            player = GameObject.FindGameObjectWithTag("Player");
 
         GunStraightBullet = transform.Find("GunStraightBullet").transform;
         fireRate = 1f;
         timeRate = Time.time;
-        GameManager.GM.startGame();// for test
     }
 
     private void Update()

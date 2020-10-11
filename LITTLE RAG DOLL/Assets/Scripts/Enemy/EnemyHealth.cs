@@ -8,18 +8,20 @@ public class EnemyHealth : MonoBehaviour
     private int HP;
 
     [HideInInspector] public bool isFreezed;
+    [HideInInspector] public bool isDeaded;
 
     private void Awake()
     {
         respawnPos = transform.position;
         isFreezed = true;
+        isDeaded = false;
         HP = HPmax;
     }
 
     public void respawn()
     {
         HP = HPmax;
-        isFreezed = true;
+        isDeaded = false;
         gameObject.SetActive(true);
     }
 
@@ -33,7 +35,10 @@ public class EnemyHealth : MonoBehaviour
 
     private void die()
     {
-        transform.position = respawnPos;
+        transform.position = respawnPos; 
+        isFreezed = true;
+
+        isDeaded = true;
         gameObject.SetActive(false);
     }
 }
