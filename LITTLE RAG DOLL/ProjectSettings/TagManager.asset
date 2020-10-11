@@ -13,7 +13,8 @@ TagManager:
   - ExplodeBullet
   - SceneTrigger
   - EnemiesHolder
-  - ScalePlate
+  - LeftPlate
+  - RightPlate
   layers:
   - Default
   - TransparentFX
