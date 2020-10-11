@@ -7,8 +7,6 @@ public class StraightBulletMovement : MonoBehaviour
     private float speed = 4;
     private Vector2 _direction;
 
-    private Camera cam;
-
     public void SetDirection(Vector2 direction)
     {
         _direction = direction.normalized;
@@ -21,5 +19,10 @@ public class StraightBulletMovement : MonoBehaviour
 
         transform.position = position;
 
+    }
+
+    void OnBecameInvisible()
+    {
+        gameObject.SetActive(false);
     }
 }

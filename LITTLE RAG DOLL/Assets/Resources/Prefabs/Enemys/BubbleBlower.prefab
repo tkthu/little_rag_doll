@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPmax: 1
+  isFreezed: 0
+  isDeaded: 0
 --- !u!50 &-7352556842061755717
 Rigidbody2D:
   serializedVersion: 4
@@ -152,8 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c217c2d61eeaf46af1ae9cf34854c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusAnimation: 0
-  bulletStraight: {fileID: 0}
+  bulletStraight: {fileID: 966353312924707340, guid: 549bfa177e2c9e54f8b3fce8cee2d136,
+    type: 3}
 --- !u!1 &2330472487921820344
 GameObject:
   m_ObjectHideFlags: 0
