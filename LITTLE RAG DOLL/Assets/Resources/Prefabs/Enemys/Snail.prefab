@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPmax: 3
+  isFreezed: 0
 --- !u!58 &4236506637167635636
 CircleCollider2D:
   m_ObjectHideFlags: 0

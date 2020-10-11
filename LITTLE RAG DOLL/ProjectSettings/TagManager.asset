@@ -12,6 +12,7 @@ TagManager:
   - BounceBullet
   - ExplodeBullet
   - SceneTrigger
+  - EnemiesHolder
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public enum SceneName
 {
     MainMenu,
