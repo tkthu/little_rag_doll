@@ -124,7 +124,7 @@ public class CharacterController2D : MonoBehaviour
 			Invoke("setWallJumpingToFalse", wallJumpTime);
 			int dir = m_FacingRight ? 1 : -1;
 			m_Rigidbody2D.velocity = new Vector2(-dir * 10f, 7f);
-			Debug.Log("first"+m_Rigidbody2D.velocity);
+			//Debug.Log("first"+m_Rigidbody2D.velocity);
 		}
 
 		if (moveX > 0 && !m_FacingRight)
