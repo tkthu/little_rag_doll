@@ -43,8 +43,11 @@ public class ScalePlatformMovement : MonoBehaviour
         RaycastHit2D groundInfo = Physics2D.Raycast(playerFeet.position, Vector2.down, 0.2f, LayerMask.GetMask("Them"));
         if(groundInfo.collider && (groundInfo.collider.CompareTag("LeftPlate") || groundInfo.collider.CompareTag("RightPlate")))
         {
+            if(groundInfo.collider.transform == leftPlate)
+            {
+                Debug.Log("leftPlate.position.y "+ leftPlate.localPosition.y);
+            }
             groundInfo.collider.attachedRigidbody.gravityScale = 1;
-            Debug.Log("ScalePlate");
                       
         }
     }
