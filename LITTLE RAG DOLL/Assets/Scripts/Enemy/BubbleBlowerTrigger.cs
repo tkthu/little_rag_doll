@@ -13,7 +13,9 @@ public class BubbleBlowerTrigger : MonoBehaviour
 
     private float fireRate;
     private float timeRate;
-    public GameObject bulletStraight;
+    private GameObject bulletStraight;
+
+    private bool m_FacingRight;
 
     private void Start()
     {
@@ -26,11 +28,16 @@ public class BubbleBlowerTrigger : MonoBehaviour
         GunStraightBullet = transform.Find("GunStraightBullet").transform;
         fireRate = 1f;
         timeRate = Time.time;
+
+        m_FacingRight = false;
     }
 
     private void Update()
     {
-        Vector2 direction = player.transform.position - transform.position;
+        if (player.transform.position.x < transform.position.x && m_FacingRight)
+            flip();
+        else if (player.transform.position.x > transform.position.x && !m_FacingRight)
+            flip();
 
         if (Time.time > timeRate)
         {
@@ -47,5 +54,12 @@ public class BubbleBlowerTrigger : MonoBehaviour
                 bulletStraight.GetComponent<StraightBulletMovement>().SetDirection(dir);
             }
         }
+    }
+    private void flip()
+    {
+        m_FacingRight = !m_FacingRight;
+        Vector2 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
