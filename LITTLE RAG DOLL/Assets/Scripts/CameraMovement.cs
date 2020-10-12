@@ -32,11 +32,13 @@ public class CameraMovement : MonoBehaviour
                 
                 bool eneInCameraBound = eneScrPoint.x > -1 && eneScrPoint.x < 2 && eneScrPoint.y > -1 && eneScrPoint.y < 2;
                 if (eneInCameraBound)
-                {
+                {                    
                     bool eneInCamera = eneScrPoint.x > -0.125 && eneScrPoint.x < 1.125 && eneScrPoint.y > -0.125 && eneScrPoint.y < 1.125;
-                    if (eneInCamera)
-                        eneHealth.isFreezed = false;             
-                    else
+                    Debug.Log("eneInCamera "+ eneInCamera);
+                    if (eneInCamera && !eneHealth.isDeaded)
+                        eneHealth.isFreezed = false;
+
+                    if (!eneInCamera && eneHealth.isDeaded)
                         eneHealth.respawn();
                 }
 
