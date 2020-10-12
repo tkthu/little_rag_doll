@@ -18,6 +18,10 @@ public class StraightBulletMovement : MonoBehaviour
         position += _direction * speed * 0.1f;
 
         transform.position = position;
+        if(position.x > 0)
+           transform.localScale = new Vector2(-1,1);
+        else
+            transform.localScale = new Vector2(1, 1);
 
     }
 
