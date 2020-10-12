@@ -14,6 +14,7 @@ public class FlowerTrigger : MonoBehaviour
     private bool down;
     private bool right;
     private bool up;
+    private float speedDirection = 0.2f;
 
     private Vector3 dir;
 
@@ -53,25 +54,25 @@ public class FlowerTrigger : MonoBehaviour
     {
         if (left == true)
         {
-            dir = Vector3.left * 0.2f;
+            dir = Vector3.left * speedDirection;
             down = true;
             left = false;
         }
         else if (down == true)
         {
-            dir = Vector3.down * 0.2f;
+            dir = Vector3.down * speedDirection;
             right = true;
             down = false;
         }
         else if (right == true)
         {
-            dir = Vector3.right * 0.2f;
+            dir = Vector3.right * speedDirection;
             up = true;
             right = false;
         }
         else if (up == true)
         {
-            dir = Vector3.up * 0.2f;
+            dir = Vector3.up * speedDirection;
             left = true;
             up = false;
         }
