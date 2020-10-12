@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 966353312924707337}
   - component: {fileID: 966353312924707338}
   - component: {fileID: 966353312924707339}
-  - component: {fileID: 8901992762216310494}
   - component: {fileID: -3409259359645242839}
   - component: {fileID: -1748058495619646425}
-  - component: {fileID: 873521511862316700}
-  m_Layer: 0
+  - component: {fileID: 2101204226413328779}
+  m_Layer: 12
   m_Name: StraightBullet
-  m_TagString: Untagged
+  m_TagString: StraightBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,22 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!70 &8901992762216310494
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966353312924707340}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.390625, y: 0.25}
-  m_Direction: 0
 --- !u!50 &-3409259359645242839
 Rigidbody2D:
   serializedVersion: 4
@@ -137,12 +120,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-1748058495619646425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e805778dc2891e43b5e45c4f56c692b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &873521511862316700
+--- !u!70 &2101204226413328779
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,9 +148,9 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.390625, y: 0.25}
-  m_Direction: 0
+  m_Offset: {x: -1.2702758e-10, y: -0.0011201428}
+  m_Size: {x: 0.39062506, y: 0.23782273}
+  m_Direction: 1
