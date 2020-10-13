@@ -34,7 +34,6 @@ public class CameraMovement : MonoBehaviour
                 if (eneInCameraBound)
                 {                    
                     bool eneInCamera = eneScrPoint.x > -0.125 && eneScrPoint.x < 1.125 && eneScrPoint.y > -0.125 && eneScrPoint.y < 1.125;
-                    Debug.Log("eneInCamera "+ eneInCamera);
                     if (eneInCamera && !eneHealth.isDeaded)
                         eneHealth.isFreezed = false;
 
