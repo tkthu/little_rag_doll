@@ -73,19 +73,19 @@ public class SceneLoader : MonoBehaviour
                     GameManager.GM.player.transform.position = st.transform.position;
             }
         }
-        setupEnemise();
+        loadEnemies();
 
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
         
     }
 
-    private void setupEnemise()
+    private void loadEnemies()
     {
         GameObject holder = GameObject.FindGameObjectWithTag("EnemiesHolder");
         if (holder != null)
         {
-            Debug.Log("setupEnemise");
+            
             foreach (Transform child in holder.transform)
             {
                 GameObject go = child.gameObject;
@@ -104,10 +104,11 @@ public class SceneLoader : MonoBehaviour
                         go = GameManager.GM.poolingManager.getBubbleBlower();
                         break;
 
-                }
+                }                
                 go.SetActive(true);
+                go.transform.GetComponent<EnemyHealth>().respawnPos = child.position;
                 go.transform.position = child.position;
-                Destroy(child.gameObject);
+                Destroy(child.gameObject);   
             }
             Destroy(holder);
         }

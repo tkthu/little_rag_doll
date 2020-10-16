@@ -35,16 +35,23 @@ public class PoolingManager : MonoBehaviour
 	private int BubbleBlowerNo = 15;
 
 	private List<List<GameObject>> listOfPool = new List<List<GameObject>>();
+	private List<List<GameObject>> listOfEnemisePool = new List<List<GameObject>>();
 
-    public void inactiveAll()
+	public void inactiveAll()
     {
 		foreach(List<GameObject> pooled in listOfPool)
 			foreach (GameObject go in pooled)
+            {
 				go.SetActive(false);
+				go.transform.position = Vector2.one * 10000;
+			}
+				
 
 	}
 
-	public void instantiateAllPool()
+    // Khoi tao Pool
+    #region Khoi Tao
+    public void instantiateAllPool()
 	{
 		//khoi tao cac pool cho bullets cua quai (ko có đạn nổ)
 		pooledStraightBullets = instantiatePool("Prefabs/Bullets/StraightBullet", StraightBulletsNo, "StraightBullets");
@@ -75,8 +82,12 @@ public class PoolingManager : MonoBehaviour
 		listOfPool.Add(pooledSnail);
 		listOfPool.Add(pooledFairy);
 		listOfPool.Add(pooledBubbleBlower);
-	}
 
+		listOfEnemisePool.Add(pooledBat);
+		listOfEnemisePool.Add(pooledSnail);
+		listOfEnemisePool.Add(pooledFairy);
+		listOfEnemisePool.Add(pooledBubbleBlower);
+	}
 	private List<GameObject> instantiatePool(string prefabName, int amountToPool, string parentObjectName)
 	{
 		GameObject parentObject = new GameObject(parentObjectName);
@@ -93,7 +104,8 @@ public class PoolingManager : MonoBehaviour
 		DontDestroyOnLoad(parentObject);
 		return pooledObjects;
 	}
-	
+    #endregion
+
     // lay dan dang inactive cua enemy
     #region Enemy Bullets
     public GameObject getStraightBullets()
@@ -160,5 +172,12 @@ public class PoolingManager : MonoBehaviour
 			if (!pooledObject[i].activeInHierarchy)
 				return pooledObject[i];
 		return null;
+	}
+
+	// lay listOfPool
+	public List<List<GameObject>> getlistOfEnemiesPool()
+    {
+		return listOfEnemisePool;
+
 	}
 }

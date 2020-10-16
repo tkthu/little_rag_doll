@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -21,7 +22,29 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        
+        List<List<GameObject>> listOfPool = GameManager.GM.poolingManager.getlistOfEnemiesPool();
+        foreach (List<GameObject> pool in listOfPool)
+        {
+            foreach (GameObject go in pool)
+            {
+                Vector3 eneScrPoint = cam.WorldToViewportPoint(go.transform.position);
+                EnemyHealth eneHealth = go.GetComponent<EnemyHealth>();
+                
+                bool eneInCameraBound = eneScrPoint.x > -1 && eneScrPoint.x < 2 && eneScrPoint.y > -1 && eneScrPoint.y < 2;
+                if (eneInCameraBound)
+                {
+                    bool eneInCamera = eneScrPoint.x > -0.125 && eneScrPoint.x < 1.125 && eneScrPoint.y > -0.125 && eneScrPoint.y < 1.125;
+                    if (eneInCamera && !eneHealth.isDeaded)
+                        eneHealth.isFreezed = false;
+
+                    if (!eneInCamera && eneHealth.isDeaded)
+                        eneHealth.respawn();
+                }
+            }
+                
+
+        }
+          
     }
     private void LateUpdate()
     {
