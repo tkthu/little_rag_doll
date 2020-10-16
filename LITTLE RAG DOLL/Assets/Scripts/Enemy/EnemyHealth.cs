@@ -2,7 +2,7 @@
 
 public class EnemyHealth : MonoBehaviour
 {
-    private Vector2 respawnPos;
+    public Vector2 respawnPos { get; set; }
 
     public int HPmax;
     private int HP;

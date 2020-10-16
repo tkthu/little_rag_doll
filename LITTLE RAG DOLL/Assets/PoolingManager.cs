@@ -24,26 +24,64 @@ public class PoolingManager : MonoBehaviour
 	private List<GameObject> pooledPlayerBatteryDeads;
 	private int PlayerBatteryDeadsNo = 5;
 
+	// Enemies
+	private List<GameObject> pooledBat;
+	private int BatNo = 15;
+	private List<GameObject> pooledSnail;
+	private int SnailNo = 15;
+	private List<GameObject> pooledFairy;
+	private int FairyNo = 15;
+	private List<GameObject> pooledBubbleBlower;
+	private int BubbleBlowerNo = 15;
+
+	private List<List<GameObject>> listOfPool = new List<List<GameObject>>();
+
+    public void inactiveAll()
+    {
+		foreach(List<GameObject> pooled in listOfPool)
+			foreach (GameObject go in pooled)
+				go.SetActive(false);
+
+	}
 
 	public void instantiateAllPool()
 	{
 		//khoi tao cac pool cho bullets cua quai (ko có đạn nổ)
-		pooledStraightBullets = instantiatePool("StraightBullet", StraightBulletsNo, "StraightBullets");
-		pooledBounceBullets = instantiatePool("BounceBullet", BounceBulletsNo, "BounceBullets");
+		pooledStraightBullets = instantiatePool("Prefabs/Bullets/StraightBullet", StraightBulletsNo, "StraightBullets");
+		pooledBounceBullets = instantiatePool("Prefabs/Bullets/BounceBullet", BounceBulletsNo, "BounceBullets");
+		listOfPool.Add(pooledStraightBullets);
+		listOfPool.Add(pooledBounceBullets);
+
 		//khoi tao cac pool cho bullets cua Player
-		pooledPlayerStraightBullets = instantiatePool("StraightBullet_Player", PlayerStraightBulletsNo, "PlayerStraightBullets");
-		pooledPlayerBounceBullets = instantiatePool("BounceBullet_Player", PlayerBounceBulletsNo, "PlayerBounceBullets");
-		pooledPlayerExplodeBullets = instantiatePool("ExplodeBullet_Player", PlayerExplodeBulletsNo, "PlayerExplodeBullets");
-		pooledPlayerPistils = instantiatePool("Pistil_Player", PlayerPistilsNo, "PlayerPistils");
-		pooledPlayerBatterys = instantiatePool("Battery_Player", PlayerBatterysNo, "PlayerBatterys");
-		pooledPlayerBatteryDeads = instantiatePool("Battery_dead_Player", PlayerBatteryDeadsNo, "PlayerBatteryDeads");
+		pooledPlayerStraightBullets = instantiatePool("Prefabs/Bullets/StraightBullet_Player", PlayerStraightBulletsNo, "PlayerStraightBullets");
+		pooledPlayerBounceBullets = instantiatePool("Prefabs/Bullets/BounceBullet_Player", PlayerBounceBulletsNo, "PlayerBounceBullets");
+		pooledPlayerExplodeBullets = instantiatePool("Prefabs/Bullets/ExplodeBullet_Player", PlayerExplodeBulletsNo, "PlayerExplodeBullets");
+		pooledPlayerPistils = instantiatePool("Prefabs/Bullets/Pistil_Player", PlayerPistilsNo, "PlayerPistils");
+		pooledPlayerBatterys = instantiatePool("Prefabs/Bullets/Battery_Player", PlayerBatterysNo, "PlayerBatterys");
+		pooledPlayerBatteryDeads = instantiatePool("Prefabs/Bullets/Battery_dead_Player", PlayerBatteryDeadsNo, "PlayerBatteryDeads");
+		listOfPool.Add(pooledPlayerStraightBullets);
+		listOfPool.Add(pooledPlayerBounceBullets);
+		listOfPool.Add(pooledPlayerExplodeBullets);
+		listOfPool.Add(pooledPlayerPistils);
+		listOfPool.Add(pooledPlayerBatterys);
+		listOfPool.Add(pooledPlayerBatteryDeads);
+
+		//Khoi tao Enemies
+		pooledBat = instantiatePool("Prefabs/Enemies/Bat", BatNo, "Bats");
+		pooledSnail = instantiatePool("Prefabs/Enemies/Snail", SnailNo, "Snails");
+		pooledFairy = instantiatePool("Prefabs/Enemies/Fairy", FairyNo, "Fairies");
+		pooledBubbleBlower = instantiatePool("Prefabs/Enemies/BubbleBlower", BubbleBlowerNo, "BubbleBlowers");
+		listOfPool.Add(pooledBat);
+		listOfPool.Add(pooledSnail);
+		listOfPool.Add(pooledFairy);
+		listOfPool.Add(pooledBubbleBlower);
 	}
 
 	private List<GameObject> instantiatePool(string prefabName, int amountToPool, string parentObjectName)
 	{
 		GameObject parentObject = new GameObject(parentObjectName);
 		List<GameObject> pooledObjects = new List<GameObject>();
-		GameObject objectToPool = Resources.Load<GameObject>("Prefabs/Bullets/" + prefabName);
+		GameObject objectToPool = Resources.Load<GameObject>( prefabName);
 		GameObject tmp;
 		for (int i = 0; i < amountToPool; i++)
 		{
@@ -55,9 +93,10 @@ public class PoolingManager : MonoBehaviour
 		DontDestroyOnLoad(parentObject);
 		return pooledObjects;
 	}
-
-	// lay dan dang inactive cua enemy
-	public GameObject getStraightBullets()
+	
+    // lay dan dang inactive cua enemy
+    #region Enemy Bullets
+    public GameObject getStraightBullets()
 	{
 		return getPooledObject(pooledStraightBullets, StraightBulletsNo);
 	}
@@ -65,8 +104,10 @@ public class PoolingManager : MonoBehaviour
 	{
 		return getPooledObject(pooledBounceBullets, BounceBulletsNo);
 	}
+	#endregion
 
 	// lay dan dang inactive cua Player
+	#region Player Bullets
 	public GameObject getPlayerStraightBullets()
 	{
 		return getPooledObject(pooledPlayerStraightBullets, PlayerStraightBulletsNo);
@@ -91,15 +132,33 @@ public class PoolingManager : MonoBehaviour
 	{
 		return getPooledObject(pooledPlayerBatteryDeads, PlayerBatteryDeadsNo);
 	}
+	#endregion
+
+	// lay enemy inactive
+	#region Enemies
+	public GameObject getBat()
+	{
+		return getPooledObject(pooledBat, BatNo);
+	}
+	public GameObject getSnail()
+	{
+		return getPooledObject(pooledSnail, SnailNo);
+	}
+	public GameObject getFairy()
+	{
+		return getPooledObject(pooledFairy, FairyNo);
+	}
+	public GameObject getBubbleBlower()
+	{
+		return getPooledObject(pooledBubbleBlower, BubbleBlowerNo);
+	}
+	#endregion
+
 	private GameObject getPooledObject(List<GameObject> pooledObject, int amountToPool)
 	{
 		for (int i = 0; i < amountToPool; i++)
-		{
 			if (!pooledObject[i].activeInHierarchy)
 				return pooledObject[i];
-
-		}
 		return null;
 	}
-
 }

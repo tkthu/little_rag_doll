@@ -40,6 +40,7 @@ public class SceneLoader : MonoBehaviour
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
     {
+        #region for testing
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject go in gos)
         {
@@ -47,13 +48,14 @@ public class SceneLoader : MonoBehaviour
                 Destroy(go);
         }
 
-        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))// for testing
+        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
         {
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
         }
+        # endregion
 
-        if (equal(previousSceneName, SceneName.MainMenu))
+        if (equal(previousSceneName, SceneName.MainMenu))//  bat dau choi
         {
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
@@ -71,12 +73,47 @@ public class SceneLoader : MonoBehaviour
                     GameManager.GM.player.transform.position = st.transform.position;
             }
         }
+        setupEnemise();
 
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
         
     }
-    
+
+    private void setupEnemise()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("EnemiesHolder");
+        if (holder != null)
+        {
+            Debug.Log("setupEnemise");
+            foreach (Transform child in holder.transform)
+            {
+                GameObject go = child.gameObject;
+                switch (child.tag)
+                {
+                    case "Bat":
+                        go = GameManager.GM.poolingManager.getBat();
+                        break;
+                    case "Snail":
+                        go = GameManager.GM.poolingManager.getSnail();
+                        break;
+                    case "Fairy":
+                        go = GameManager.GM.poolingManager.getFairy();
+                        break;
+                    case "BubbleBlower":
+                        go = GameManager.GM.poolingManager.getBubbleBlower();
+                        break;
+
+                }
+                go.SetActive(true);
+                go.transform.position = child.position;
+                Destroy(child.gameObject);
+            }
+            Destroy(holder);
+        }
+
+    }
+
     private bool equal(Scene s, SceneName sn)
     {
         return s.name == sn.ToString();

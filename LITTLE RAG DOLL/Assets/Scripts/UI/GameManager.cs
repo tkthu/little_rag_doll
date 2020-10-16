@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -63,9 +64,12 @@ public class GameManager : MonoBehaviour
 	}
 	public void loadScene(SceneName sn)
 	{
+		poolingManager.inactiveAll();
 		sceneLoader.loadScene(sn);
+		
 	}
-	public void addScore(int amount)
+
+    public void addScore(int amount)
 	{
 		score = score + amount;
 	}
