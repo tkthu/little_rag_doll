@@ -24,7 +24,7 @@ public class BatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(eneHealth != null && !eneHealth.isFreezed) //neu Player khong bi dong cung
+        if(eneHealth != null && !eneHealth.isFreezed) //neu Enemy khong bi dong cung
         {
             if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
             {
