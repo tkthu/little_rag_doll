@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class ScalePlatformMovement : MonoBehaviour
+public class ScalePlatform : MonoBehaviour
 {
 
     private float[] plateY = new float[2];
@@ -13,6 +13,8 @@ public class ScalePlatformMovement : MonoBehaviour
 
     private GameObject player;
     private Transform playerFeet;
+
+    private List<GameObject> listGameObject = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -28,13 +30,13 @@ public class ScalePlatformMovement : MonoBehaviour
         rightPlate = transform.Find("RightPlate");
 
         updatePlateY();
+
     }
     
     private void updatePlateY()
     {
         plateY[0] = leftPlate.localPosition.y;
         plateY[1] = rightPlate.localPosition.y;
-        Debug.Log(plateY[0] + " " + plateY[1]);
     }
 
     // Update is called once per frame
@@ -45,10 +47,29 @@ public class ScalePlatformMovement : MonoBehaviour
         {
             if(groundInfo.collider.transform == leftPlate)
             {
-                Debug.Log("leftPlate.position.y "+ leftPlate.localPosition.y);
+                //Debug.Log("leftPlate.position.y "+ leftPlate.localPosition.y);
             }
+            groundInfo.collider.attachedRigidbody.bodyType = RigidbodyType2D.Dynamic;
             groundInfo.collider.attachedRigidbody.gravityScale = 1;
                       
+        }
+    }
+
+    public void addGameObject(GameObject go)
+    {
+        if (!listGameObject.Contains(go))
+        {
+            listGameObject.Add(go);
+            Debug.Log(listGameObject.Count);
+        }
+    }
+
+    public void removeGameObject(GameObject go)
+    {
+        if (listGameObject.Contains(go))
+        {            
+            listGameObject.Remove(go);
+            Debug.Log(listGameObject.Count);
         }
     }
 }
