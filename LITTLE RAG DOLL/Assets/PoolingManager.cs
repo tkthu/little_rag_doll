@@ -44,9 +44,11 @@ public class PoolingManager : MonoBehaviour
             {
 				go.SetActive(false);
 				go.transform.position = Vector2.one * 10000;
+				EnemyHealth eneHealth = go.GetComponent<EnemyHealth>();
+				if (eneHealth != null)
+					eneHealth.resetStatus();
 			}
-				
-
+		
 	}
 
     // Khoi tao Pool

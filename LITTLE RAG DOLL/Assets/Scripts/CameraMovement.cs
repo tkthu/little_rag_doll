@@ -37,9 +37,18 @@ public class CameraMovement : MonoBehaviour
                     if (eneInCamera && !eneHealth.isDeaded)
                         eneHealth.isFreezed = false;
 
-                    if (!eneInCamera && eneHealth.isDeaded)
-                        eneHealth.respawn();
+                    if (!eneInCamera)
+                    {
+                        if(eneHealth.isDeaded)
+                            eneHealth.respawn();
+                        else if(go.CompareTag("BubbleBlower"))
+                            eneHealth.isFreezed = true;
+                    }
+                        
+
+                    
                 }
+                
             }
                 
 

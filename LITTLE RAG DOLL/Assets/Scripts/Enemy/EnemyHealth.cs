@@ -8,8 +8,12 @@ public class EnemyHealth : MonoBehaviour
     [HideInInspector] public Vector2 respawnPos = Vector2.one * 10000;
     [HideInInspector] public bool isFreezed;
     [HideInInspector] public bool isDeaded;
-
     private void Awake()
+    {
+        resetStatus();
+    }
+
+    public void resetStatus()
     {
         isFreezed = true;
         isDeaded = false;
