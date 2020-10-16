@@ -41,7 +41,7 @@ public class BubbleBlowerTrigger : MonoBehaviour
 
         if (Time.time > timeRate)
         {
-            bulletStraight = GameManager.GM.getStraightBullets();
+            bulletStraight = GameManager.GM.poolingManager.getStraightBullets();
             if (bulletStraight != null)
             {
                 anim.SetTrigger("Shoot");
