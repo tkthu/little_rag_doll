@@ -12,6 +12,12 @@ TagManager:
   - BounceBullet
   - ExplodeBullet
   - SceneTrigger
+  - EnemiesHolder
+  - LeftPlate
+  - RightPlate
+  - Flower
+  - Helmet
+  - InteractablesHolder
   layers:
   - Default
   - TransparentFX
@@ -27,7 +33,7 @@ TagManager:
   - PlayerBullets
   - EneBullets
   - Them
-  - 
+  - Spike
   - 
   - 
   - 

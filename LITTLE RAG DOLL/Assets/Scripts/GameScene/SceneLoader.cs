@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public enum SceneName
 {
     MainMenu,
@@ -26,7 +25,7 @@ public enum SceneName
 
 public class SceneLoader : MonoBehaviour
 {
-    string previousSceneName;
+    string previousSceneName = "";
 
     // Start is called before the first frame update
     void Awake()
@@ -41,18 +40,26 @@ public class SceneLoader : MonoBehaviour
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
     {
+        #region for testing
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject go in gos)
         {
             if (go != GameManager.GM.player)
                 Destroy(go);
         }
-        
-        if (equal(previousSceneName, SceneName.MainMenu))
+
+        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
         {
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
-            if(equal(currentScene, SceneName.SampleScene))
+        }
+        # endregion
+
+        if (equal(previousSceneName, SceneName.MainMenu))//  bat dau choi
+        {
+            GameManager.GM.startGame();
+            GameManager.GM.player.SetActive(true);
+            if (equal(currentScene, SceneName.SampleScene))
                 GameManager.GM.player.transform.position = new Vector2(0, 0);
             else if(equal(currentScene, SceneName.Scene_8)) 
                 GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
@@ -66,12 +73,76 @@ public class SceneLoader : MonoBehaviour
                     GameManager.GM.player.transform.position = st.transform.position;
             }
         }
+        loadEnemies();
+        loadInteractables();
 
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
         
     }
-    
+
+    private void loadEnemies()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("EnemiesHolder");
+        if (holder != null)
+        {
+            
+            foreach (Transform child in holder.transform)
+            {
+                GameObject go = child.gameObject;
+                switch (child.tag)
+                {
+                    case "Bat":
+                        go = GameManager.GM.poolingManager.getBat();
+                        break;
+                    case "Snail":
+                        go = GameManager.GM.poolingManager.getSnail();
+                        break;
+                    case "Fairy":
+                        go = GameManager.GM.poolingManager.getFairy();
+                        break;
+                    case "BubbleBlower":
+                        go = GameManager.GM.poolingManager.getBubbleBlower();
+                        break;
+
+                }                
+                go.SetActive(true);
+                go.transform.GetComponent<EnemyHealth>().respawnPos = child.position;
+                go.transform.position = child.position;
+                Destroy(child.gameObject);   
+            }
+            Destroy(holder);
+        }
+
+    }
+
+    private void loadInteractables()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("InteractablesHolder");
+        if (holder != null)
+        {
+            foreach (Transform child in holder.transform)
+            {
+                GameObject go = child.gameObject;
+                switch (child.tag)
+                {
+                    case "Flower":
+                        go = GameManager.GM.poolingManager.getFlower();
+                        break;
+                    case "Helmet":
+                        go = GameManager.GM.poolingManager.getHelmet();
+                        break;
+
+                }
+                go.SetActive(true);
+                go.transform.position = child.position;
+                Destroy(child.gameObject);
+            }
+            Destroy(holder);
+        }
+
+    }
+
     private bool equal(Scene s, SceneName sn)
     {
         return s.name == sn.ToString();

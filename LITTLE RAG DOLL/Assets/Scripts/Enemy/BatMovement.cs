@@ -9,6 +9,7 @@ public class BatMovement : MonoBehaviour
 
     private Transform target;
     private GameObject player;
+    private EnemyHealth eneHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +18,19 @@ public class BatMovement : MonoBehaviour
         else
             player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
+        eneHealth = GetComponent<EnemyHealth>();
     }
    
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
+        if(eneHealth != null && !eneHealth.isFreezed) //neu Enemy khong bi dong cung
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }
+            if (Vector2.Distance(transform.position, target.position) > stoppingDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            }
+        }        
                 
     }
 }
