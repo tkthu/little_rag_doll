@@ -31,7 +31,7 @@ public class PlatformController : MonoBehaviour
                 waitTime -= Time.deltaTime;
             }
         }
-        else
+        else if(effector.rotationalOffset != 0)
         {
             effector.rotationalOffset = 0;
         }
