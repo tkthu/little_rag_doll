@@ -85,8 +85,7 @@ GameObject:
   - component: {fileID: 737077505166705716}
   - component: {fileID: 737077505166705717}
   - component: {fileID: 2140302331798416264}
-  - component: {fileID: 4236506637167635636}
-  - component: {fileID: 2065572106108544464}
+  - component: {fileID: 7255212316304819002}
   m_Layer: 10
   m_Name: Snail
   m_TagString: Snail
@@ -228,8 +227,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPmax: 3
   isFreezed: 0
---- !u!58 &4236506637167635636
-CircleCollider2D:
+  isDeaded: 0
+--- !u!60 &7255212316304819002
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -241,25 +241,28 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.115796715, y: 0.02503711}
-  serializedVersion: 2
-  m_Radius: 0.27318224
---- !u!70 &2065572106108544464
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737077505166705719}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.032609083, y: -0.21190548}
-  m_Size: {x: 0.6939395, y: 0.16993971}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.890625, y: 0.59375}
+    newSize: {x: 0.890625, y: 0.59375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.01962366, y: 0.27477038}
+      - {x: -0.14726004, y: 0.1487386}
+      - {x: -0.14087844, y: -0.17743687}
+      - {x: -0.28324783, y: -0.17679006}
+      - {x: -0.28324777, y: -0.296875}
+      - {x: 0.3845715, y: -0.29538992}
+      - {x: 0.23028038, y: -0.19791064}
+      - {x: 0.3401939, y: -0.09994686}
+      - {x: 0.33890682, y: 0.15464664}
+      - {x: 0.21581376, y: 0.2725599}
 --- !u!1 &737077505187976175
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,12 @@ public class BubbleBlowerTrigger : MonoBehaviour
 
     private Transform GunStraightBullet;
 
-    private float fireRate;
+    public float fireRate = 2f;
     private float timeRate;
-    public GameObject bulletStraight;
+    private GameObject bulletStraight;
+
+    private bool m_FacingRight;
+    private EnemyHealth eneHealth;
 
     private void Start()
     {
@@ -24,28 +27,43 @@ public class BubbleBlowerTrigger : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
 
         GunStraightBullet = transform.Find("GunStraightBullet").transform;
-        fireRate = 1f;
         timeRate = Time.time;
+
+        m_FacingRight = false;
+        eneHealth = GetComponent<EnemyHealth>();
     }
 
     private void Update()
     {
-        Vector2 direction = player.transform.position - transform.position;
-
-        if (Time.time > timeRate)
+        if (eneHealth != null && !eneHealth.isFreezed)//neu Enemy khong bi dong cung
         {
-            bulletStraight = GameManager.GM.getStraightBullets();
-            if (bulletStraight != null)
-            {
-                anim.SetTrigger("Shoot");
-                bulletStraight.transform.position = GunStraightBullet.position;
-                bulletStraight.transform.rotation = GunStraightBullet.rotation;
-                bulletStraight.SetActive(true);
+            if (player.transform.position.x < transform.position.x && m_FacingRight)
+                flip();
+            else if (player.transform.position.x > transform.position.x && !m_FacingRight)
+                flip();
 
-                timeRate = Time.time + fireRate;
-                Vector2 dir = player.transform.position - bulletStraight.transform.position;
-                bulletStraight.GetComponent<StraightBulletMovement>().SetDirection(dir);
+            if (Time.time > timeRate)
+            {
+                bulletStraight = GameManager.GM.poolingManager.getStraightBullets();
+                if (bulletStraight != null)
+                {
+                    anim.SetTrigger("Shoot");
+                    bulletStraight.transform.position = GunStraightBullet.position;
+                    bulletStraight.transform.rotation = GunStraightBullet.rotation;
+                    bulletStraight.SetActive(true);
+
+                    timeRate = Time.time + fireRate;
+                    Vector2 dir = player.transform.position - bulletStraight.transform.position;
+                    bulletStraight.GetComponent<StraightBulletMovement>().SetDirection(new Vector2(dir.x, 0));//ban ngang
+                }
             }
         }
+    }
+    private void flip()
+    {
+        m_FacingRight = !m_FacingRight;
+        Vector2 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }

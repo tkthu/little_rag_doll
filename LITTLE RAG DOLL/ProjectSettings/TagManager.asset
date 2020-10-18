@@ -13,6 +13,8 @@ TagManager:
   - ExplodeBullet
   - SceneTrigger
   - EnemiesHolder
+  - LeftPlate
+  - RightPlate
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - PlayerBullets
   - EneBullets
   - Them
-  - 
+  - Spike
   - 
   - 
   - 
