@@ -21218,7 +21218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 544969650}
   m_Layer: 0
-  m_Name: Holder
+  m_Name: EnemiesHoler
   m_TagString: EnemiesHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

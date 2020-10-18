@@ -74,6 +74,7 @@ public class SceneLoader : MonoBehaviour
             }
         }
         loadEnemies();
+        loadInteractables();
 
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
@@ -109,6 +110,33 @@ public class SceneLoader : MonoBehaviour
                 go.transform.GetComponent<EnemyHealth>().respawnPos = child.position;
                 go.transform.position = child.position;
                 Destroy(child.gameObject);   
+            }
+            Destroy(holder);
+        }
+
+    }
+
+    private void loadInteractables()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("InteractablesHolder");
+        if (holder != null)
+        {
+            foreach (Transform child in holder.transform)
+            {
+                GameObject go = child.gameObject;
+                switch (child.tag)
+                {
+                    case "Flower":
+                        go = GameManager.GM.poolingManager.getFlower();
+                        break;
+                    case "Helmet":
+                        go = GameManager.GM.poolingManager.getHelmet();
+                        break;
+
+                }
+                go.SetActive(true);
+                go.transform.position = child.position;
+                Destroy(child.gameObject);
             }
             Destroy(holder);
         }

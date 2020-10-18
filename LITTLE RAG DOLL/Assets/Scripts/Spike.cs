@@ -21,7 +21,6 @@ public class Spike : MonoBehaviour
         if(other.gameObject == player)
         {
             playerhealth = other.gameObject.GetComponent<PlayerHealth>();
-            Debug.Log("hit spike");
             playerhealth.takeDamage(1);
         }
     }

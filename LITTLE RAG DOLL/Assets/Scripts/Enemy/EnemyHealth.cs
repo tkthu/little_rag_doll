@@ -32,7 +32,6 @@ public class EnemyHealth : MonoBehaviour
         HP = HP - damage;
         if (HP <= 0)
             die();
-        Debug.Log("HP = " + HP);
     }
 
     private void die()

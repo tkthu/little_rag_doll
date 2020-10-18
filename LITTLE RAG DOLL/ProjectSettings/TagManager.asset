@@ -15,6 +15,9 @@ TagManager:
   - EnemiesHolder
   - LeftPlate
   - RightPlate
+  - Flower
+  - Helmet
+  - InteractablesHolder
   layers:
   - Default
   - TransparentFX

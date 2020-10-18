@@ -34,8 +34,15 @@ public class PoolingManager : MonoBehaviour
 	private List<GameObject> pooledBubbleBlower;
 	private int BubbleBlowerNo = 15;
 
+	// Interactable
+	private List<GameObject> pooledFlower;
+	private int FlowerNo = 5;
+	private List<GameObject> pooledHelmet;
+	private int HelmetNo = 5;
+
 	private List<List<GameObject>> listOfPool = new List<List<GameObject>>();
 	private List<List<GameObject>> listOfEnemisePool = new List<List<GameObject>>();
+	private List<List<GameObject>> listOfInteractablesPool = new List<List<GameObject>>();
 
 	public void inactiveAll()
     {
@@ -89,6 +96,15 @@ public class PoolingManager : MonoBehaviour
 		listOfEnemisePool.Add(pooledSnail);
 		listOfEnemisePool.Add(pooledFairy);
 		listOfEnemisePool.Add(pooledBubbleBlower);
+
+		//Khoi tao Interactable
+		pooledFlower = instantiatePool("Prefabs/Interactables/Flower", FlowerNo, "Flowers");
+		pooledHelmet = instantiatePool("Prefabs/Interactables/Helmet", HelmetNo, "Helmets");
+		listOfPool.Add(pooledFlower);
+		listOfPool.Add(pooledHelmet);
+
+		listOfInteractablesPool.Add(pooledFlower);
+		listOfInteractablesPool.Add(pooledHelmet);
 	}
 	private List<GameObject> instantiatePool(string prefabName, int amountToPool, string parentObjectName)
 	{
@@ -168,7 +184,19 @@ public class PoolingManager : MonoBehaviour
 	}
 	#endregion
 
-	private GameObject getPooledObject(List<GameObject> pooledObject, int amountToPool)
+	// lay Interactables inactive
+	#region Interactables
+	public GameObject getFlower()
+	{
+		return getPooledObject(pooledFlower, FlowerNo);
+	}
+	public GameObject getHelmet()
+	{
+		return getPooledObject(pooledHelmet, HelmetNo);
+	}
+    #endregion
+
+    private GameObject getPooledObject(List<GameObject> pooledObject, int amountToPool)
 	{
 		for (int i = 0; i < amountToPool; i++)
 			if (!pooledObject[i].activeInHierarchy)

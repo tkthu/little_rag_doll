@@ -8,7 +8,7 @@ public class FlowerTrigger : MonoBehaviour
     //Time rate
     private float fireRate;
     private float timeRate;
-    public GameObject bulletBounce;
+    private GameObject bulletBounce;
     //Xu li dan bay 4 huong
     private bool left;
     private bool down;
