@@ -36,7 +36,7 @@ public class FlowerTrigger : MonoBehaviour
     {
         if (Time.time > timeRate)
         {
-            bulletBounce = GameManager.GM.getBounceBullets();
+            bulletBounce = GameManager.GM.poolingManager.getBounceBullets();
             if (bulletBounce != null)
             {
                 anim.SetTrigger("Shoot");
