@@ -2,17 +2,19 @@
 
 public class EnemyHealth : MonoBehaviour
 {
-    private Vector2 respawnPos;
-
     public int HPmax;
     private int HP;
 
+    [HideInInspector] public Vector2 respawnPos = Vector2.one * 10000;
     [HideInInspector] public bool isFreezed;
     [HideInInspector] public bool isDeaded;
-
     private void Awake()
     {
-        respawnPos = transform.position;
+        resetStatus();
+    }
+
+    public void resetStatus()
+    {
         isFreezed = true;
         isDeaded = false;
         HP = HPmax;
