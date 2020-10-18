@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
         HP = HP - damage;
         if (HP <= 0)
             die();
+        //Debug.Log("Player HP = " +HP);
     }
 
     private void die()
