@@ -12,9 +12,9 @@ public class ScalePlatform : MonoBehaviour
     private Transform rightPlate;
 
     private GameObject player;
-    private Transform playerFeet;
 
-    private List<GameObject> listGameObject = new List<GameObject>();
+    private List<GameObject> listGameObjectLeft = new List<GameObject>();
+    private List<GameObject> listGameObjectRight = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +23,6 @@ public class ScalePlatform : MonoBehaviour
             player = GameManager.GM.player;
         else
             player = GameObject.FindGameObjectWithTag("Player");
-
-        playerFeet = player.transform.Find("GroundCheck");
 
         leftPlate = transform.Find("LeftPlate");
         rightPlate = transform.Find("RightPlate");
@@ -42,34 +40,45 @@ public class ScalePlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D groundInfo = Physics2D.Raycast(playerFeet.position, Vector2.down, 0.2f, LayerMask.GetMask("Them"));
-        if(groundInfo.collider && (groundInfo.collider.CompareTag("LeftPlate") || groundInfo.collider.CompareTag("RightPlate")))
+        if(listGameObjectLeft.Count > listGameObjectRight.Count && rightPlate.localPosition.y < -1) //trai nang hon phai
         {
-            if(groundInfo.collider.transform == leftPlate)
-            {
-                //Debug.Log("leftPlate.position.y "+ leftPlate.localPosition.y);
-            }
-            groundInfo.collider.attachedRigidbody.bodyType = RigidbodyType2D.Dynamic;
-            groundInfo.collider.attachedRigidbody.gravityScale = 1;
-                      
+            leftPlate.transform.localPosition = new Vector2(leftPlate.transform.localPosition.x, leftPlate.transform.localPosition.y - 1 * Time.deltaTime);
+            rightPlate.transform.localPosition = new Vector2(rightPlate.transform.localPosition.x, rightPlate.transform.localPosition.y + 1 * Time.deltaTime);
+        }else if (listGameObjectLeft.Count < listGameObjectRight.Count && leftPlate.localPosition.y < -1) //phai nang hon trai
+        {
+            rightPlate.transform.localPosition = new Vector2(rightPlate.transform.localPosition.x, rightPlate.transform.localPosition.y - 1 * Time.deltaTime);
+            leftPlate.transform.localPosition = new Vector2(leftPlate.transform.localPosition.x, leftPlate.transform.localPosition.y + 1 * Time.deltaTime);
         }
+
     }
 
-    public void addGameObject(GameObject go)
+    private bool checkContainGameObject(int instanceID, List<GameObject> listGameObject)
     {
-        if (!listGameObject.Contains(go))
+        foreach(GameObject go in listGameObject)
         {
-            listGameObject.Add(go);
-            Debug.Log(listGameObject.Count);
+            if (go.GetInstanceID() == instanceID)
+                return true;
         }
+        return false;
     }
 
-    public void removeGameObject(GameObject go)
+    public void addGameObject(GameObject go, string plateTag)
     {
-        if (listGameObject.Contains(go))
-        {            
-            listGameObject.Remove(go);
-            Debug.Log(listGameObject.Count);
-        }
+        Debug.Log(listGameObjectRight.Contains(go) + " "+ go);
+        if (plateTag == "RightPlate" && !listGameObjectRight.Contains(go))
+            listGameObjectRight.Add(go);
+        else if (plateTag == "LeftPlate" && !listGameObjectLeft.Contains(go))
+            listGameObjectLeft.Add(go);
+        Debug.Log(listGameObjectLeft.Count +" "+ listGameObjectRight.Count);
+
+    }
+
+    public void removeGameObject(GameObject go, string plateTag)
+    {
+        if (plateTag == "RightPlate" && listGameObjectRight.Contains(go))
+            listGameObjectRight.Remove(go);
+        else if (plateTag == "LeftPlate" && listGameObjectLeft.Contains(go))
+            listGameObjectLeft.Remove(go);
+        Debug.Log(listGameObjectLeft.Count + " " + listGameObjectRight.Count);
     }
 }
