@@ -11,24 +11,17 @@ public class ScalePlatform : MonoBehaviour
     private Transform leftPlate;
     private Transform rightPlate;
 
-    private GameObject player;
 
-    private List<GameObject> listGameObjectLeft = new List<GameObject>();
-    private List<GameObject> listGameObjectRight = new List<GameObject>();
+    private Dictionary<GameObject,Transform> dictParentLeft = new Dictionary<GameObject, Transform>();
+    private Dictionary<GameObject, Transform> dictParentRight = new Dictionary<GameObject, Transform>();
 
     // Start is called before the first frame update
     void Start()
     {
-        if (GameManager.GM != null)
-            player = GameManager.GM.player;
-        else
-            player = GameObject.FindGameObjectWithTag("Player");
-
         leftPlate = transform.Find("LeftPlate");
         rightPlate = transform.Find("RightPlate");
 
         updatePlateY();
-
     }
     
     private void updatePlateY()
@@ -40,11 +33,15 @@ public class ScalePlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(listGameObjectLeft.Count > listGameObjectRight.Count && rightPlate.localPosition.y < -1) //trai nang hon phai
+        RaycastHit2D GroundInfoLeft = Physics2D.Raycast(leftPlate.position,Vector2.down,0.2f,LayerMask.GetMask("Ground"));
+        RaycastHit2D GroundInfoRight = Physics2D.Raycast(rightPlate.position,Vector2.down,0.2f, LayerMask.GetMask("Ground"));
+        
+
+        if (dictParentLeft.Count > dictParentRight.Count && rightPlate.localPosition.y < -1 && !GroundInfoLeft.collider) //trai nang hon phai
         {
             leftPlate.transform.localPosition = new Vector2(leftPlate.transform.localPosition.x, leftPlate.transform.localPosition.y - 1 * Time.deltaTime);
             rightPlate.transform.localPosition = new Vector2(rightPlate.transform.localPosition.x, rightPlate.transform.localPosition.y + 1 * Time.deltaTime);
-        }else if (listGameObjectLeft.Count < listGameObjectRight.Count && leftPlate.localPosition.y < -1) //phai nang hon trai
+        }else if (dictParentLeft.Count < dictParentRight.Count && leftPlate.localPosition.y < -1 && !GroundInfoRight.collider) //phai nang hon trai
         {
             rightPlate.transform.localPosition = new Vector2(rightPlate.transform.localPosition.x, rightPlate.transform.localPosition.y - 1 * Time.deltaTime);
             leftPlate.transform.localPosition = new Vector2(leftPlate.transform.localPosition.x, leftPlate.transform.localPosition.y + 1 * Time.deltaTime);
@@ -52,33 +49,32 @@ public class ScalePlatform : MonoBehaviour
 
     }
 
-    private bool checkContainGameObject(int instanceID, List<GameObject> listGameObject)
+    public void addGameObject(GameObject goKey, Transform transParent, string plateTag)
     {
-        foreach(GameObject go in listGameObject)
+        if (plateTag == "RightPlate" && !dictParentRight.ContainsKey(goKey))
         {
-            if (go.GetInstanceID() == instanceID)
-                return true;
+            dictParentRight.Add(goKey, transParent);
+        }            
+        else if (plateTag == "LeftPlate" && !dictParentLeft.ContainsKey(goKey))
+        {
+            dictParentLeft.Add(goKey, transParent);
         }
-        return false;
+            
     }
 
-    public void addGameObject(GameObject go, string plateTag)
+    public Transform removeGameObject(GameObject goKey, string plateTag)
     {
-        Debug.Log(listGameObjectRight.Contains(go) + " "+ go);
-        if (plateTag == "RightPlate" && !listGameObjectRight.Contains(go))
-            listGameObjectRight.Add(go);
-        else if (plateTag == "LeftPlate" && !listGameObjectLeft.Contains(go))
-            listGameObjectLeft.Add(go);
-        Debug.Log(listGameObjectLeft.Count +" "+ listGameObjectRight.Count);
-
-    }
-
-    public void removeGameObject(GameObject go, string plateTag)
-    {
-        if (plateTag == "RightPlate" && listGameObjectRight.Contains(go))
-            listGameObjectRight.Remove(go);
-        else if (plateTag == "LeftPlate" && listGameObjectLeft.Contains(go))
-            listGameObjectLeft.Remove(go);
-        Debug.Log(listGameObjectLeft.Count + " " + listGameObjectRight.Count);
+        Transform transParent = null;
+        if (plateTag == "RightPlate" && dictParentRight.ContainsKey(goKey))
+        {
+            transParent = dictParentRight[goKey];
+            dictParentRight.Remove(goKey);
+        }            
+        else if (plateTag == "LeftPlate" && dictParentLeft.ContainsKey(goKey))
+        {
+            transParent = dictParentLeft[goKey];
+            dictParentLeft.Remove(goKey);
+        }
+        return transParent;
     }
 }

@@ -44,6 +44,8 @@ public class PoolingManager : MonoBehaviour
 	private List<List<GameObject>> listOfEnemisePool = new List<List<GameObject>>();
 	private List<List<GameObject>> listOfInteractablesPool = new List<List<GameObject>>();
 
+	private GameObject parentObject;
+
 	public void inactiveAll()
     {
 		foreach(List<GameObject> pooled in listOfPool)
@@ -60,8 +62,9 @@ public class PoolingManager : MonoBehaviour
 
     // Khoi tao Pool
     #region Khoi Tao
-    public void instantiateAllPool()
+    public void instantiateAllPool(GameObject parentObject)
 	{
+		this.parentObject = parentObject;
 		//khoi tao cac pool cho bullets cua quai (ko có đạn nổ)
 		pooledStraightBullets = instantiatePool("Prefabs/Bullets/StraightBullet", StraightBulletsNo, "StraightBullets");
 		pooledBounceBullets = instantiatePool("Prefabs/Bullets/BounceBullet", BounceBulletsNo, "BounceBullets");
@@ -108,7 +111,7 @@ public class PoolingManager : MonoBehaviour
 	}
 	private List<GameObject> instantiatePool(string prefabName, int amountToPool, string parentObjectName)
 	{
-		GameObject parentObject = new GameObject(parentObjectName);
+		GameObject groupObject = new GameObject(parentObjectName);
 		List<GameObject> pooledObjects = new List<GameObject>();
 		GameObject objectToPool = Resources.Load<GameObject>( prefabName);
 		GameObject tmp;
@@ -116,10 +119,10 @@ public class PoolingManager : MonoBehaviour
 		{
 			tmp = Instantiate(objectToPool);
 			tmp.SetActive(false);
-			tmp.transform.SetParent(parentObject.transform);
+			tmp.transform.SetParent(groupObject.transform);
 			pooledObjects.Add(tmp);
 		}
-		DontDestroyOnLoad(parentObject);
+		groupObject.transform.SetParent(parentObject.transform);
 		return pooledObjects;
 	}
     #endregion

@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 2975885550372942890, guid: 0fd3f2f4bb64806449499a0c1a81815b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -132,6 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPmax: 1
+  respawnPos: {x: 10000, y: 10000}
+  isFreezed: 0
+  isDeaded: 0
 --- !u!70 &2729824439025827088
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
