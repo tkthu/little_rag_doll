@@ -31,7 +31,7 @@ public class MenuScript : MonoBehaviour
 			else if (menuPanel.GetChild(i).name == "btn_jump")
 				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.jump.ToString();
 			else if (menuPanel.GetChild(i).name == "btn_map")
-				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.map.ToString();
+				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.interact.ToString();
 			else if (menuPanel.GetChild(i).name == "btn_attack")
 				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.attack.ToString();
 			else if (menuPanel.GetChild(i).name == "btn_eatShoot")
@@ -111,10 +111,10 @@ public class MenuScript : MonoBehaviour
                 buttonText.text = GameManager.GM.jump.ToString(); //set button text to new key
                 PlayerPrefs.SetString("jumpKey", GameManager.GM.jump.ToString()); //save new key to playerprefs
                 break;
-            case "map":
-                GameManager.GM.map = newKey; //set jump to new keycode
-                buttonText.text = GameManager.GM.map.ToString(); //set button text to new key
-                PlayerPrefs.SetString("mapKey", GameManager.GM.map.ToString()); //save new key to playerprefs
+            case "interact":
+                GameManager.GM.interact = newKey; //set jump to new keycode
+                buttonText.text = GameManager.GM.interact.ToString(); //set button text to new key
+                PlayerPrefs.SetString("interactKey", GameManager.GM.interact.ToString()); //save new key to playerprefs
                 break;
             case "attack":
                 GameManager.GM.attack = newKey; //set jump to new keycode
