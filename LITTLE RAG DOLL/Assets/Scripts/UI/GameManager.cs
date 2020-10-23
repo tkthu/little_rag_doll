@@ -55,9 +55,11 @@ public class GameManager : MonoBehaviour
 		GameObject playerPrefabs = Resources.Load<GameObject>("Prefabs/Player/Player");
 		player = Instantiate(playerPrefabs);
 		player.SetActive(false);
-		DontDestroyOnLoad(player);
+		GameObject parentObject = new GameObject("GameObjects");
+		player.transform.SetParent(parentObject.transform);
+		DontDestroyOnLoad(parentObject);
 
-		poolingManager.instantiateAllPool();
+		poolingManager.instantiateAllPool(parentObject);
 
 		score = 0;
 

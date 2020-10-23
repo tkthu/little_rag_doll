@@ -27,12 +27,17 @@ public class SceneLoader : MonoBehaviour
 {
     string previousSceneName = "";
 
-    // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
+        Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += onSceneLoaded;
     }
-    
+    void OnDisable()
+    {
+        Debug.Log("OnDisable");
+        SceneManager.sceneLoaded -= onSceneLoaded;
+    }
+
     public void loadScene(SceneName sn)
     {
         SceneManager.LoadScene(sn.ToString());
@@ -55,7 +60,7 @@ public class SceneLoader : MonoBehaviour
         }
         # endregion
 
-        if (equal(previousSceneName, SceneName.MainMenu))//  bat dau choi
+        if (equal(previousSceneName, SceneName.MainMenu) && !equal(currentScene, SceneName.ControlsScene ) && !equal(currentScene, SceneName.OptionsScene))//  bat dau choi
         {
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
