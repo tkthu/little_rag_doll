@@ -18,6 +18,8 @@ TagManager:
   - Flower
   - Helmet
   - InteractablesHolder
+  - Spirit
+  - Heart
   layers:
   - Default
   - TransparentFX

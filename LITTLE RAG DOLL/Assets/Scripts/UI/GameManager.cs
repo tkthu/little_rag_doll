@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public GameObject player;	
 
 	private SceneLoader sceneLoader;
+	private GameTimer gameTimer;
 	[HideInInspector] public PoolingManager poolingManager;
 
 
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
 
 		sceneLoader = GetComponent<SceneLoader>();
 		poolingManager = GetComponent<PoolingManager>();
+		gameTimer = GetComponent<GameTimer>();
 
 	}
 
@@ -60,6 +62,8 @@ public class GameManager : MonoBehaviour
 		poolingManager.instantiateAllPool();
 
 		score = 0;
+
+		
 
 	}
 	public void loadScene(SceneName sn)
