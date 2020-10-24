@@ -7,49 +7,38 @@ public class BounceBulletMovement : MonoBehaviour
 {
     private Vector3 _direction;
 
-    //private Rigidbody2D rb;
-
-    private Vector3 initialVelocity;
-
-    private float minVelocity = 10f;
-
-    private Vector3 lastFrameVelocity;
-    private Rigidbody2D rb;
-
     // Update is called once per frame
     public void SetDirection(Vector3 direction)
     {
         _direction = direction;
     }
 
-    private void OnEnable()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = initialVelocity;
-    }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    var direction = Vector3.Reflect(_direction, collision.contacts[0].normal);
-    //    this.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, direction.y, 0.0f));
-    //}
-
     void Update()
     {
-        lastFrameVelocity = rb.velocity;
+        Vector3 position = transform.position;
+
+        position += transform.rotation * _direction * 0.1f;
+
+        transform.position = position;
+        bumpEdgeCamera(position);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void bumpEdgeCamera(Vector3 position)
     {
-        Bounce(collision.contacts[0].normal);
+        var translation = Input.acceleration.x * 50f;
+        position = Camera.main.WorldToScreenPoint(this.transform.position);
+
+        if (position.x <= 0 || position.y <= 0 ||
+            position.x > Screen.width || position.y > Screen.height)
+        {
+            position.x = -Screen.width;
+            Debug.Log(position);
+        }
     }
 
-    private void Bounce(Vector3 collisionNormal)
+    void bounceBullet()
     {
-        var speed = lastFrameVelocity.magnitude;
-        var direction = Vector3.Reflect(_direction, collisionNormal);
+        
 
-        Debug.Log("Out Direction: " + direction);
-        rb.velocity = direction * Mathf.Max(speed, minVelocity);
     }
 }
