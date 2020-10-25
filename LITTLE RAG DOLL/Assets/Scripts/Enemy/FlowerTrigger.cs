@@ -14,10 +14,8 @@ public class FlowerTrigger : MonoBehaviour
     private bool down;
     private bool right;
     private bool up;
-    private float speedDirection = 0.2f;
 
     private Vector3 dir;
-
     //Animation
     private Animator anim;
 
@@ -26,7 +24,7 @@ public class FlowerTrigger : MonoBehaviour
     {
         GunBounceBullet = transform.Find("GunBounceBullet").transform;
         anim = GetComponent<Animator>();
-        fireRate = 1f;
+        fireRate = 3f;
         timeRate = Time.time;
         left = true;
     }
@@ -41,11 +39,13 @@ public class FlowerTrigger : MonoBehaviour
             {
                 anim.SetTrigger("Shoot");
                 bulletBounce.transform.position = GunBounceBullet.position;
-                bulletBounce.transform.rotation = GunBounceBullet.rotation;
-                bulletBounce.SetActive(true);
+                bulletBounce.transform.rotation = Quaternion.identity;
+                
 
                 timeRate = Time.time + fireRate;
                 bulletBounce.GetComponent<BounceBulletMovement>().SetDirection(DirDirection(dir));
+                bulletBounce.GetComponent<BounceBulletMovement>().activate();
+                
             }
         }
     }
@@ -54,25 +54,25 @@ public class FlowerTrigger : MonoBehaviour
     {
         if (left == true)
         {
-            dir = Vector3.left * speedDirection;
+            dir = Vector3.left;
             down = true;
             left = false;
         }
         else if (down == true)
         {
-            dir = Vector3.down * speedDirection;
+            dir = Vector3.down;
             right = true;
             down = false;
         }
         else if (right == true)
         {
-            dir = Vector3.right * speedDirection;
+            dir = Vector3.right;
             up = true;
             right = false;
         }
         else if (up == true)
         {
-            dir = Vector3.up * speedDirection;
+            dir = Vector3.up;
             left = true;
             up = false;
         }
