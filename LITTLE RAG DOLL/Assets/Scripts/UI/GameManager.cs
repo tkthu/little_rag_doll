@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +20,10 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public GameObject player;	
 
 	private SceneLoader sceneLoader;
+	private GameTimer gameTimer;
 	[HideInInspector] public PoolingManager poolingManager;
+
+	public Text scoreSpirit;
 
 
 	void Awake()
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
 
 		sceneLoader = GetComponent<SceneLoader>();
 		poolingManager = GetComponent<PoolingManager>();
+		gameTimer = GetComponent<GameTimer>();
 
 	}
 
@@ -63,6 +68,10 @@ public class GameManager : MonoBehaviour
 
 		score = 0;
 
+		gameTimer.TimerStart();
+
+		scoreSpirit.text = "Spirit: ";
+		transform.Find("GameUI").gameObject.SetActive(true);
 	}
 	public void loadScene(SceneName sn)
 	{
@@ -74,8 +83,8 @@ public class GameManager : MonoBehaviour
     public void addScore(int amount)
 	{
 		score = score + amount;
+		scoreSpirit.text = "Spirit: " + score;
 	}
 
-	
-		
+
 }
