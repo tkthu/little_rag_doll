@@ -25,7 +25,7 @@ public class Gui : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NumOfHearts = GameManager.GM.player.GetComponent<PlayerHealth>().HPmax;// chưa có update lại cái NumOfHearts
+        NumOfHearts = GameManager.GM.player.GetComponent<PlayerHealth>().HPmax;
         health = GameManager.GM.player.GetComponent<PlayerHealth>().HP;
         if (health > NumOfHearts)
         {
