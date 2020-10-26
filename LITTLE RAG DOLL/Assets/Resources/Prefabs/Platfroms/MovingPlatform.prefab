@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1978009899d423941852cade1bd10f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.2
 --- !u!251 &968394758244023170
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -112,11 +111,11 @@ PlatformEffector2D:
     m_Bits: 4294967295
   m_RotationalOffset: 0
   m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_UseOneWayGrouping: 1
+  m_SurfaceArc: 70
   m_UseSideFriction: 0
   m_UseSideBounce: 0
-  m_SideArc: 1
+  m_SideArc: 0
 --- !u!61 &5875054434777582099
 BoxCollider2D:
   m_ObjectHideFlags: 0

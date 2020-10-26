@@ -50,13 +50,7 @@ public class PoolingManager : MonoBehaviour
     {
 		foreach(List<GameObject> pooled in listOfPool)
 			foreach (GameObject go in pooled)
-            {
-				go.SetActive(false);
-				go.transform.position = Vector2.one * 10000;
-				EnemyHealth eneHealth = go.GetComponent<EnemyHealth>();
-				if (eneHealth != null)
-					eneHealth.resetStatus();
-			}
+				go.GetComponent<PoolingItem>().resetState();
 		
 	}
 
@@ -119,7 +113,7 @@ public class PoolingManager : MonoBehaviour
 		{
 			tmp = Instantiate(objectToPool);
 			tmp.SetActive(false);
-			tmp.transform.SetParent(groupObject.transform);
+			tmp.AddComponent<PoolingItem>().setOriginalParent(groupObject.transform);
 			pooledObjects.Add(tmp);
 		}
 		groupObject.transform.SetParent(parentObject.transform);
@@ -211,6 +205,11 @@ public class PoolingManager : MonoBehaviour
 	public List<List<GameObject>> getlistOfEnemiesPool()
     {
 		return listOfEnemisePool;
+
+	}
+	public List<List<GameObject>> getListOfInteractablesPool()
+	{
+		return listOfInteractablesPool;
 
 	}
 }

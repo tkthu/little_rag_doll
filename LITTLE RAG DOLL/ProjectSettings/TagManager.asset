@@ -18,6 +18,11 @@ TagManager:
   - Flower
   - Helmet
   - InteractablesHolder
+  - Spirit
+  - Heart
+  - GameManager
+  - bigBlood
+  - smallBlood
   layers:
   - Default
   - TransparentFX

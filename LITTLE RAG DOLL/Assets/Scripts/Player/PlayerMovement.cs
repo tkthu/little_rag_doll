@@ -59,13 +59,9 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region JumpHandler
-        if (Input.GetButton("Duck") && Input.GetButtonDown("Jump") && controller2D.m_Grounded)
+        
+        else if (!Input.GetButton("Duck") &&  Input.GetButtonDown("Jump") && controller2D.m_Grounded)
         {
-            Debug.Log("jump down");
-        }
-        else if (Input.GetButtonDown("Jump") && controller2D.m_Grounded)
-        {
-            Debug.Log("jump");
             isJumping = true;
             highJump = true;
             jumpCounter = jumpTime;

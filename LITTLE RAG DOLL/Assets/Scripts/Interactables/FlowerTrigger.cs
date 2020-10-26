@@ -6,7 +6,7 @@ public class FlowerTrigger : MonoBehaviour
 {
     private Transform GunBounceBullet;
     //Time rate
-    private float fireRate;
+    public float fireRate = 5f;
     private float timeRate;
     private GameObject bulletBounce;
     //Xu li dan bay 4 huong
@@ -14,38 +14,42 @@ public class FlowerTrigger : MonoBehaviour
     private bool down;
     private bool right;
     private bool up;
-    private float speedDirection = 0.2f;
 
     private Vector3 dir;
-
     //Animation
     private Animator anim;
+    private FlowerHealth health;
 
     // Start is called before the first frame update
     void Start()
     {
         GunBounceBullet = transform.Find("GunBounceBullet").transform;
         anim = GetComponent<Animator>();
-        fireRate = 1f;
         timeRate = Time.time;
         left = true;
+        health = GetComponent<FlowerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > timeRate)
+        if (health != null && !health.isFreezed)
         {
-            bulletBounce = GameManager.GM.poolingManager.getBounceBullets();
-            if (bulletBounce != null)
+            if (Time.time > timeRate)
             {
-                anim.SetTrigger("Shoot");
-                bulletBounce.transform.position = GunBounceBullet.position;
-                bulletBounce.transform.rotation = GunBounceBullet.rotation;
-                bulletBounce.SetActive(true);
+                bulletBounce = GameManager.GM.poolingManager.getBounceBullets();
+                if (bulletBounce != null)
+                {
+                    anim.SetTrigger("Shoot");
+                    bulletBounce.transform.position = GunBounceBullet.position;
+                    bulletBounce.transform.rotation = Quaternion.identity;
 
-                timeRate = Time.time + fireRate;
-                bulletBounce.GetComponent<BounceBulletMovement>().SetDirection(DirDirection(dir));
+
+                    timeRate = Time.time + fireRate;
+                    bulletBounce.GetComponent<BounceBulletMovement>().SetDirection(DirDirection(dir));
+                    bulletBounce.GetComponent<BounceBulletMovement>().activate();
+
+                }
             }
         }
     }
@@ -54,25 +58,25 @@ public class FlowerTrigger : MonoBehaviour
     {
         if (left == true)
         {
-            dir = Vector3.left * speedDirection;
+            dir = Vector3.left;
             down = true;
             left = false;
         }
         else if (down == true)
         {
-            dir = Vector3.down * speedDirection;
+            dir = Vector3.down;
             right = true;
             down = false;
         }
         else if (right == true)
         {
-            dir = Vector3.right * speedDirection;
+            dir = Vector3.right;
             up = true;
             right = false;
         }
         else if (up == true)
         {
-            dir = Vector3.up * speedDirection;
+            dir = Vector3.up;
             left = true;
             up = false;
         }

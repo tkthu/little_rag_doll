@@ -29,7 +29,7 @@ public class CameraMovement : MonoBehaviour
             {
                 Vector3 eneScrPoint = cam.WorldToViewportPoint(go.transform.position);
                 EnemyHealth eneHealth = go.GetComponent<EnemyHealth>();
-                
+
                 bool eneInCameraBound = eneScrPoint.x > -1 && eneScrPoint.x < 2 && eneScrPoint.y > -1 && eneScrPoint.y < 2;
                 if (eneInCameraBound)
                 {
@@ -39,21 +39,45 @@ public class CameraMovement : MonoBehaviour
 
                     if (!eneInCamera)
                     {
-                        if(eneHealth.isDeaded)
+                        if (eneHealth.isDeaded)
                             eneHealth.respawn();
-                        else if(go.CompareTag("BubbleBlower"))
+                        else if (go.CompareTag("BubbleBlower"))
                             eneHealth.isFreezed = true;
                     }
-                        
+                }
 
-                    
+            }
+
+        }
+        listOfPool = GameManager.GM.poolingManager.getListOfInteractablesPool();
+        foreach (List<GameObject> pool in listOfPool)
+        {
+            foreach (GameObject go in pool)
+            {
+                Vector3 scrPoint = cam.WorldToViewportPoint(go.transform.position);
+                FlowerHealth flowerHealth = go.GetComponent<FlowerHealth>();
+                if(flowerHealth != null)
+                {
+                    bool flowerInCameraBound = scrPoint.x > -1 && scrPoint.x < 2 && scrPoint.y > -1 && scrPoint.y < 2;
+                    if (flowerInCameraBound)
+                    {
+                        bool flowerInCamera = scrPoint.x > -0.125 && scrPoint.x < 1.125 && scrPoint.y > -0.125 && scrPoint.y < 1.125;
+                        if (flowerInCamera && !flowerHealth.isDeaded)
+                            flowerHealth.isFreezed = false;
+                        if (!flowerInCamera)
+                        {
+                            if (flowerHealth.isDeaded)
+                                flowerHealth.respawn();
+                            else if (go.CompareTag("Flower"))
+                                flowerHealth.isFreezed = true;
+                        }
+                    }
                 }
                 
             }
-                
 
         }
-          
+
     }
     private void LateUpdate()
     {
