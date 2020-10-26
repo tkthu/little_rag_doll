@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager GM;
 
 	public KeyCode jump { get; set; }
-	public KeyCode attack { get; set; }
+    public KeyCode attack { get; set; }
 	public KeyCode eatShoot { get; set; }
 	public KeyCode map { get; set; }
 	public KeyCode up { get; set; }
@@ -24,6 +24,15 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public PoolingManager poolingManager;
 
 	public Text scoreSpirit;
+
+	[HideInInspector] public bool isGameover = false;
+	[HideInInspector] public bool isRestartingScene = false;
+	[HideInInspector] public bool GameIsPaused = false;
+	[HideInInspector] public GameObject GameUI;
+	[HideInInspector] public GameObject PauseMenu;
+	[HideInInspector] public GameObject GameOverMenu;
+
+	private bool firstTime = true;
 
 
 	void Awake()
@@ -52,26 +61,51 @@ public class GameManager : MonoBehaviour
 		poolingManager = GetComponent<PoolingManager>();
 		gameTimer = GetComponent<GameTimer>();
 
+		GameUI = transform.Find("GameUI").gameObject;
+		PauseMenu = transform.Find("PauseMenu").gameObject;
+		GameOverMenu = transform.Find("GameOverMenu").gameObject;
+
+	}
+	// Update is called once per frame
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape) && !isGameover)
+		{
+			if (GameIsPaused)
+			{
+				resume();
+			}
+			else
+			{
+				pause();
+			}
+		}
 	}
 
-
-    public void startGame()
+	public void startGame()
     {
-		GameObject playerPrefabs = Resources.Load<GameObject>("Prefabs/Player/Player");
-		player = Instantiate(playerPrefabs);
-		player.SetActive(false);
-		GameObject parentObject = new GameObject("GameObjects");
-		player.transform.SetParent(parentObject.transform);
-		DontDestroyOnLoad(parentObject);
+		if (firstTime) 
+		{
+			firstTime = false;
 
-		poolingManager.instantiateAllPool(parentObject);
+			GameObject playerPrefabs = Resources.Load<GameObject>("Prefabs/Player/Player");
+			player = Instantiate(playerPrefabs);
+			player.SetActive(false);
+			GameObject parentObject = new GameObject("GameObjects");
+			player.AddComponent<PoolingItem>().setOriginalParent(parentObject.transform);
+			DontDestroyOnLoad(parentObject);
+
+			poolingManager.instantiateAllPool(parentObject);
+		}
+
+		isGameover = false;
 
 		score = 0;
+		player.GetComponent<PlayerHealth>().resetState();
 
-		gameTimer.TimerStart();
+		gameTimer.TimerReset();
 
-		scoreSpirit.text = "Spirit: ";
-		transform.Find("GameUI").gameObject.SetActive(true);
+		scoreSpirit.text = "Spirit: 0";
 	}
 	public void loadScene(SceneName sn)
 	{
@@ -86,5 +120,32 @@ public class GameManager : MonoBehaviour
 		scoreSpirit.text = "Spirit: " + score;
 	}
 
+	public void restart()
+	{
+		isRestartingScene = true;
+		loadScene(SceneName.Scene_8);
+		startGame();		
+		GameOverMenu.SetActive(false);
+
+	}
+	public void gameover()
+	{
+		isGameover = true;
+		gameTimer.TimerStop();
+		GameOverMenu.SetActive(true);
+	}
+	public void resume()
+	{
+		Time.timeScale = 1f;
+		GameIsPaused = false;
+		PauseMenu.SetActive(false);
+	}
+
+	public void pause()
+	{
+		Time.timeScale = 0f;
+		GameIsPaused = true;
+		PauseMenu.SetActive(true);
+	}
 
 }

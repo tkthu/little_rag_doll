@@ -464,7 +464,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3474112026459467830}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2712027762249336869}
+        m_MethodName: restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1493176513132981879
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,8 +671,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4145334185201902329}
-        m_MethodName: Menu
+      - m_Target: {fileID: 2712027762249336869}
+        m_MethodName: backToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -789,8 +800,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4145334185201902329}
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 2712027762249336869}
+        m_MethodName: quitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -812,7 +823,6 @@ GameObject:
   - component: {fileID: 7944429194559338759}
   - component: {fileID: 7177896748740100793}
   - component: {fileID: 8897875093603561384}
-  - component: {fileID: 4145334185201902329}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -900,19 +910,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4145334185201902329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227001573045843320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8039363da7f66dc4cb07dbc8a92ae04d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 2823767056787117580}
 --- !u!1 &2259180088907546370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1027,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8712484064591903988}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2712027762249336869}
+        m_MethodName: backToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2732444019509293991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6684219318191511173
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1839,8 +1847,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4145334185201902329}
-        m_MethodName: Resume
+      - m_Target: {fileID: 2712027762249336869}
+        m_MethodName: resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2013,6 +2021,7 @@ GameObject:
   - component: {fileID: 5425516173345654690}
   - component: {fileID: 6291495485514813012}
   - component: {fileID: 1198483871190567997}
+  - component: {fileID: 2712027762249336869}
   m_Layer: 0
   m_Name: _GM
   m_TagString: Untagged
@@ -2053,6 +2062,8 @@ MonoBehaviour:
   player: {fileID: 0}
   poolingManager: {fileID: 0}
   scoreSpirit: {fileID: 3979098643872956112}
+  isGameover: 0
+  GameIsPaused: 0
 --- !u!114 &5425516173345654690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2092,6 +2103,18 @@ MonoBehaviour:
   timerMinutes: {fileID: 193135132843907411}
   timerSeconds: {fileID: 3908491141170537440}
   timerSeconds100: {fileID: 7783588531535169207}
+--- !u!114 &2712027762249336869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5425516173345654703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe56bba87126a74797b50843d5a54a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6035490746854375484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2588,7 +2611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21cdbc56c4e4f7642af25e0ce69c0ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: {fileID: 8680285903591163424}
   health: 3
   NumOfHearts: 7
   hearts:
@@ -3232,7 +3254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1849887429482952698
 RectTransform:
   m_ObjectHideFlags: 0

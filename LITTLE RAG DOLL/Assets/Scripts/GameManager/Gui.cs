@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Gui : MonoBehaviour
 {
-    public GameObject gameOver;
     public int health;
     public int NumOfHearts;
 
@@ -18,7 +17,6 @@ public class Gui : MonoBehaviour
     {
         NumOfHearts = GameManager.GM.player.GetComponent<PlayerHealth>().HPmax;
         health = GameManager.GM.player.GetComponent<PlayerHealth>().HP;
-        gameOver.gameObject.SetActive(false);
 
     }
 

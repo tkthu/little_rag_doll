@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BounceBulletMovement : MonoBehaviour
 {
@@ -9,13 +6,7 @@ public class BounceBulletMovement : MonoBehaviour
     private bool firstBounce = true;
     private float speed = 2f;
     private float aliveTime = 10f;
-    private Transform oiginalParent;
-
-    private void Start()
-    {
-        Debug.Log("Start " + transform.parent);
-             
-    }
+   
 
     // Update is called once per frame
     public void SetDirection(Vector3 direction)
@@ -47,7 +38,6 @@ public class BounceBulletMovement : MonoBehaviour
                 var wDirection = transform.TransformDirection(lDirection);
 
                 _direction = wDirection;
-                transform.SetParent(Camera.main.transform);
                 firstBounce = false;
             }
             else
@@ -79,12 +69,10 @@ public class BounceBulletMovement : MonoBehaviour
     {
         firstBounce = true;
         gameObject.SetActive(false);
-        transform.SetParent(oiginalParent);
     }
 
     public void activate()
     {
-        oiginalParent = transform.parent;
         Invoke("outOfTime", aliveTime);        
         gameObject.SetActive(true);
     }
