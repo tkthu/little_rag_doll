@@ -16,7 +16,7 @@ public class CommonButtonController : MonoBehaviour
 
     public void backToMenu()
     {
-        GameManager.GM.resume();
+        Time.timeScale = 1f;
         GameManager.GM.loadScene(SceneName.MainMenu);
     }
 

@@ -34,7 +34,6 @@ public class FlowerHealth : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        Debug.Log("takeDamage");
         HP = HP - damage;
         if (HP <= 0)
             die();

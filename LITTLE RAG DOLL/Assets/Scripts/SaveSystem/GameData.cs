@@ -18,7 +18,9 @@ public class GameData
     public int HPmax;
     public string sceneHasPlayer;
     public float[] playerPos;
+    public float stopTime;
     public List<SceneData> arrSceneData;
+    
 
 
     public GameData()
@@ -26,9 +28,12 @@ public class GameData
         score = GameManager.GM.score;
         HPmax = GameManager.GM.player.GetComponent<PlayerHealth>().HPmax;
         sceneHasPlayer = SceneManager.GetActiveScene().name;
+
         playerPos = new float[2];
         playerPos[0] = GameManager.GM.player.transform.position.x;
         playerPos[1] = GameManager.GM.player.transform.position.y;
+
+        stopTime = GameManager.GM.gameTimer.getCurrentTime();
 
         //dummy
         SceneData sd = new SceneData();
@@ -45,13 +50,15 @@ public class GameData
 
     }
 
-    public GameData(int score, int hPmax, string sceneHasPlayer, float[] playerPos , List<SceneData> arrSceneData)
+    public GameData(int score, int hPmax, string sceneHasPlayer, float[] playerPos , float stopTime, List<SceneData> arrSceneData)
     {
         this.score = score;
         HPmax = hPmax;
         this.sceneHasPlayer = sceneHasPlayer;
         this.playerPos[0] = playerPos[0];
         this.playerPos[1] = playerPos[1];
+
+        this.stopTime = stopTime;
 
         //dummy
         SceneData sd = new SceneData();

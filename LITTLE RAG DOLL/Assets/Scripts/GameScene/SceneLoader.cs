@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public enum SceneName
 {
     MainMenu,
+    SaveFileScene,
     ControlsScene,
     OptionsScene,
     SampleScene,
@@ -41,6 +42,10 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(sn.ToString());
     }
+    public void loadScene(string strScene)
+    {
+        SceneManager.LoadScene(strScene);
+    }
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
     {
@@ -62,12 +67,16 @@ public class SceneLoader : MonoBehaviour
 
         UIShowing(currentScene);
 
-        if (equal(previousSceneName, SceneName.MainMenu) && !equal(currentScene, SceneName.ControlsScene ) && !equal(currentScene, SceneName.OptionsScene))//  bat dau choi
+        if (equal(previousSceneName, SceneName.MainMenu) && !equal(currentScene, SceneName.ControlsScene ) && !equal(currentScene, SceneName.OptionsScene) && !equal(currentScene, SceneName.SaveFileScene))//  bat dau choi
         {
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
             if(equal(currentScene, SceneName.Scene_8)) 
                 GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
+        }
+        else if (GameManager.GM.loadAtCheckpoint)
+        {
+            GameManager.GM.loadAtCheckpoint = false;
         }
         else
         {
@@ -84,15 +93,6 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
 
-        #region for testing
-        
-        if (equal(currentScene, SceneName.Scene_8) && GameManager.GM.isRestartingScene)
-        {
-            GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
-            GameManager.GM.isRestartingScene = false;
-        }
-
-        #endregion
     }
 
     private void UIShowing(Scene currentScene)

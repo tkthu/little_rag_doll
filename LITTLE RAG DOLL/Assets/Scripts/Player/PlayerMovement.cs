@@ -34,15 +34,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Y))
-        {
-            GameData gameData = SaveSystem.loadData();
-            PlayerHealth playerHealth = GetComponent<PlayerHealth>();
-            playerHealth.HPmax = gameData.HPmax;
-            GameManager.GM.score = gameData.score;
-            transform.position = new Vector2(gameData.playerPos[0], gameData.playerPos[1]);
-        }
-
         #region RunHandler
         hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
         vermove = Input.GetAxisRaw("Vertical") * runSpeed;
