@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 	public KeyCode jump { get; set; }
     public KeyCode attack { get; set; }
 	public KeyCode eatShoot { get; set; }
-	public KeyCode map { get; set; }
+	public KeyCode interact { get; set; }
 	public KeyCode up { get; set; }
 	public KeyCode down { get; set; }
 	public KeyCode left { get; set; }
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "K"));
-		map = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("mapKey", "M"));
+		interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interactKey", "I"));
 		eatShoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("eatShootKey", "L"));
 		attack = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("attackKey", "J"));
 		up = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("upKey", "W"));

@@ -2024,7 +2024,7 @@ GameObject:
   - component: {fileID: 2712027762249336869}
   m_Layer: 0
   m_Name: _GM
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2063,7 +2063,11 @@ MonoBehaviour:
   poolingManager: {fileID: 0}
   scoreSpirit: {fileID: 3979098643872956112}
   isGameover: 0
+  isRestartingScene: 0
   GameIsPaused: 0
+  GameUI: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  GameOverMenu: {fileID: 0}
 --- !u!114 &5425516173345654690
 MonoBehaviour:
   m_ObjectHideFlags: 0

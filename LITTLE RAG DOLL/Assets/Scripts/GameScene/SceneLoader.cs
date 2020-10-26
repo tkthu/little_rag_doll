@@ -44,6 +44,22 @@ public class SceneLoader : MonoBehaviour
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
     {
+        #region for testing
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject go in gos)
+        {
+            if (go != GameManager.GM.player)
+                Destroy(go);
+        }
+
+        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
+        {
+            GameManager.GM.startGame();
+            GameManager.GM.player.SetActive(true);
+        }
+
+        #endregion
+
         UIShowing(currentScene);
 
         if (equal(previousSceneName, SceneName.MainMenu) && !equal(currentScene, SceneName.ControlsScene ) && !equal(currentScene, SceneName.OptionsScene))//  bat dau choi
@@ -69,18 +85,7 @@ public class SceneLoader : MonoBehaviour
         previousSceneName = currentScene.name;
 
         #region for testing
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject go in gos)
-        {
-            if (go != GameManager.GM.player)
-                Destroy(go);
-        }
-
-        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
-        {
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-        }
+        
         if (equal(currentScene, SceneName.Scene_8) && GameManager.GM.isRestartingScene)
         {
             GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
