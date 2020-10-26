@@ -19,6 +19,7 @@ public class GameTimer : MonoBehaviour
     {
         if(!isRunning)
         {
+            Time.timeScale = 1f;
             isRunning = true;
             startTime = Time.time;
         }
@@ -28,6 +29,7 @@ public class GameTimer : MonoBehaviour
     {
         if (isRunning)
         {
+            Time.timeScale = 0f;
             isRunning = false;
         }
     }
@@ -35,6 +37,8 @@ public class GameTimer : MonoBehaviour
     public void TimerReset()
     {
         timerMinutes.text = timerSeconds.text = timerSeconds100.text = "00";
+        isRunning = false;
+        TimerStart();
     }
 
     void Update()

@@ -6,7 +6,7 @@ public class FlowerTrigger : MonoBehaviour
 {
     private Transform GunBounceBullet;
     //Time rate
-    private float fireRate;
+    public float fireRate = 5f;
     private float timeRate;
     private GameObject bulletBounce;
     //Xu li dan bay 4 huong
@@ -18,34 +18,38 @@ public class FlowerTrigger : MonoBehaviour
     private Vector3 dir;
     //Animation
     private Animator anim;
+    private FlowerHealth health;
 
     // Start is called before the first frame update
     void Start()
     {
         GunBounceBullet = transform.Find("GunBounceBullet").transform;
         anim = GetComponent<Animator>();
-        fireRate = 3f;
         timeRate = Time.time;
         left = true;
+        health = GetComponent<FlowerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > timeRate)
+        if (health != null && !health.isFreezed)
         {
-            bulletBounce = GameManager.GM.poolingManager.getBounceBullets();
-            if (bulletBounce != null)
+            if (Time.time > timeRate)
             {
-                anim.SetTrigger("Shoot");
-                bulletBounce.transform.position = GunBounceBullet.position;
-                bulletBounce.transform.rotation = Quaternion.identity;
-                
+                bulletBounce = GameManager.GM.poolingManager.getBounceBullets();
+                if (bulletBounce != null)
+                {
+                    anim.SetTrigger("Shoot");
+                    bulletBounce.transform.position = GunBounceBullet.position;
+                    bulletBounce.transform.rotation = Quaternion.identity;
 
-                timeRate = Time.time + fireRate;
-                bulletBounce.GetComponent<BounceBulletMovement>().SetDirection(DirDirection(dir));
-                bulletBounce.GetComponent<BounceBulletMovement>().activate();
-                
+
+                    timeRate = Time.time + fireRate;
+                    bulletBounce.GetComponent<BounceBulletMovement>().SetDirection(DirDirection(dir));
+                    bulletBounce.GetComponent<BounceBulletMovement>().activate();
+
+                }
             }
         }
     }

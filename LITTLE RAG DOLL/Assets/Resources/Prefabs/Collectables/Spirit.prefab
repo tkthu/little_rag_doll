@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 921615556283225559}
   - component: {fileID: 921615556283225556}
   - component: {fileID: 8247837504002786616}
-  - component: {fileID: 2980065481588563698}
   m_Layer: 0
   m_Name: Spirit
   m_TagString: Spirit
@@ -120,16 +119,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.25, y: 0.328125}
   m_Direction: 0
---- !u!114 &2980065481588563698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921615556283225557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 012d5383fdf41fc4c9a171525b277686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0

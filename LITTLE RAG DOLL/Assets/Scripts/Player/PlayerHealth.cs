@@ -5,32 +5,33 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public int HPmax;
-    public int HP;
+    [HideInInspector] public int HP;
 
     private void Awake()
     {
+        resetState();
+    }
+    public void resetState()
+    {
         HP = HPmax;
     }
-
     public void takeDamage(int damage)
     {
-        HP = HP - damage;
-        if (HP <= 0)
+        HP = Mathf.Clamp(HP - damage,0,HPmax);
+        if (HP == 0)
             die();
-        //Debug.Log("Player HP = " +HP);
+            
     }
 
     public void addBlood(int blood)
     {
-        HP = HP + blood;
-        if (HP > HPmax)
-            HP = HPmax;
-        //Debug.Log("Player HP = " +HP);
+        HP = Mathf.Clamp(HP + blood, 0, HPmax);
     }
 
     private void die()
     {
         Debug.Log("Player is dead");
+        //GameManager.GM.gameover();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -65,7 +66,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Heart");
             HPmax += 1;
-            addBlood(1);
+            addBlood(HPmax);
             other.gameObject.SetActive(false);
         }
     }

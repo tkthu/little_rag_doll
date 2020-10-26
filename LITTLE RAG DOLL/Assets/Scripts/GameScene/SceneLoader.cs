@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public enum SceneName
@@ -29,12 +30,10 @@ public class SceneLoader : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += onSceneLoaded;
     }
     void OnDisable()
     {
-        Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= onSceneLoaded;
     }
 
@@ -45,28 +44,13 @@ public class SceneLoader : MonoBehaviour
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
     {
-        #region for testing
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject go in gos)
-        {
-            if (go != GameManager.GM.player)
-                Destroy(go);
-        }
-
-        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
-        {
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-        }
-        # endregion
+        UIShowing(currentScene);
 
         if (equal(previousSceneName, SceneName.MainMenu) && !equal(currentScene, SceneName.ControlsScene ) && !equal(currentScene, SceneName.OptionsScene))//  bat dau choi
         {
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
-            if (equal(currentScene, SceneName.SampleScene))
-                GameManager.GM.player.transform.position = new Vector2(0, 0);
-            else if(equal(currentScene, SceneName.Scene_8)) 
+            if(equal(currentScene, SceneName.Scene_8)) 
                 GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
         }
         else
@@ -83,7 +67,43 @@ public class SceneLoader : MonoBehaviour
 
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
-        
+
+        #region for testing
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject go in gos)
+        {
+            if (go != GameManager.GM.player)
+                Destroy(go);
+        }
+
+        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
+        {
+            GameManager.GM.startGame();
+            GameManager.GM.player.SetActive(true);
+        }
+        if (equal(currentScene, SceneName.Scene_8) && GameManager.GM.isRestartingScene)
+        {
+            GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
+            GameManager.GM.isRestartingScene = false;
+        }
+
+        #endregion
+    }
+
+    private void UIShowing(Scene currentScene)
+    {
+        if (equal(currentScene, SceneName.MainMenu) || equal(currentScene, SceneName.ControlsScene) || equal(currentScene, SceneName.OptionsScene))
+        {
+            GameManager.GM.GameUI.SetActive(false);
+            GameManager.GM.PauseMenu.SetActive(false);
+            GameManager.GM.GameOverMenu.SetActive(false);
+        }
+        else
+        {
+            GameManager.GM.GameUI.SetActive(true);
+            GameManager.GM.PauseMenu.SetActive(false);
+            GameManager.GM.GameOverMenu.SetActive(false);
+        }
     }
 
     private void loadEnemies()
@@ -140,6 +160,8 @@ public class SceneLoader : MonoBehaviour
 
                 }
                 go.SetActive(true);
+                if(go.transform.GetComponent<FlowerHealth>() != null)
+                    go.transform.GetComponent<FlowerHealth>().respawnPos = child.position;
                 go.transform.position = child.position;
                 Destroy(child.gameObject);
             }
