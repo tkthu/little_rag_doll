@@ -57,6 +57,13 @@ public class SceneLoader : MonoBehaviour
                 Destroy(go);
         }
 
+        if (previousSceneName == "" && equal(currentScene, SceneName.SampleScene))
+        {
+            GameManager.GM.testing = true;
+            GameManager.GM.startGame();
+            GameManager.GM.player.SetActive(true);
+            
+        }
         #endregion
 
         UIShowing(currentScene);

@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
 
 	private GameData gameData;
 
+	[HideInInspector] public bool testing = false;
+
 
 	void Awake()
 	{
@@ -125,8 +127,8 @@ public class GameManager : MonoBehaviour
 		}
 
 		isGameover = false;
-
-		loadGameData();
+		if(!testing)
+			loadGameData();
 
 		scoreSpirit.text = "Spirit: "+ score;
 	}
