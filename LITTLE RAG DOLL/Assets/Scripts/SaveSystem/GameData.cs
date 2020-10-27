@@ -11,31 +11,30 @@ public class SceneData
 }
 
 [System.Serializable]
-public class GameData 
+public class GameData
 {
-    
+    public int filenumber;
     public int score;
     public int HPmax;
     public string sceneHasPlayer;
     public float[] playerPos;
     public float stopTime;
-    public List<SceneData> arrSceneData;
-    
+    //public List<SceneData> arrSceneData;
 
-
-    public GameData()
+    public GameData()//Khởi tạo save file (lúc nhấn vào nút tạo mới save file)
     {
-        score = GameManager.GM.score;
-        HPmax = GameManager.GM.player.GetComponent<PlayerHealth>().HPmax;
-        sceneHasPlayer = SceneManager.GetActiveScene().name;
+        score = 0;
+        HPmax = 5;//????
+        sceneHasPlayer = SceneName.Scene_8.ToString();
 
         playerPos = new float[2];
-        playerPos[0] = GameManager.GM.player.transform.position.x;
-        playerPos[1] = GameManager.GM.player.transform.position.y;
+        playerPos[0] = -4;
+        playerPos[1] = -7.5f;
 
-        stopTime = GameManager.GM.gameTimer.getCurrentTime();
+        stopTime = 0;
 
         //dummy
+        /*
         SceneData sd = new SceneData();
         sd.sceneName = SceneName.Scene_8.ToString();
         sd.collectedSpiritPos_x = new float[2];
@@ -47,38 +46,22 @@ public class GameData
 
         arrSceneData = new List<SceneData>();
         arrSceneData.Add(sd);
+        */
 
     }
-
-    public GameData(int score, int hPmax, string sceneHasPlayer, float[] playerPos , float stopTime, List<SceneData> arrSceneData)
+    public GameData(GameManager GM)//tạo save file từ GameManager
     {
-        this.score = score;
-        HPmax = hPmax;
-        this.sceneHasPlayer = sceneHasPlayer;
-        this.playerPos[0] = playerPos[0];
-        this.playerPos[1] = playerPos[1];
+        filenumber = GM.getGameData().filenumber;
+        score = GM.score;
+        HPmax = GM.player.GetComponent<PlayerHealth>().HPmax;
+        sceneHasPlayer = SceneManager.GetActiveScene().name;
 
-        this.stopTime = stopTime;
+        playerPos = new float[2];
+        playerPos[0] = GM.player.transform.position.x;
+        playerPos[1] = GM.player.transform.position.y;
 
-        //dummy
-        SceneData sd = new SceneData();
-        arrSceneData = new List<SceneData>();
-        foreach (SceneData asd in arrSceneData)
-        {
-            sd.sceneName = asd.sceneName;
-            sd.collectedSpiritPos_x = new float[2];
-            sd.collectedSpiritPos_y = new float[2];
-            sd.collectedSpiritPos_x[0] = asd.collectedSpiritPos_x[0];
-            sd.collectedSpiritPos_x[1] = asd.collectedSpiritPos_x[1];
-            sd.collectedSpiritPos_y[0] = asd.collectedSpiritPos_y[0];
-            sd.collectedSpiritPos_y[1] = asd.collectedSpiritPos_y[1];
-
-            arrSceneData.Add(sd);
-        }
-        
-        
+        stopTime = GM.gameTimer.getCurrentTime();
     }
-
 
 
 }

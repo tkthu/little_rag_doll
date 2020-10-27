@@ -24,8 +24,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void addBlood(int blood)
-    {
-        
+    {        
         HP = Mathf.Clamp(HP + blood, 0, HPmax);
     }
 
@@ -35,13 +34,9 @@ public class PlayerHealth : MonoBehaviour
         //GameManager.GM.gameover();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.GetMask("Enemies"))  // Cái này ko chạy
-        {
-            Debug.Log("damage");
-            takeDamage(1);
-        }/*
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {        
         // Hồi máu
         if (other.tag == "smallBlood")
         {
@@ -55,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("bigBlood");
             HP = HPmax;
             other.gameObject.SetActive(false);
-        }*/
+        }
         // Ăn spirit
         if (other.tag == "Spirit")
         {

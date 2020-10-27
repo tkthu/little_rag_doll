@@ -57,28 +57,14 @@ public class SceneLoader : MonoBehaviour
                 Destroy(go);
         }
 
-        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
-        {
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-        }
-
         #endregion
 
         UIShowing(currentScene);
-
-        if (equal(previousSceneName, SceneName.MainMenu) && !equal(currentScene, SceneName.ControlsScene ) && !equal(currentScene, SceneName.OptionsScene) && !equal(currentScene, SceneName.SaveFileScene))//  bat dau choi
-        {
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-            if(equal(currentScene, SceneName.Scene_8)) 
-                GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
-        }
-        else if (GameManager.GM.loadAtCheckpoint)
+        
+        if (GameManager.GM.loadAtCheckpoint)
         {
             GameManager.GM.loadAtCheckpoint = false;
-        }
-        else
+        }else
         {
             GameObject[] sceneTriggers = GameObject.FindGameObjectsWithTag("SceneTrigger");
             foreach (GameObject st in sceneTriggers)
@@ -97,17 +83,20 @@ public class SceneLoader : MonoBehaviour
 
     private void UIShowing(Scene currentScene)
     {
-        if (equal(currentScene, SceneName.MainMenu) || equal(currentScene, SceneName.ControlsScene) || equal(currentScene, SceneName.OptionsScene))
+        if (equal(currentScene, SceneName.MainMenu) || equal(currentScene, SceneName.ControlsScene) || equal(currentScene, SceneName.OptionsScene) || equal(currentScene, SceneName.SaveFileScene))
         {
             GameManager.GM.GameUI.SetActive(false);
             GameManager.GM.PauseMenu.SetActive(false);
             GameManager.GM.GameOverMenu.SetActive(false);
+            if(GameManager.GM.player != null)
+                GameManager.GM.player.SetActive(false);
         }
         else
         {
             GameManager.GM.GameUI.SetActive(true);
             GameManager.GM.PauseMenu.SetActive(false);
             GameManager.GM.GameOverMenu.SetActive(false);
+            GameManager.GM.player.SetActive(true);
         }
     }
 

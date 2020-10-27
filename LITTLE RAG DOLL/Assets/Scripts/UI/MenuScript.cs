@@ -30,7 +30,7 @@ public class MenuScript : MonoBehaviour
 				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.right.ToString();
 			else if (menuPanel.GetChild(i).name == "btn_jump")
 				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.jump.ToString();
-			else if (menuPanel.GetChild(i).name == "btn_map")
+			else if (menuPanel.GetChild(i).name == "btn_interact")
 				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.interact.ToString();
 			else if (menuPanel.GetChild(i).name == "btn_attack")
 				menuPanel.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = GameManager.GM.attack.ToString();

@@ -9,32 +9,15 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.GM.player.GetComponent<PlayerHealth>().addBlood(100);
-            if ((Input.GetKey(KeyCode.Keypad1) || Input.GetKey(KeyCode.Keypad2) || Input.GetKey(KeyCode.Keypad3)) && !save)
+            if (!save)
             {
-                int filenumber = 1;
-                if (Input.GetKey(KeyCode.Keypad1))
-                    filenumber = 1;
-                else if (Input.GetKey(KeyCode.Keypad2))
-                    filenumber = 2;
-                else if (Input.GetKey(KeyCode.Keypad3))
-                    filenumber = 3;
-
-                SaveSystem.saveData(filenumber);
+                GameManager.GM.player.GetComponent<PlayerHealth>().addBlood(100);
+                SaveSystem.saveData(GameManager.GM);
                 Debug.Log("Saving...");
                 save = true;
             }
+            
         }
-        
-
-        /*
-		if (Input.GetButton("Interact") && !save)
-        {
-            SaveSystem.saveData(1);
-            save = true;
-            Debug.Log("Saving...");
-        }
-        */ 
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

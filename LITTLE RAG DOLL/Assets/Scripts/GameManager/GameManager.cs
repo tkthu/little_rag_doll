@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
 	private bool firstTime = true;
 
+	private GameData gameData;
+
 
 	void Awake()
 	{
@@ -66,7 +68,31 @@ public class GameManager : MonoBehaviour
 		GameOverMenu = transform.Find("GameOverMenu").gameObject;
 
 	}
-	// Update is called once per frame
+
+	public void setGameData(GameData gameData)
+    {
+		this.gameData = gameData;
+    }
+	public GameData getGameData()
+	{
+		return gameData;
+	}
+
+	public void loadGameData()
+	{
+		gameTimer.TimerStop();
+		loadAtCheckpoint = true;
+		loadScene(gameData.sceneHasPlayer);
+		PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+		playerHealth.HPmax = gameData.HPmax;
+		playerHealth.HP = gameData.HPmax;
+		score = gameData.score;
+		player.transform.position = new Vector2(gameData.playerPos[0], gameData.playerPos[1]);
+		gameTimer.TimerStart(gameData.stopTime);
+
+		scoreSpirit.text = "Spirit: " + score;
+	}
+	
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape) && !isGameover)
@@ -80,57 +106,6 @@ public class GameManager : MonoBehaviour
 				pause();
 			}
 		}
-
-
-		#region for testing
-		/*
-		 * 1,2,3 save
-		 * 4,5,6 load
-		 * 7,8,9 delete
-		 * 
-		 */
-
-		if (Input.GetKey(KeyCode.Keypad4) || Input.GetKey(KeyCode.Keypad5) || Input.GetKey(KeyCode.Keypad6))
-		{
-			int filenumber = 1;
-			if (Input.GetKey(KeyCode.Keypad4))
-				filenumber = 1;
-			else if (Input.GetKey(KeyCode.Keypad5))
-				filenumber = 2;
-			else if (Input.GetKey(KeyCode.Keypad6))
-				filenumber = 3;
-			GameData gameData = SaveSystem.loadData(filenumber);
-
-			if(gameData != null)
-            {
-				gameTimer.TimerStop();
-				loadAtCheckpoint = true;
-				loadScene(gameData.sceneHasPlayer);
-				PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-				playerHealth.HPmax = gameData.HPmax;
-				score = gameData.score;
-				player.transform.position = new Vector2(gameData.playerPos[0], gameData.playerPos[1]);
-				gameTimer.TimerStart(gameData.stopTime);
-
-				scoreSpirit.text = "Spirit: " + score;
-			}
-			
-		}
-		if (Input.GetKey(KeyCode.Keypad7) || Input.GetKey(KeyCode.Keypad8) || Input.GetKey(KeyCode.Keypad9))
-		{
-			int filenumber = 1;
-			if (Input.GetKey(KeyCode.Keypad7))
-				filenumber = 1;
-			else if (Input.GetKey(KeyCode.Keypad8))
-				filenumber = 2;
-			else if (Input.GetKey(KeyCode.Keypad9))
-				filenumber = 3;
-			SaveSystem.deleteData(filenumber);
-
-		}
-
-		
-		#endregion
 	}
 
     public void startGame()
@@ -146,15 +121,12 @@ public class GameManager : MonoBehaviour
 			player.AddComponent<PoolingItem>().setOriginalParent(parentObject.transform);
 			DontDestroyOnLoad(parentObject);
 
-			poolingManager.instantiateAllPool(parentObject);
+			poolingManager.instantiateAllPool(parentObject);			
 		}
 
 		isGameover = false;
 
-		score = 0;
-		player.GetComponent<PlayerHealth>().resetState();
-
-		gameTimer.TimerStart();
+		loadGameData();
 
 		scoreSpirit.text = "Spirit: "+ score;
 	}
@@ -180,7 +152,7 @@ public class GameManager : MonoBehaviour
 	public void restart()
 	{
 		loadAtCheckpoint = true;
-		loadScene(SceneName.Scene_8);
+		setGameData(SaveSystem.loadData(gameData.filenumber));
 		startGame();		
 		GameOverMenu.SetActive(false);
 

@@ -33,7 +33,7 @@ public class GameTimer : MonoBehaviour
             Time.timeScale = 1f;
             isRunning = true;
             stopTime = startAt;
-            startTime = Time.time;            
+            startTime = Time.time;
         }
     }
 
