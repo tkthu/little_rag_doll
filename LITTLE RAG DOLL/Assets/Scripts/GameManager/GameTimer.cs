@@ -15,31 +15,45 @@ public class GameTimer : MonoBehaviour
     private float timerTime;
     private bool isRunning = false;
 
-    public void TimerStart()
+
+    public float getCurrentStopTime()// ?????????
+    {
+        return stopTime;
+    }
+
+    public float getCurrentTime()
+    {
+        return timerTime;
+    }
+
+    public void TimerStart(float startAt = 0)
     {
         if(!isRunning)
         {
             Time.timeScale = 1f;
             isRunning = true;
+            stopTime = startAt;
             startTime = Time.time;
         }
     }
 
-    public void TimerStop()
+    public float TimerStop()
     {
         if (isRunning)
         {
             Time.timeScale = 0f;
             isRunning = false;
+            stopTime = timerTime;
         }
+        return stopTime;
     }
 
-    public void TimerReset()
+    /*public void TimerReset()
     {
         timerMinutes.text = timerSeconds.text = timerSeconds100.text = "00";
         isRunning = false;
         TimerStart();
-    }
+    }*/
 
     void Update()
     {

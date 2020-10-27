@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 	public KeyCode jump { get; set; }
     public KeyCode attack { get; set; }
 	public KeyCode eatShoot { get; set; }
-	public KeyCode map { get; set; }
+	public KeyCode interact { get; set; }
 	public KeyCode up { get; set; }
 	public KeyCode down { get; set; }
 	public KeyCode left { get; set; }
@@ -20,19 +20,21 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public GameObject player;	
 
 	private SceneLoader sceneLoader;
-	private GameTimer gameTimer;
+	[HideInInspector] public GameTimer gameTimer;
 	[HideInInspector] public PoolingManager poolingManager;
 
 	public Text scoreSpirit;
 
 	[HideInInspector] public bool isGameover = false;
-	[HideInInspector] public bool isRestartingScene = false;
+	[HideInInspector] public bool loadAtCheckpoint = false;
 	[HideInInspector] public bool GameIsPaused = false;
 	[HideInInspector] public GameObject GameUI;
 	[HideInInspector] public GameObject PauseMenu;
 	[HideInInspector] public GameObject GameOverMenu;
 
 	private bool firstTime = true;
+
+	private GameData gameData;
 
 
 	void Awake()
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "K"));
-		map = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("mapKey", "M"));
+		interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interactKey", "I"));
 		eatShoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("eatShootKey", "L"));
 		attack = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("attackKey", "J"));
 		up = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("upKey", "W"));
@@ -66,7 +68,31 @@ public class GameManager : MonoBehaviour
 		GameOverMenu = transform.Find("GameOverMenu").gameObject;
 
 	}
-	// Update is called once per frame
+
+	public void setGameData(GameData gameData)
+    {
+		this.gameData = gameData;
+    }
+	public GameData getGameData()
+	{
+		return gameData;
+	}
+
+	public void loadGameData()
+	{
+		gameTimer.TimerStop();
+		loadAtCheckpoint = true;
+		loadScene(gameData.sceneHasPlayer);
+		PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+		playerHealth.HPmax = gameData.HPmax;
+		playerHealth.HP = gameData.HPmax;
+		score = gameData.score;
+		player.transform.position = new Vector2(gameData.playerPos[0], gameData.playerPos[1]);
+		gameTimer.TimerStart(gameData.stopTime);
+
+		scoreSpirit.text = "Spirit: " + score;
+	}
+	
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape) && !isGameover)
@@ -82,7 +108,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void startGame()
+    public void startGame()
     {
 		if (firstTime) 
 		{
@@ -95,17 +121,14 @@ public class GameManager : MonoBehaviour
 			player.AddComponent<PoolingItem>().setOriginalParent(parentObject.transform);
 			DontDestroyOnLoad(parentObject);
 
-			poolingManager.instantiateAllPool(parentObject);
+			poolingManager.instantiateAllPool(parentObject);			
 		}
 
 		isGameover = false;
 
-		score = 0;
-		player.GetComponent<PlayerHealth>().resetState();
+		loadGameData();
 
-		gameTimer.TimerReset();
-
-		scoreSpirit.text = "Spirit: 0";
+		scoreSpirit.text = "Spirit: "+ score;
 	}
 	public void loadScene(SceneName sn)
 	{
@@ -113,8 +136,14 @@ public class GameManager : MonoBehaviour
 		sceneLoader.loadScene(sn);
 		
 	}
+	public void loadScene(string strScene)
+	{
+		poolingManager.inactiveAll();
+		sceneLoader.loadScene(strScene);
 
-    public void addScore(int amount)
+	}
+
+	public void addScore(int amount)
 	{
 		score = score + amount;
 		scoreSpirit.text = "Spirit: " + score;
@@ -122,8 +151,8 @@ public class GameManager : MonoBehaviour
 
 	public void restart()
 	{
-		isRestartingScene = true;
-		loadScene(SceneName.Scene_8);
+		loadAtCheckpoint = true;
+		setGameData(SaveSystem.loadData(gameData.filenumber));
 		startGame();		
 		GameOverMenu.SetActive(false);
 
@@ -136,14 +165,14 @@ public class GameManager : MonoBehaviour
 	}
 	public void resume()
 	{
-		Time.timeScale = 1f;
+		gameTimer.TimerStart(gameTimer.getCurrentStopTime());		
 		GameIsPaused = false;
 		PauseMenu.SetActive(false);
 	}
 
 	public void pause()
 	{
-		Time.timeScale = 0f;
+		gameTimer.TimerStop();
 		GameIsPaused = true;
 		PauseMenu.SetActive(true);
 	}

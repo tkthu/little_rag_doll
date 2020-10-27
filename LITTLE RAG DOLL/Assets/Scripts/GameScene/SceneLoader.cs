@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public enum SceneName
 {
     MainMenu,
+    SaveFileScene,
     ControlsScene,
     OptionsScene,
     SampleScene,
@@ -41,19 +42,29 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(sn.ToString());
     }
+    public void loadScene(string strScene)
+    {
+        SceneManager.LoadScene(strScene);
+    }
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
     {
-        UIShowing(currentScene);
-
-        if (equal(previousSceneName, SceneName.MainMenu) && !equal(currentScene, SceneName.ControlsScene ) && !equal(currentScene, SceneName.OptionsScene))//  bat dau choi
+        #region for testing
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject go in gos)
         {
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-            if(equal(currentScene, SceneName.Scene_8)) 
-                GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
+            if (go != GameManager.GM.player)
+                Destroy(go);
         }
-        else
+
+        #endregion
+
+        UIShowing(currentScene);
+        
+        if (GameManager.GM.loadAtCheckpoint)
+        {
+            GameManager.GM.loadAtCheckpoint = false;
+        }else
         {
             GameObject[] sceneTriggers = GameObject.FindGameObjectsWithTag("SceneTrigger");
             foreach (GameObject st in sceneTriggers)
@@ -68,41 +79,24 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
 
-        #region for testing
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject go in gos)
-        {
-            if (go != GameManager.GM.player)
-                Destroy(go);
-        }
-
-        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
-        {
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-        }
-        if (equal(currentScene, SceneName.Scene_8) && GameManager.GM.isRestartingScene)
-        {
-            GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
-            GameManager.GM.isRestartingScene = false;
-        }
-
-        #endregion
     }
 
     private void UIShowing(Scene currentScene)
     {
-        if (equal(currentScene, SceneName.MainMenu) || equal(currentScene, SceneName.ControlsScene) || equal(currentScene, SceneName.OptionsScene))
+        if (equal(currentScene, SceneName.MainMenu) || equal(currentScene, SceneName.ControlsScene) || equal(currentScene, SceneName.OptionsScene) || equal(currentScene, SceneName.SaveFileScene))
         {
             GameManager.GM.GameUI.SetActive(false);
             GameManager.GM.PauseMenu.SetActive(false);
             GameManager.GM.GameOverMenu.SetActive(false);
+            if(GameManager.GM.player != null)
+                GameManager.GM.player.SetActive(false);
         }
         else
         {
             GameManager.GM.GameUI.SetActive(true);
             GameManager.GM.PauseMenu.SetActive(false);
             GameManager.GM.GameOverMenu.SetActive(false);
+            GameManager.GM.player.SetActive(true);
         }
     }
 

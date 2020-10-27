@@ -13,9 +13,9 @@ public class PlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Press S to go down
+        // Press S and K to go down
         
-        if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.K))
+        if(Input.GetButton("Duck") && Input.GetButton("Jump"))
         {
             effector.rotationalOffset = 180f;
            
