@@ -16,6 +16,10 @@ public class Attachment : MonoBehaviour
     private float aVel;
     private float aAcc;
 
+    private float chainDistance = 0.5f;
+
+    private Dictionary<Transform, float> dictOfLen = new Dictionary<Transform, float>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,36 +33,32 @@ public class Attachment : MonoBehaviour
 
         aVel = 0;
         aAcc = 0;
-
-        //drawChain();
+        dictOfLen.Add(end, len);
+        drawChain();
     }
-    /*
+    
     private void drawChain()
     {
-        
-        Transform nextChain = end;
-        while(Vector2.Distance(nextChain.position, root.position) > 2)
+        float l = len;
+        while(l > chainDistance)
         {
-            Vector2 pos2Create = end.
-
-            GameObject objectToPool = Resources.Load<GameObject>("Prefabs/Platfroms/ChainLink");
-            GameObject tmp = Instantiate(objectToPool);
-            for (int i = 0; i < amountToPool; i++)
-            {
-                tmp = Instantiate(objectToPool);
-                tmp.SetActive(false);
-                tmp.AddComponent<PoolingItem>().setOriginalParent(groupObject.transform);
-                pooledObjects.Add(tmp);
-            }
-            attachment = Instantiate(attachment, end.localPosition, Quaternion.identity);
+            l = l - chainDistance;
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/Platfroms/ChainLink");
+            GameObject chain = Instantiate(prefab);
+            dictOfLen.Add(chain.transform, l);
         }
     }
-    */
+    
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 newPos = new Vector2(len * Mathf.Sin(angle), - len * Mathf.Cos(angle));
-        end.localPosition = newPos;
+        foreach (KeyValuePair<Transform, float> entry in dictOfLen)
+        {
+            len = entry.Value;
+            Vector2 newPos = new Vector2(len * Mathf.Sin(angle), -len * Mathf.Cos(angle));
+            entry.Key.localPosition = newPos;
+        }
+        
 
         aAcc = - Time.fixedDeltaTime * Mathf.Sin(angle) / len * slowDown;
 

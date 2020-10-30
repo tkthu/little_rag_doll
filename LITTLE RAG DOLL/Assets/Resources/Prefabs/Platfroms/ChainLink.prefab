@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4085086865328757543}
   - component: {fileID: 4085086865328757542}
   - component: {fileID: 6473877370476958224}
-  - component: {fileID: 7067282633399773147}
+  - component: {fileID: 3651292626001403490}
   m_Layer: 0
   m_Name: ChainLink
   m_TagString: Untagged
@@ -104,7 +104,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!233 &7067282633399773147
+--- !u!233 &3651292626001403490
 HingeJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,8 +118,8 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0.5}
-  m_ConnectedAnchor: {x: 0, y: 0.5}
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
