@@ -1,71 +1,20 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class Attachment : MonoBehaviour
 {
-    private Transform root;
-    private Transform end;
     public GameObject attachment;
-    private float slowDown = 0.1f;
-
-    private float len;
-    private float angle;
-    private float aVel;
-    private float aAcc;
-
-    private float chainDistance = 0.5f;
-
-    private Dictionary<Transform, float> dictOfLen = new Dictionary<Transform, float>();
-
-
     // Start is called before the first frame update
     void Start()
     {
-        root = transform.Find("ChainLink_root");
-        end = transform.Find("ChainLink_end");
-        attachment = Instantiate(attachment, end.localPosition, Quaternion.identity);
-        len = Vector2.Distance(end.localPosition, root.localPosition);
-        float val = Mathf.Clamp(end.localPosition.x / len, -1, 1);
-        angle = Mathf.Asin(val); ;
+        attachment = Instantiate(attachment, transform.localPosition, Quaternion.identity);
+        attachment.transform.SetParent(transform.parent);
+    }
 
-        aVel = 0;
-        aAcc = 0;
-        dictOfLen.Add(end, len);
-        drawChain();
-    }
-    
-    private void drawChain()
-    {
-        float l = len;
-        while(l > chainDistance)
-        {
-            l = l - chainDistance;
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/Platfroms/ChainLink");
-            GameObject chain = Instantiate(prefab);
-            dictOfLen.Add(chain.transform, l);
-        }
-    }
-    
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        foreach (KeyValuePair<Transform, float> entry in dictOfLen)
-        {
-            len = entry.Value;
-            Vector2 newPos = new Vector2(len * Mathf.Sin(angle), -len * Mathf.Cos(angle));
-            entry.Key.localPosition = newPos;
-        }
-        
-
-        aAcc = - Time.fixedDeltaTime * Mathf.Sin(angle) / len * slowDown;
-
-        aVel += aAcc;
-        angle += aVel;
-
-        attachment.transform.localPosition = end.transform.localPosition;
+        attachment.transform.localPosition = transform.localPosition;
     }
-
 }
