@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 1684563488551160726}
   - component: {fileID: 5246561852997338471}
   m_Layer: 0
-  m_Name: EnemiesDamageTaking
+  m_Name: DamageTaking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

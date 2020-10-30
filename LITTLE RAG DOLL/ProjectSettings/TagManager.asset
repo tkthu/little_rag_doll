@@ -18,11 +18,11 @@ TagManager:
   - Flower
   - Helmet
   - InteractablesHolder
-  - Spirit
-  - Heart
+  - cube
   - GameManager
-  - bigBlood
-  - smallBlood
+  - Heart
+  - Spirit
+  - Saw
   layers:
   - Default
   - TransparentFX
@@ -39,7 +39,7 @@ TagManager:
   - EneBullets
   - Them
   - Spike
-  - Cong
+  - 
   - 
   - 
   - 
