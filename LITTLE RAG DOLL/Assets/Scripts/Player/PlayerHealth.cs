@@ -64,5 +64,6 @@ public class PlayerHealth : MonoBehaviour
             addBlood(HPmax);
             other.gameObject.SetActive(false);
         }
+        
     }
 }
