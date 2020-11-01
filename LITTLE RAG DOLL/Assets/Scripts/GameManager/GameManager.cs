@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 		player.transform.position = new Vector2(gameData.playerPos[0], gameData.playerPos[1]);
 		gameTimer.TimerStart(gameData.stopTime);
 
-		scoreSpirit.text = "Spirit: " + score;
+		scoreSpirit.text = ""+score;
 	}
 	
 	void Update()
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
 		if(!testing)
 			loadGameData();
 
-		scoreSpirit.text = "Spirit: "+ score;
+		scoreSpirit.text = ""+ score;
 	}
 	public void loadScene(SceneName sn)
 	{
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
 	public void addScore(int amount)
 	{
 		score = score + amount;
-		scoreSpirit.text = "Spirit: " + score;
+		scoreSpirit.text = "" + score;
 	}
 
 	public void restart()
