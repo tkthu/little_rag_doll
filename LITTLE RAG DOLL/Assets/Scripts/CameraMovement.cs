@@ -4,10 +4,12 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public float camSmooth = 5;
+    public bool followPlayer = true;
+    public bool freezeY = false;
+    public bool freezeX = false;
 
     private GameObject player;
     private Camera cam;
-    private Transform camTrans;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class CameraMovement : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
 
         cam = GetComponent<Camera>();
-        camTrans = GetComponent<Transform>();
+        
     }
 
     void Update()
@@ -81,9 +83,18 @@ public class CameraMovement : MonoBehaviour
     }
     private void LateUpdate()
     {
-        Vector3 playerPos = player.GetComponent<Transform>().position;
-        Vector3 targetPos = new Vector3(playerPos.x, playerPos.y, -10);
-        camTrans.position = Vector3.Lerp(camTrans.position,targetPos, camSmooth*Time.deltaTime);
+        if (followPlayer)
+        {
+            Vector3 playerPos = player.GetComponent<Transform>().position;
+            Vector3 targetPos;
+            if (freezeX)
+                targetPos = new Vector3(transform.position.x, playerPos.y, -10);
+            else if(freezeY)
+                targetPos = new Vector3(playerPos.x, transform.position.y, -10);
+            else
+                targetPos = new Vector3(playerPos.x, playerPos.y, -10);
+            transform.position = Vector3.Lerp(transform.position, targetPos, camSmooth * Time.deltaTime);
+        }       
             
     }
 }

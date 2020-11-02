@@ -1214,6 +1214,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5425516173345654688, guid: 3b8b928e851de2d429689484fe510e1b,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 43734889}
     - target: {fileID: 5425516173345654689, guid: 3b8b928e851de2d429689484fe510e1b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1317,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 7252771437681237065, guid: 3b8b928e851de2d429689484fe510e1b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7354010970230798593, guid: 3b8b928e851de2d429689484fe510e1b,
         type: 3}

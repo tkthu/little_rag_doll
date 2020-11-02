@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public GameTimer gameTimer;
 	[HideInInspector] public PoolingManager poolingManager;
 
-	public Text scoreSpirit;
+	private Text scoreSpirit;
 
 	[HideInInspector] public bool isGameover = false;
 	[HideInInspector] public bool loadAtCheckpoint = false;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 		{
 			DontDestroyOnLoad(gameObject);
 			GM = this;
+			
 		}
 		else if (GM != this)
 		{
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
 		GameUI = transform.Find("GameUI").gameObject;
 		PauseMenu = transform.Find("PauseMenu").gameObject;
 		GameOverMenu = transform.Find("GameOverMenu").gameObject;
+
+		scoreSpirit = GameUI.transform.Find("SpiritText").gameObject.GetComponent<Text>() ;
 
 	}
 
@@ -123,7 +126,7 @@ public class GameManager : MonoBehaviour
 			player.AddComponent<PoolingItem>().setOriginalParent(parentObject.transform);
 			DontDestroyOnLoad(parentObject);
 
-			poolingManager.instantiateAllPool(parentObject);			
+			poolingManager.instantiateAllPool(parentObject);
 		}
 
 		isGameover = false;

@@ -11,7 +11,7 @@ public class OptionsSceneController : MonoBehaviour
     void Start()
     {
         activeScreenResIndex = PlayerPrefs.GetInt("Screen res index");
-        bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
+        bool isFullscreen = (PlayerPrefs.GetInt("Fullscreen") == 1) ? true : false;
 
         volumeSliders[0].value = AudioManager.instance.masterVolumePercent;
         volumeSliders[1].value = AudioManager.instance.musicVolumePercent;
