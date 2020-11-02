@@ -8,7 +8,7 @@ public class SwingingChain : MonoBehaviour
 {
     private Transform root;
     private Transform end;    
-    private float slowDown = 0.01f;
+    public float slowDown = 0.01f;
 
     private float len;
     private float angle;
