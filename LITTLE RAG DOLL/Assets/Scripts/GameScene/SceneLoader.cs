@@ -136,6 +136,9 @@ public class SceneLoader : MonoBehaviour
                     case "BubbleBlower":
                         go = GameManager.GM.poolingManager.getBubbleBlower();
                         break;
+                    case "Frog":
+                        go = GameManager.GM.poolingManager.getFrog();
+                        break;
 
                 }                
                 go.SetActive(true);
