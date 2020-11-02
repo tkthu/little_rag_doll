@@ -33,6 +33,8 @@ public class PoolingManager : MonoBehaviour
 	private int FairyNo = 15;
 	private List<GameObject> pooledBubbleBlower;
 	private int BubbleBlowerNo = 15;
+	private List<GameObject> pooledFrog;
+	private int FrogNo = 5;
 
 	// Interactable
 	private List<GameObject> pooledFlower;
@@ -44,24 +46,21 @@ public class PoolingManager : MonoBehaviour
 	private List<List<GameObject>> listOfEnemisePool = new List<List<GameObject>>();
 	private List<List<GameObject>> listOfInteractablesPool = new List<List<GameObject>>();
 
+	private GameObject parentObject;
+
 	public void inactiveAll()
     {
 		foreach(List<GameObject> pooled in listOfPool)
 			foreach (GameObject go in pooled)
-            {
-				go.SetActive(false);
-				go.transform.position = Vector2.one * 10000;
-				EnemyHealth eneHealth = go.GetComponent<EnemyHealth>();
-				if (eneHealth != null)
-					eneHealth.resetStatus();
-			}
+				go.GetComponent<PoolingItem>().resetState();
 		
 	}
 
     // Khoi tao Pool
     #region Khoi Tao
-    public void instantiateAllPool()
+    public void instantiateAllPool(GameObject parentObject)
 	{
+		this.parentObject = parentObject;
 		//khoi tao cac pool cho bullets cua quai (ko có đạn nổ)
 		pooledStraightBullets = instantiatePool("Prefabs/Bullets/StraightBullet", StraightBulletsNo, "StraightBullets");
 		pooledBounceBullets = instantiatePool("Prefabs/Bullets/BounceBullet", BounceBulletsNo, "BounceBullets");
@@ -87,15 +86,18 @@ public class PoolingManager : MonoBehaviour
 		pooledSnail = instantiatePool("Prefabs/Enemies/Snail", SnailNo, "Snails");
 		pooledFairy = instantiatePool("Prefabs/Enemies/Fairy", FairyNo, "Fairies");
 		pooledBubbleBlower = instantiatePool("Prefabs/Enemies/BubbleBlower", BubbleBlowerNo, "BubbleBlowers");
+		pooledFrog = instantiatePool("Prefabs/Bullets/ExplodeBullet", FrogNo, "Frogs");
 		listOfPool.Add(pooledBat);
 		listOfPool.Add(pooledSnail);
 		listOfPool.Add(pooledFairy);
 		listOfPool.Add(pooledBubbleBlower);
+		listOfPool.Add(pooledFrog);
 
 		listOfEnemisePool.Add(pooledBat);
 		listOfEnemisePool.Add(pooledSnail);
 		listOfEnemisePool.Add(pooledFairy);
 		listOfEnemisePool.Add(pooledBubbleBlower);
+		listOfEnemisePool.Add(pooledFrog);
 
 		//Khoi tao Interactable
 		pooledFlower = instantiatePool("Prefabs/Interactables/Flower", FlowerNo, "Flowers");
@@ -108,7 +110,7 @@ public class PoolingManager : MonoBehaviour
 	}
 	private List<GameObject> instantiatePool(string prefabName, int amountToPool, string parentObjectName)
 	{
-		GameObject parentObject = new GameObject(parentObjectName);
+		GameObject groupObject = new GameObject(parentObjectName);
 		List<GameObject> pooledObjects = new List<GameObject>();
 		GameObject objectToPool = Resources.Load<GameObject>( prefabName);
 		GameObject tmp;
@@ -116,10 +118,10 @@ public class PoolingManager : MonoBehaviour
 		{
 			tmp = Instantiate(objectToPool);
 			tmp.SetActive(false);
-			tmp.transform.SetParent(parentObject.transform);
+			tmp.AddComponent<PoolingItem>().setOriginalParent(groupObject.transform);
 			pooledObjects.Add(tmp);
 		}
-		DontDestroyOnLoad(parentObject);
+		groupObject.transform.SetParent(parentObject.transform);
 		return pooledObjects;
 	}
     #endregion
@@ -182,6 +184,10 @@ public class PoolingManager : MonoBehaviour
 	{
 		return getPooledObject(pooledBubbleBlower, BubbleBlowerNo);
 	}
+	public GameObject getFrog()
+	{
+		return getPooledObject(pooledFrog, FrogNo);
+	}
 	#endregion
 
 	// lay Interactables inactive
@@ -208,6 +214,11 @@ public class PoolingManager : MonoBehaviour
 	public List<List<GameObject>> getlistOfEnemiesPool()
     {
 		return listOfEnemisePool;
+
+	}
+	public List<List<GameObject>> getListOfInteractablesPool()
+	{
+		return listOfInteractablesPool;
 
 	}
 }

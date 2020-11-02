@@ -1,12 +1,19 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public enum SceneName
 {
     MainMenu,
+    SaveFileScene,
     ControlsScene,
     OptionsScene,
     SampleScene,
+    Scene_4,
+    Scene_5,
+    Scene_6,
+    Scene_6a,
+    Scene_7,
     Scene_8,
     Scene_8a,
     Scene_8b,
@@ -21,21 +28,29 @@ public enum SceneName
     Scene_13,
     Scene_14,
     Scene_15,
+    Scene_16,
 }
 
 public class SceneLoader : MonoBehaviour
 {
     string previousSceneName = "";
 
-    // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
         SceneManager.sceneLoaded += onSceneLoaded;
     }
-    
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= onSceneLoaded;
+    }
+
     public void loadScene(SceneName sn)
     {
         SceneManager.LoadScene(sn.ToString());
+    }
+    public void loadScene(string strScene)
+    {
+        SceneManager.LoadScene(strScene);
     }
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
@@ -48,23 +63,21 @@ public class SceneLoader : MonoBehaviour
                 Destroy(go);
         }
 
-        if (previousSceneName == "" && !equal(currentScene, SceneName.MainMenu))
+        if (previousSceneName == "" && equal(currentScene, SceneName.SampleScene))
         {
+            GameManager.GM.testing = true;
             GameManager.GM.startGame();
             GameManager.GM.player.SetActive(true);
+            
         }
-        # endregion
+        #endregion
 
-        if (equal(previousSceneName, SceneName.MainMenu))//  bat dau choi
+        UIShowing(currentScene);
+        
+        if (GameManager.GM.loadAtCheckpoint)
         {
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-            if (equal(currentScene, SceneName.SampleScene))
-                GameManager.GM.player.transform.position = new Vector2(0, 0);
-            else if(equal(currentScene, SceneName.Scene_8)) 
-                GameManager.GM.player.transform.position = new Vector2(-4, -7.5f);
-        }
-        else
+            GameManager.GM.loadAtCheckpoint = false;
+        }else
         {
             GameObject[] sceneTriggers = GameObject.FindGameObjectsWithTag("SceneTrigger");
             foreach (GameObject st in sceneTriggers)
@@ -78,7 +91,26 @@ public class SceneLoader : MonoBehaviour
 
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
-        
+
+    }
+
+    private void UIShowing(Scene currentScene)
+    {
+        if (equal(currentScene, SceneName.MainMenu) || equal(currentScene, SceneName.ControlsScene) || equal(currentScene, SceneName.OptionsScene) || equal(currentScene, SceneName.SaveFileScene))
+        {
+            GameManager.GM.GameUI.SetActive(false);
+            GameManager.GM.PauseMenu.SetActive(false);
+            GameManager.GM.GameOverMenu.SetActive(false);
+            if(GameManager.GM.player != null)
+                GameManager.GM.player.SetActive(false);
+        }
+        else
+        {
+            GameManager.GM.GameUI.SetActive(true);
+            GameManager.GM.PauseMenu.SetActive(false);
+            GameManager.GM.GameOverMenu.SetActive(false);
+            GameManager.GM.player.SetActive(true);
+        }
     }
 
     private void loadEnemies()
@@ -103,6 +135,9 @@ public class SceneLoader : MonoBehaviour
                         break;
                     case "BubbleBlower":
                         go = GameManager.GM.poolingManager.getBubbleBlower();
+                        break;
+                    case "Frog":
+                        go = GameManager.GM.poolingManager.getFrog();
                         break;
 
                 }                
@@ -135,6 +170,8 @@ public class SceneLoader : MonoBehaviour
 
                 }
                 go.SetActive(true);
+                if(go.transform.GetComponent<FlowerHealth>() != null)
+                    go.transform.GetComponent<FlowerHealth>().respawnPos = child.position;
                 go.transform.position = child.position;
                 Destroy(child.gameObject);
             }

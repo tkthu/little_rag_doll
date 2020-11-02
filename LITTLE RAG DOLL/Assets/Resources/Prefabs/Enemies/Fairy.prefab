@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: -7783539379779033489, guid: 0f81a0d8a2939d64fb252fe43c9f38a4,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -142,7 +142,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-107143933181396908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPmax: 1
+  respawnPos: {x: 10000, y: 10000}
+  isFreezed: 0
+  isDeaded: 0
 --- !u!114 &-4827031729258179280
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,12 @@ TagManager:
   - Flower
   - Helmet
   - InteractablesHolder
+  - cube
+  - GameManager
+  - Heart
+  - Spirit
+  - Saw
+  - Frog
   layers:
   - Default
   - TransparentFX

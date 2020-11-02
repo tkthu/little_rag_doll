@@ -8,7 +8,10 @@ public class FeetController : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        snail.transform.Rotate(new Vector3(0.0f, 180, 0.0f));
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Them"))
+        {
+            snail.transform.Rotate(new Vector3(0.0f, 180, 0.0f));
+        }
     }
 
     

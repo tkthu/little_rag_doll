@@ -6,7 +6,7 @@ public class MainMenuController : MonoBehaviour
     // Start is called before the first frame update
     public void btn_PlayHandler()
     {
-        GameManager.GM.loadScene(SceneName.Scene_8);
+        GameManager.GM.loadScene(SceneName.SaveFileScene);
     }
     public void btn_OptionsHandler()
     {

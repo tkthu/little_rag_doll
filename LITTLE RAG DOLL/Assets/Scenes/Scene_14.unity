@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 2813018}
   - component: {fileID: 2813020}
   - component: {fileID: 2813019}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Front_cong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e531a55091787d54d9810188e4a365cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toScene: 15
+  toScene: 21
 --- !u!212 &138094632
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1758,7 +1758,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.011605
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1801,6 +1801,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camSmooth: 5
+  followPlayer: 1
+  freezeY: 0
+  freezeX: 0
 --- !u!1001 &465332228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5193,7 +5196,7 @@ PrefabInstance:
     - target: {fileID: 737077504714622866, guid: 4414f94270a436d4c8180ee8dc97d9fd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.93
+      value: 8.01
       objectReference: {fileID: 0}
     - target: {fileID: 737077504714622866, guid: 4414f94270a436d4c8180ee8dc97d9fd,
         type: 3}
@@ -5203,7 +5206,7 @@ PrefabInstance:
     - target: {fileID: 737077504714622866, guid: 4414f94270a436d4c8180ee8dc97d9fd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.31
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4548785644225577709, guid: 4414f94270a436d4c8180ee8dc97d9fd,
         type: 3}
@@ -36379,12 +36382,12 @@ PrefabInstance:
     - target: {fileID: 6721008506368686677, guid: e5988cd066b7340458bd0ec968e31846,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.009642657
       objectReference: {fileID: 0}
     - target: {fileID: 6721008506368686677, guid: e5988cd066b7340458bd0ec968e31846,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99995357
       objectReference: {fileID: 0}
     - target: {fileID: 6721008506368686677, guid: e5988cd066b7340458bd0ec968e31846,
         type: 3}
@@ -36404,7 +36407,7 @@ PrefabInstance:
     - target: {fileID: 6721008506368686677, guid: e5988cd066b7340458bd0ec968e31846,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -1.105
       objectReference: {fileID: 0}
     - target: {fileID: 6721008506368686679, guid: e5988cd066b7340458bd0ec968e31846,
         type: 3}
@@ -36524,7 +36527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e531a55091787d54d9810188e4a365cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toScene: 17
+  toScene: 23
 --- !u!212 &1965616760
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -51310,18 +51313,6 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 2004999195}
     m_ColliderPaths:
-    - - X: -9375000
-        Y: 12500000
-      - X: 37500000
-        Y: 12500000
-      - X: 37500000
-        Y: 46875000
-      - X: -15625000
-        Y: 46875000
-      - X: -15625000
-        Y: -6250000
-      - X: -9375000
-        Y: -6250000
     - - X: -140624992
         Y: 12500000
       - X: -37500000
@@ -51338,6 +51329,18 @@ CompositeCollider2D:
         Y: -81250000
       - X: -140624992
         Y: -81250000
+    - - X: -9375000
+        Y: 12500000
+      - X: 37500000
+        Y: 12500000
+      - X: 37500000
+        Y: 46875000
+      - X: -15625000
+        Y: 46875000
+      - X: -15625000
+        Y: -6250000
+      - X: -9375000
+        Y: -6250000
     - - X: 100000000
         Y: 46875000
       - X: 59375000
@@ -51355,6 +51358,30 @@ CompositeCollider2D:
       - X: 84375000
         Y: -18750000
       - X: 84375000
+        Y: -56250000
+      - X: 59375100
+        Y: -56250000
+      - X: 59375100
+        Y: -56250041
+      - X: 59375041
+        Y: -56250100
+      - X: 56249959
+        Y: -56250100
+      - X: 56249900
+        Y: -56250041
+      - X: 56249900
+        Y: -56250000
+      - X: 46875100
+        Y: -56250000
+      - X: 46875100
+        Y: -56250041
+      - X: 46875041
+        Y: -56250100
+      - X: 43749959
+        Y: -56250100
+      - X: 43749900
+        Y: -56250041
+      - X: 43749900
         Y: -56250000
       - X: -18750000
         Y: -56250000

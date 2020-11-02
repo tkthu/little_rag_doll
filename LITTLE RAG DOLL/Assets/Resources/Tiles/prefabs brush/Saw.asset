@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
-  m_Name: New Prefab Brush
+  m_Name: Saw
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_Tile: {fileID: 0}
+  - m_Tile: {fileID: 11400000, guid: b3718b801be946047aa206718d2d6a19, type: 2}
     m_Matrix:
       e00: 1
       e01: 0
@@ -36,4 +36,5 @@ MonoBehaviour:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
   m_Anchor: {x: 0.5, y: 0.5, z: 0.5}
-  m_Prefab: {fileID: 0}
+  m_Prefab: {fileID: 1747354557988163618, guid: 276bd60fd0c14a04db1138ee98d93adb,
+    type: 3}

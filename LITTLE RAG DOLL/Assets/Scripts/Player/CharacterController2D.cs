@@ -13,7 +13,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform Face;
 
 
-	const float k_ColliderRadius = .02f; // Radius of the overlap circle to determine if grounded
+	const float k_ColliderRadius = .05f; // Radius of the overlap circle to determine if grounded .02f
 	[HideInInspector] public bool m_Grounded;            // Whether or not the player is grounded.
 	[HideInInspector] public bool m_Themed;            // Whether or not the player is grounded.
 	[HideInInspector] public bool m_Walled;            // Whether or not the player is grounded.

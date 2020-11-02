@@ -50,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region JumpHandler
-        if (Input.GetButtonDown("Jump") && controller2D.m_Grounded)
+        
+        else if (!Input.GetButton("Duck") &&  Input.GetButtonDown("Jump") && controller2D.m_Grounded)
         {
             isJumping = true;
             highJump = true;

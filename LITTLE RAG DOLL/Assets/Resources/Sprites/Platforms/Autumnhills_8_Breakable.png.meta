@@ -1,7 +1,130 @@
 fileFormatVersion: 2
 guid: b632fc43d623ed04984d45ae5bffa2e9
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 8236271453827098402
+    second: Autumnhills_8_Breakable_0
+  - first:
+      213: 2628591143332518059
+    second: Autumnhills_8_Breakable_1
+  - first:
+      213: -7266875521569735023
+    second: Autumnhills_8_Breakable_2
+  - first:
+      213: 3934455674789651682
+    second: Autumnhills_8_Breakable_3
+  - first:
+      213: -1491254619062471552
+    second: Autumnhills_8_Breakable_4
+  - first:
+      213: 905707900225682051
+    second: Autumnhills_8_Breakable_5
+  - first:
+      213: -2198855846971134829
+    second: Autumnhills_8_Breakable_6
+  - first:
+      213: -2616921970291810758
+    second: Autumnhills_8_Breakable_7
+  - first:
+      213: 8903070950614074788
+    second: Autumnhills_8_Breakable_8
+  - first:
+      213: 8211738127038799329
+    second: Autumnhills_8_Breakable_9
+  - first:
+      213: -9021630586134470640
+    second: Autumnhills_8_Breakable_10
+  - first:
+      213: 2452091406638906176
+    second: Autumnhills_8_Breakable_11
+  - first:
+      213: -7663376031451734474
+    second: Autumnhills_8_Breakable_12
+  - first:
+      213: 9131911431212513202
+    second: Autumnhills_8_Breakable_13
+  - first:
+      213: -7983157574136323469
+    second: Autumnhills_8_Breakable_14
+  - first:
+      213: 6743126237130432008
+    second: Autumnhills_8_Breakable_15
+  - first:
+      213: -4263474804073623271
+    second: Autumnhills_8_Breakable_16
+  - first:
+      213: -872447772245360507
+    second: Autumnhills_8_Breakable_17
+  - first:
+      213: -8538070181008044751
+    second: Autumnhills_8_Breakable_18
+  - first:
+      213: -6497924445370749839
+    second: Autumnhills_8_Breakable_19
+  - first:
+      213: -611428643795127379
+    second: Autumnhills_8_Breakable_20
+  - first:
+      213: -3261357409668801247
+    second: Autumnhills_8_Breakable_21
+  - first:
+      213: 5782269894382079697
+    second: Autumnhills_8_Breakable_22
+  - first:
+      213: 4621458105363180394
+    second: Autumnhills_8_Breakable_23
+  - first:
+      213: -3333083286336905345
+    second: Autumnhills_8_Breakable_24
+  - first:
+      213: -3984866800887047176
+    second: Autumnhills_8_Breakable_25
+  - first:
+      213: 6097268872920739239
+    second: Autumnhills_8_Breakable_26
+  - first:
+      213: 1298967759191435940
+    second: Autumnhills_8_Breakable_27
+  - first:
+      213: 7605422425572602172
+    second: Autumnhills_8_Breakable_28
+  - first:
+      213: 6997663867467955072
+    second: Autumnhills_8_Breakable_29
+  - first:
+      213: -4168288204513589070
+    second: Autumnhills_8_Breakable_30
+  - first:
+      213: 6174170149952418751
+    second: Autumnhills_8_Breakable_31
+  - first:
+      213: 1234638565554986992
+    second: Autumnhills_8_Breakable_0
+  - first:
+      213: -7992816728352387346
+    second: Autumnhills_8_Breakable_1
+  - first:
+      213: 8005941135819851431
+    second: Autumnhills_8_Breakable_2
+  - first:
+      213: -746328412390471152
+    second: Autumnhills_8_Breakable_3
+  - first:
+      213: -7493339034790761313
+    second: Autumnhills_8_Breakable_4
+  - first:
+      213: -6200509310806523632
+    second: Autumnhills_8_Breakable_5
+  - first:
+      213: -7123991390439700740
+    second: Autumnhills_8_Breakable_6
+  - first:
+      213: 653725148401449243
+    second: Autumnhills_8_Breakable_7
+  - first:
+      213: 5293639144766411285
+    second: Autumnhills_8_Breakable_8
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +163,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -82,9 +205,246 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ff17e5eb31522110800000000000000
+      internalID: 1234638565554986992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 80
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eee81c7888fc31190800000000000000
+      internalID: -7992816728352387346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a6ca35bb01da1f60800000000000000
+      internalID: 8005941135819851431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01a4fad534284a5f0800000000000000
+      internalID: -746328412390471152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_4
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 40
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9c6ab969df420890800000000000000
+      internalID: -7493339034790761313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 40
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01100ee22ad53f9a0800000000000000
+      internalID: -6200509310806523632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf686ed239f722d90800000000000000
+      internalID: -7123991390439700740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_7
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1935331f8f721900800000000000000
+      internalID: 653725148401449243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Autumnhills_8_Breakable_8
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51297e851c8c67940800000000000000
+      internalID: 5293639144766411285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
