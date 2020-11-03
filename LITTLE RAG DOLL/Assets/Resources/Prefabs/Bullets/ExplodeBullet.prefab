@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5841667258954939224}
   m_Layer: 0
   m_Name: ExplodeBullet
-  m_TagString: Untagged
+  m_TagString: ExplodeBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
