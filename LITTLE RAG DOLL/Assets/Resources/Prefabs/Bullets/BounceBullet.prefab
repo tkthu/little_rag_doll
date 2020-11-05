@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1189638849939077913}
   - component: {fileID: -5662676657665342217}
   - component: {fileID: 2394214610490435068}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BounceBullet
-  m_TagString: Untagged
+  m_TagString: BounceBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

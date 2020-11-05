@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 5841667258954939226}
   - component: {fileID: 5841667258954939227}
   - component: {fileID: 5841667258954939224}
-  - component: {fileID: 6115097203499028103}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ExplodeBullet
-  m_TagString: Frog
+  m_TagString: ExplodeBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
