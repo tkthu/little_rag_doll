@@ -207,7 +207,7 @@ PrefabInstance:
     - target: {fileID: 7473015701189707024, guid: c4cf2d256ee469744ac295895b854938,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7473015701189707024, guid: c4cf2d256ee469744ac295895b854938,
         type: 3}
@@ -3121,7 +3121,6 @@ Transform:
   m_LocalPosition: {x: 1.47, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1411625602}
   - {fileID: 148430429}
   m_Father: {fileID: 0}
   m_RootOrder: 13
