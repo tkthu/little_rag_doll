@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 206360832885493879}
   - component: {fileID: 4081525966320484008}
   - component: {fileID: 9006427272642604536}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Pistil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
