@@ -30,21 +30,28 @@ public class SaveFileSceneController : MonoBehaviour
                 int minutesInt = (int)timerTime / 60;
                 int secondsInt = (int)timerTime % 60;
                 int seconds100Int = (int)(Mathf.Floor((timerTime - (secondsInt + minutesInt * 60)) * 100));
-                string strTime = (minutesInt < 10) ? "0" + minutesInt : minutesInt.ToString();
-                strTime += ":";
-                strTime += (secondsInt < 10) ? "0" + secondsInt : secondsInt.ToString();
-                strTime += ":";
-                strTime += (seconds100Int < 10) ? "0" + seconds100Int : seconds100Int.ToString();
-                SaveSlots[i].transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "" + strTime;
+
+                Text MinutesText = SaveSlots[i].transform.Find("GameUI").transform.Find("Time").transform.Find("Minutes").GetComponent<Text>();
+                MinutesText.text = (minutesInt < 10) ? "0" + minutesInt : minutesInt.ToString();
+                Text SecondText = SaveSlots[i].transform.Find("GameUI").transform.Find("Time").transform.Find("Second").GetComponent<Text>();
+                SecondText.text = (secondsInt < 10) ? "0" + secondsInt : secondsInt.ToString();
+                Text Seconds100Text = SaveSlots[i].transform.Find("GameUI").transform.Find("Time").transform.Find("Seconds100").GetComponent<Text>();
+                Seconds100Text.text = (seconds100Int < 10) ? "0" + seconds100Int : seconds100Int.ToString();
 
                 //hiện số spirits
-
+                float spirit = gameData.score;
+                Text Score = SaveSlots[i].transform.Find("GameUI").transform.Find("Spirit").transform.Find("Spirit").GetComponent<Text>();
+                Score.text = "" + spirit;
                 //hiện số HPmax
-
+                int HPmax = gameData.HPmax;
+                Text heart = SaveSlots[i].transform.Find("GameUI").transform.Find("Heart").transform.Find("HPmax").GetComponent<Text>();
+                heart.text = "" + HPmax;
             }
             else
-            {
-                SaveSlots[i].transform.Find("Text").GetComponent<TextMeshProUGUI>().text = "Empty Slot " + i;
+            {// đây là update lại giao diện của một slot (khi nhấn xóa)
+                SaveSlots[i].transform.Find("Text").GetComponent<Text>().text = "Empty Slot " + i;
+                SaveSlots[i].transform.Find("GameUI").gameObject.SetActive(false);
+
             }
 
         }
@@ -76,7 +83,7 @@ public class SaveFileSceneController : MonoBehaviour
         {
             // hiện bảng hỏi: chắc ko ? delete, cancel
             SaveSystem.deleteData(filenumber);
-            updateSaveFileUI();
+            updateSaveFileUI();// đây
         }
         else
         {

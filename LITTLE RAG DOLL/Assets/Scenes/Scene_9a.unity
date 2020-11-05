@@ -6027,7 +6027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e531a55091787d54d9810188e4a365cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toScene: 8
+  toScene: 13
 --- !u!212 &658249973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7041,6 +7041,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camSmooth: 5
+  followPlayer: 0
+  freezeY: 0
+  freezeX: 0
 --- !u!1001 &1213187199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7372,7 +7375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e531a55091787d54d9810188e4a365cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toScene: 10
+  toScene: 15
 --- !u!212 &1412261723
 SpriteRenderer:
   m_ObjectHideFlags: 0

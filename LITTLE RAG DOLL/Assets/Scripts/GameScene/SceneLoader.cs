@@ -9,6 +9,11 @@ public enum SceneName
     ControlsScene,
     OptionsScene,
     SampleScene,
+    Scene_4,
+    Scene_5,
+    Scene_6,
+    Scene_6a,
+    Scene_7,
     Scene_8,
     Scene_8a,
     Scene_8b,
@@ -23,6 +28,7 @@ public enum SceneName
     Scene_13,
     Scene_14,
     Scene_15,
+    Scene_16,
 }
 
 public class SceneLoader : MonoBehaviour
@@ -129,6 +135,9 @@ public class SceneLoader : MonoBehaviour
                         break;
                     case "BubbleBlower":
                         go = GameManager.GM.poolingManager.getBubbleBlower();
+                        break;
+                    case "Frog":
+                        go = GameManager.GM.poolingManager.getFrog();
                         break;
 
                 }                
