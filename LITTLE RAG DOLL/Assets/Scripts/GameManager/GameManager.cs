@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 		sceneLoader = GetComponent<SceneLoader>();
 		poolingManager = GetComponent<PoolingManager>();
 		gameTimer = GetComponent<GameTimer>();
-		musicManager = GetComponent<MusicManager>();
+		musicManager = transform.Find("Audio Manager").GetComponent<MusicManager>();
 
 		GameUI = transform.Find("GameUI").gameObject;
 		PauseMenu = transform.Find("PauseMenu").gameObject;

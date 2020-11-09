@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         
         else if (!Input.GetButton("Duck") &&  Input.GetButtonDown("Jump") && controller2D.m_Grounded)
         {
+            AudioManager.instance.PlaySound(playerJump, transform.position);
             isJumping = true;
             highJump = true;
             jumpCounter = jumpTime;
@@ -73,8 +74,7 @@ public class PlayerMovement : MonoBehaviour
             highJump = false;
         }
         if (Input.GetButton("Jump") && highJump)
-        {
-            AudioManager.instance.PlaySound(playerJump, transform.position);
+        {            
             if (jumpCounter > 0)
             {
                 jumpCounter -= Time.deltaTime;

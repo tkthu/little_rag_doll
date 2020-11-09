@@ -21,7 +21,8 @@ public class AudioManager : MonoBehaviour
 
 	SoundLibrary library;
 
-	public int musicBPM, timeSignature, barsLength;
+	public int musicBPM=135;
+	public int timeSignature, barsLength;
 	private float loopPointMinutes, loopPointSeconds;
 	private double time;
 
