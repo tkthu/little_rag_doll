@@ -21,6 +21,11 @@ public class AudioManager : MonoBehaviour
 
 	SoundLibrary library;
 
+	public int musicBPM, timeSignature, barsLength;
+	private float loopPointMinutes, loopPointSeconds;
+	private double time;
+
+
 	void Awake()
 	{
 		if (instance != null)
@@ -55,6 +60,17 @@ public class AudioManager : MonoBehaviour
 			masterVolumePercent = PlayerPrefs.GetFloat("master vol", 1);
 			sfxVolumePercent = PlayerPrefs.GetFloat("sfx vol", 1);
 			musicVolumePercent = PlayerPrefs.GetFloat("music vol", 1);
+		}
+	}
+
+	void Update()
+	{
+		// Loop music
+		if (!musicSources[activeMusicSourceIndex].isPlaying)
+		{
+			time = time + loopPointSeconds;
+			musicSources[activeMusicSourceIndex].PlayScheduled(time);
+			activeMusicSourceIndex = 1 - activeMusicSourceIndex; //Switch to other AudioSource
 		}
 	}
 
@@ -103,10 +119,12 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayMusic(AudioClip clip, float fadeDuration = 1)
 	{
-		activeMusicSourceIndex = 1 - activeMusicSourceIndex;
+		//activeMusicSourceIndex = 1 - activeMusicSourceIndex;
 		musicSources[activeMusicSourceIndex].clip = clip;
 		musicSources[activeMusicSourceIndex].Play();
-
+		loopPointMinutes = (barsLength * timeSignature) / musicBPM;
+		loopPointSeconds = loopPointMinutes * 60;
+		time = AudioSettings.dspTime;
 		StartCoroutine(AnimateMusicCrossfade(fadeDuration));
 	}
 

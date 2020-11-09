@@ -7,6 +7,11 @@ public class PlayerHealth : MonoBehaviour
     public int HPmax;
     [HideInInspector] public int HP;
 
+    public AudioClip eatSpirit;
+    public AudioClip playerDeath;
+    public AudioClip playerDamage;
+    public AudioClip addFullBlood;
+
     private void Awake()
     {
         resetState();
@@ -17,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void takeDamage(int damage)
     {
+        AudioManager.instance.PlaySound(playerDamage, transform.position);
         HP = Mathf.Clamp(HP - damage,0,HPmax);
         if (HP == 0)
             die();
@@ -32,9 +38,10 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Player is dead");
         //GameManager.GM.gameover();
+        //AudioManager.instance.PlaySound(playerDeath, transform.position);
     }
 
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {        
         // Hồi máu
@@ -56,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
         {
             GameManager.GM.addScore(1);
             other.gameObject.SetActive(false);
+            AudioManager.instance.PlaySound(eatSpirit, transform.position);
         }
         // Thêm mạng
         if (other.tag == "Heart")
@@ -63,7 +71,8 @@ public class PlayerHealth : MonoBehaviour
             HPmax += 1;
             addBlood(HPmax);
             other.gameObject.SetActive(false);
+            AudioManager.instance.PlaySound(addFullBlood, transform.position);
         }
-        
+
     }
 }

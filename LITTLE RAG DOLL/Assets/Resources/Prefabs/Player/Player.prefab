@@ -479,6 +479,8 @@ MonoBehaviour:
   runSpeed: 40
   headAnimator: {fileID: 2151621878649956253}
   jumpTime: 0.15
+  playerAttack: {fileID: 8300000, guid: 02aedae20d621dc47a4feb3d5c511577, type: 3}
+  playerJump: {fileID: 8300000, guid: 01e3494abdd1bda4e8d30eed9f4e67fa, type: 3}
 --- !u!114 &7145290370771909243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +495,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPmax: 5
   HP: 0
+  eatSpirit: {fileID: 8300000, guid: b152da140d9763d40aeb192b6f6879e1, type: 3}
+  playerDeath: {fileID: 8300000, guid: b40fcc353d55d2642b50bacbcefb2729, type: 3}
+  playerDamage: {fileID: 8300000, guid: 02aedae20d621dc47a4feb3d5c511577, type: 3}
+  addFullBlood: {fileID: 8300000, guid: cab410e14cf6e1c47b71dc83a9942eeb, type: 3}
 --- !u!70 &2151621879023751984
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
