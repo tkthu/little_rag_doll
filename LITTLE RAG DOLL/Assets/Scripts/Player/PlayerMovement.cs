@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller2D;
     public GameObject attack;
+    public GameObject grab;
     public Animator animator;
     public float runSpeed = 40f;
     public Animator headAnimator;
@@ -20,11 +21,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isClimbing = false;
     private bool isSliding = false;
     private bool isAttacking = false;
+    [HideInInspector] public bool isRetracting = false;
     private bool isWallJumping = false;
 
     private bool highJump = false;
     private float jumpCounter = 0;
     public float jumpTime = 0.35f;
+    public float grabLength = 2f;
 
 
 
@@ -117,7 +120,44 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking && isClinging)
             vermove = 0;
-        #endregion        
+        #endregion    
+        
+        #region GrabHandler
+
+        if (Input.GetButtonDown("Grab/Shoot") && !grab.activeSelf)
+        {
+            grab.SetActive(true);
+        }
+        if(grab.activeSelf)
+        {
+            
+
+            if (!isRetracting && Vector2.Distance(Vector2.zero, grab.transform.localPosition) < grabLength )
+            {
+                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, new Vector2(grabLength,0), 10 * Time.deltaTime);
+            }
+            else
+            {
+                isRetracting = true;
+            }
+           /* else
+            {
+                isRetracting = true;
+                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, Vector2.zero, 10 * Time.deltaTime);
+                if (grab.transform.localPosition.magnitude == 0)
+                {
+                    isRetracting = false;
+                    grab.SetActive(false);
+                    foreach (Transform child in grab.transform)
+                    {
+                        PoolingItem pi = child.GetComponent<PoolingItem>();
+                        if(pi != null) pi.resetState();
+                    }
+                }
+            }*/
+            
+        }
+        #endregion
 
         #region ClingHandler
 
