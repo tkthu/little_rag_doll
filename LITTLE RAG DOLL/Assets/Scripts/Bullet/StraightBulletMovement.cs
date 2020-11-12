@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StraightBulletMovement : MonoBehaviour
 {
@@ -16,6 +14,7 @@ public class StraightBulletMovement : MonoBehaviour
     {
         Vector2 position = transform.position;
         position += _direction * speed * Time.fixedDeltaTime;
+        Debug.Log("FixedUpdate "+position+ " "+ _direction);
 
         transform.position = position;
         if(_direction.x > 0)

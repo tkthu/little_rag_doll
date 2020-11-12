@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpCounter = 0;
     public float jumpTime = 0.35f;
     public float grabLength = 2f;
+    public float retractSpeed = 5f;
 
 
 
@@ -134,27 +135,23 @@ public class PlayerMovement : MonoBehaviour
 
             if (!isRetracting && Vector2.Distance(Vector2.zero, grab.transform.localPosition) < grabLength )
             {
-                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, new Vector2(grabLength,0), 10 * Time.deltaTime);
+                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, new Vector2(grabLength,0), retractSpeed * Time.deltaTime);
             }
             else
             {
                 isRetracting = true;
-            }
-           /* else
-            {
-                isRetracting = true;
-                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, Vector2.zero, 10 * Time.deltaTime);
-                if (grab.transform.localPosition.magnitude == 0)
+                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, Vector2.zero, retractSpeed * Time.deltaTime);
+                if (grab.transform.localPosition.magnitude <= 0)
                 {
                     isRetracting = false;
-                    grab.SetActive(false);
                     foreach (Transform child in grab.transform)
                     {
                         PoolingItem pi = child.GetComponent<PoolingItem>();
                         if(pi != null) pi.resetState();
                     }
+                    grab.SetActive(false);
                 }
-            }*/
+            }
             
         }
         #endregion
