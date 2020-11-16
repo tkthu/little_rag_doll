@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 5
+  bubbleAttack: {fileID: 8300000, guid: 2630b3c4b6b5e2341bb399c70c484881, type: 3}
 --- !u!61 &7496094494583110858
 BoxCollider2D:
   m_ObjectHideFlags: 0

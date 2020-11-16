@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 public class MusicManager : MonoBehaviour
 {
     public AudioClip mainTheme;
-	//public AudioClip menuTheme;
+	public AudioSource audioSource;
 
-    void Start()
+	void Start()
     {
-		AudioManager.instance.PlayMusic(mainTheme, 2);    
-    }
+		AudioManager.instance.PlayMusic(mainTheme, 2);
+	}
 
     /*void Update()
     {

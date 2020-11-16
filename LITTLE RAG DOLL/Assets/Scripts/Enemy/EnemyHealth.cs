@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
     [HideInInspector] public Vector2 respawnPos = Vector2.one * 10000;
     [HideInInspector] public bool isFreezed;
     [HideInInspector] public bool isDeaded;
+
+    public AudioClip enemyDeath;
     private void Awake()
     {
         resetStatus();
@@ -41,5 +43,6 @@ public class EnemyHealth : MonoBehaviour
 
         isDeaded = true;
         gameObject.SetActive(false);
+        AudioManager.instance.PlaySound(enemyDeath, transform.position);
     }
 }
