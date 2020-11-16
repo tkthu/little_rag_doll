@@ -18,6 +18,7 @@ public class CommonButtonController : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameManager.GM.loadScene(SceneName.MainMenu);
+        GameManager.GM.audioManager.SetActive(true);
     }
 
     public void quitGame()
