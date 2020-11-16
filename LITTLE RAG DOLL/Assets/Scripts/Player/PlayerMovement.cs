@@ -33,7 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
 
     private float attackTimeRate = 0.3f;
-    private float attackTimeLimit = 0; 
+    private float attackTimeLimit = 0;
+
+    public AudioClip playerAttack;
+    public AudioClip playerJump;
 
     // Update is called once per frame
     void Update()
@@ -57,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         
         else if (!Input.GetButton("Duck") &&  Input.GetButtonDown("Jump") && controller2D.m_Grounded)
         {
+            AudioManager.instance.PlaySound(playerJump, transform.position);
             isJumping = true;
             highJump = true;
             jumpCounter = jumpTime;
@@ -74,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
             highJump = false;
         }
         if (Input.GetButton("Jump") && highJump)
-        {
+        {            
             if (jumpCounter > 0)
             {
                 jumpCounter -= Time.deltaTime;
@@ -98,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Attack") && !attack.activeSelf)
         {
+            AudioManager.instance.PlaySound(playerAttack, transform.position);
+            Debug.Log("Attack");
             isAttacking = true;
             setAnimParameter("trgAttack");
             attack.SetActive(true);

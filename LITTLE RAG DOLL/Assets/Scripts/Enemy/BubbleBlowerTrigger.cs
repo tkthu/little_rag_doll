@@ -18,6 +18,8 @@ public class BubbleBlowerTrigger : MonoBehaviour
     private bool m_FacingRight;
     private EnemyHealth eneHealth;
 
+    public AudioClip bubbleAttack;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -44,6 +46,7 @@ public class BubbleBlowerTrigger : MonoBehaviour
 
             if (Time.time > timeRate)
             {
+                AudioManager.instance.PlaySound(bubbleAttack, transform.position);
                 bulletStraight = GameManager.GM.poolingManager.getStraightBullets();
                 if (bulletStraight != null)
                 {

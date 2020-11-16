@@ -498,6 +498,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPmax: 5
   HP: 0
+  eatSpirit: {fileID: 8300000, guid: b152da140d9763d40aeb192b6f6879e1, type: 3}
+  playerDeath: {fileID: 8300000, guid: b40fcc353d55d2642b50bacbcefb2729, type: 3}
+  playerDamage: {fileID: 8300000, guid: 02aedae20d621dc47a4feb3d5c511577, type: 3}
+  addFullBlood: {fileID: 8300000, guid: cab410e14cf6e1c47b71dc83a9942eeb, type: 3}
 --- !u!70 &2151621879023751984
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
