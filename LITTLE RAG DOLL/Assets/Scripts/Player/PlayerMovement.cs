@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Animations;
 
 public class PlayerMovement : MonoBehaviour
@@ -27,8 +28,6 @@ public class PlayerMovement : MonoBehaviour
     private bool highJump = false;
     private float jumpCounter = 0;
     public float jumpTime = 0.35f;
-    public float grabLength = 2f;
-    public float retractSpeed = 5f;
 
 
 
@@ -37,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioClip playerAttack;
     public AudioClip playerJump;
+
+    [HideInInspector] public GameObject currentBullet;
 
     // Update is called once per frame
     void Update()
@@ -108,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
             setAnimParameter("trgAttack");
             attack.SetActive(true);
             attackTimeLimit = Time.time + attackTimeRate;
+            /*
             attack.transform.localPosition = new Vector2(0.5f, 0);
             attack.transform.localScale = new Vector2(1, 1);
             if (isDucking)
@@ -117,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
                 attack.transform.localScale = new Vector2(-1, 1);
                 attack.transform.localPosition = new Vector2(-0.5f, 0);
             }
+            */
                 
         }
         if (Time.time >= attackTimeLimit)
@@ -127,39 +130,56 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking && isClinging)
             vermove = 0;
-        #endregion    
-        
+        #endregion
+
         #region GrabHandler
 
-        if (Input.GetButtonDown("Grab/Shoot") && !grab.activeSelf)
+        if (currentBullet == null)
         {
-            grab.SetActive(true);
-        }
-        if(grab.activeSelf)
-        {
-            
+            if (Input.GetButtonDown("Grab/Shoot") && !grab.activeSelf)
+            {
+                grab.SetActive(true);
+                PlayerGrab pGrab = grab.GetComponent<PlayerGrab>();
+                pGrab.caughted = false;
 
-            if (!isRetracting && Vector2.Distance(Vector2.zero, grab.transform.localPosition) < grabLength )
-            {
-                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, new Vector2(grabLength,0), retractSpeed * Time.deltaTime);
-            }
-            else
-            {
-                isRetracting = true;
-                grab.transform.localPosition = Vector2.MoveTowards(grab.transform.localPosition, Vector2.zero, retractSpeed * Time.deltaTime);
-                if (grab.transform.localPosition.magnitude <= 0)
+                pGrab.setOffset(Vector2.zero);
+                grab.transform.localScale = new Vector2(1, 1);
+                if (isDucking)
+                    pGrab.setOffset(new Vector2(0, -0.4f));
+                else if (isClinging)
                 {
-                    isRetracting = false;
-                    foreach (Transform child in grab.transform)
-                    {
-                        PoolingItem pi = child.GetComponent<PoolingItem>();
-                        if(pi != null) pi.resetState();
-                    }
-                    grab.SetActive(false);
+                    grab.transform.localScale = new Vector2(-1, 1);
+                    pGrab.setOffset(Vector2.zero);
                 }
+
             }
             
         }
+        else
+        {
+            if (Input.GetButtonDown("Grab/Shoot"))
+            {
+                currentBullet.transform.position = transform.position;                
+
+                Vector2 dir = transform.localScale;
+                if(currentBullet.tag == "StraightBullet")
+                {
+                    currentBullet.SetActive(true);
+                    currentBullet.GetComponent<StraightBulletMovement>().SetDirection(new Vector2(dir.x, 0));//ban ngang
+                }
+                if (currentBullet.tag == "BounceBullet")
+                {
+                    currentBullet.GetComponent<BounceBulletMovement>().SetDirection(new Vector2(dir.x, 0));
+                    currentBullet.GetComponent<BounceBulletMovement>().activate();
+                }
+                GameManager.GM.GameUI
+                .transform
+                .Find("CurrentBullet")
+                .gameObject.SetActive(false);
+                currentBullet = null;
+            }
+        }
+        
         #endregion
 
         #region ClingHandler
@@ -189,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
         setAnimParameter("isAttacking", isAttacking);
         #endregion
     }
+    
 
     private void setAnimParameter(string name,bool value)
     {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3753339691969598813}
   m_Layer: 0
   m_Name: attack
-  m_TagString: Untagged
+  m_TagString: Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,8 +482,9 @@ MonoBehaviour:
   headAnimator: {fileID: 2151621878649956253}
   isRetracting: 0
   jumpTime: 0.35
-  grabLength: 5
-  retractSpeed: 5
+  playerAttack: {fileID: 8300000, guid: 2eaa124b444c7c046a60b9b6a8429892, type: 3}
+  playerJump: {fileID: 8300000, guid: 01e3494abdd1bda4e8d30eed9f4e67fa, type: 3}
+  currentBullet: {fileID: 0}
 --- !u!114 &7145290370771909243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,7 +534,7 @@ GameObject:
   - component: {fileID: 1917591988962952194}
   m_Layer: 0
   m_Name: Grab
-  m_TagString: Untagged
+  m_TagString: Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -631,6 +632,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caughted: 0
+  offset: {x: 0, y: 0}
+  grabLength: 2.5
+  armSpeed: 10
 --- !u!120 &1917591988962952194
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -803,7 +807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6539098612449153329
 Transform:
   m_ObjectHideFlags: 0

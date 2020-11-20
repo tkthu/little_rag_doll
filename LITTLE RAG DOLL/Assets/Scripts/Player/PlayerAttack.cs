@@ -12,6 +12,8 @@ public class PlayerAttack : MonoBehaviour
             go.GetComponent<EnemyHealth>().takeDamage(damage);
         else if(go.GetComponent<FlowerHealth>() != null)
             go.GetComponent<FlowerHealth>().takeDamage(damage);
+        else if (go.layer == LayerMask.NameToLayer("EneBullets") && (collision.transform.parent.parent == null || collision.transform.parent.parent.tag != "Helmet"))
+            go.SetActive(false);
 
     }
 }

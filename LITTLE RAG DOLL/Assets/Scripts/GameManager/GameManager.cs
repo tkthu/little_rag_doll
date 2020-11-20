@@ -133,8 +133,6 @@ public class GameManager : MonoBehaviour
 			DontDestroyOnLoad(parentObject);
 
 			poolingManager.instantiateAllPool(parentObject);
-
-			DontDestroyOnLoad(musicManager);
 		}
 
 		isGameover = false;

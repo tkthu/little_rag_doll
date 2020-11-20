@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : Heath
 {
     public int HPmax;
     [HideInInspector] public int HP;
@@ -16,10 +16,14 @@ public class PlayerHealth : MonoBehaviour
     {
         resetState();
     }
+
+    override
     public void resetState()
     {
         HP = HPmax;
     }
+
+    override
     public void takeDamage(int damage)
     {
         AudioManager.instance.PlaySound(playerDamage, transform.position);

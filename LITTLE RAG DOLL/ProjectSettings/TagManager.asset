@@ -10,11 +10,8 @@ TagManager:
   - Fairy
   - StraightBullet
   - BounceBullet
-  - ExplodeBullet
   - SceneTrigger
   - EnemiesHolder
-  - LeftPlate
-  - RightPlate
   - Flower
   - Helmet
   - InteractablesHolder
@@ -23,7 +20,7 @@ TagManager:
   - Heart
   - Spirit
   - Saw
-  - Frog
+  - Arm
   layers:
   - Default
   - TransparentFX
