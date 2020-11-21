@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject attack;
     public GameObject grab;
     public Animator animator;
-    public float runSpeed = 40f;
+    public float runSpeed = 35f;
     public Animator headAnimator;
 
     private float hormove = 0f;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool highJump = false;
     private float jumpCounter = 0;
-    public float jumpTime = 0.35f;
+    public float jumpTime = 0.15f;
 
 
 
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
             setAnimParameter("trgAttack");
             attack.SetActive(true);
             attackTimeLimit = Time.time + attackTimeRate;
-            /*
+            
             attack.transform.localPosition = new Vector2(0.5f, 0);
             attack.transform.localScale = new Vector2(1, 1);
             if (isDucking)
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
                 attack.transform.localScale = new Vector2(-1, 1);
                 attack.transform.localPosition = new Vector2(-0.5f, 0);
             }
-            */
+            
                 
         }
         if (Time.time >= attackTimeLimit)

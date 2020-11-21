@@ -13,15 +13,23 @@ public class BulletDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Arm")
+        if(gameObject.layer == LayerMask.NameToLayer("PlayerBullets"))
         {
-            Heath heath = collision.GetComponent<Heath>();
+            Heath heath = collision.GetComponent<EnemyHealth>();
             if (heath != null)
                 heath.takeDamage(1);
+            if(collision.gameObject.layer == LayerMask.NameToLayer("EneBullets") && (collision.transform.parent.parent == null || collision.transform.parent.parent.tag != "Helmet"))
+                collision.gameObject.SetActive(false);
         }
-        if (gameObject.layer == LayerMask.NameToLayer("PlayerBullets") && collision.gameObject.layer == LayerMask.NameToLayer("EneBullets") && (collision.transform.parent.parent == null || collision.transform.parent.parent.tag != "Helmet"))
+        if (gameObject.layer == LayerMask.NameToLayer("EneBullets"))
         {
-            collision.gameObject.SetActive(false);
+            if(collision.tag != "Arm")
+            {
+                Heath heath = collision.GetComponent<PlayerHealth>();
+                if (heath != null)
+                    heath.takeDamage(1);
+            }
+            
         }
     }
 

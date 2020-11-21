@@ -27,7 +27,7 @@ public class PlayerGrab : MonoBehaviour
     {
         
         startPos = GameManager.GM.player.transform.position + new Vector3(offset.x, offset.y,0);
-        endPos = transform.position + new Vector3(offset.x,offset.y,0);
+        endPos = transform.position;
 
         line.SetPosition(0, startPos);
         line.SetPosition(1, endPos);       
@@ -37,13 +37,14 @@ public class PlayerGrab : MonoBehaviour
 
         if (!isRetracting && Vector2.Distance(Vector2.zero, transform.localPosition) < grabLength)
         {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, new Vector2(grabLength, 0) + offset, armSpeed * Time.deltaTime);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, new Vector2(grabLength, offset.y), armSpeed * Time.deltaTime);
         }
         else
         {
             isRetracting = true;
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, Vector2.zero , armSpeed * Time.deltaTime);
-            if (transform.localPosition.magnitude <= 0)
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, Vector2.zero + offset, armSpeed * Time.deltaTime);
+            Vector3 v = transform.localPosition - (Vector3.zero + (Vector3)offset);
+            if (v.magnitude <= 0)
             {
                 isRetracting = false;
                 foreach (Transform child in transform)
@@ -94,7 +95,7 @@ public class PlayerGrab : MonoBehaviour
     {
         float lineLength = Vector3.Distance(startPos, endPos); // length of line
         col.size = new Vector3(lineLength, 0.1f, 1f); // size of collider is set where X is length of line, Y is width of line, Z will be set as per requirement
-        col.offset = new Vector2(- lineLength/2, 0) + new Vector2(offset.x, offset.y); // setting position of collider object
+        col.offset = new Vector2(- lineLength/2, 0); // setting position of collider object
     }
 
     // Start is called before the first frame update

@@ -478,10 +478,10 @@ MonoBehaviour:
   attack: {fileID: 2151621877201610740}
   grab: {fileID: 4021720141695627176}
   animator: {fileID: 2151621879023751989}
-  runSpeed: 40
+  runSpeed: 30
   headAnimator: {fileID: 2151621878649956253}
   isRetracting: 0
-  jumpTime: 0.35
+  jumpTime: 0.15
   playerAttack: {fileID: 8300000, guid: 2eaa124b444c7c046a60b9b6a8429892, type: 3}
   playerJump: {fileID: 8300000, guid: 01e3494abdd1bda4e8d30eed9f4e67fa, type: 3}
   currentBullet: {fileID: 0}
@@ -697,8 +697,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0, b: 0, a: 1}
-      key1: {r: 0, g: 0, b: 0, a: 1}
+      key0: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
+      key1: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

@@ -23,7 +23,7 @@ public class PoolingItem : MonoBehaviour
             eneHealth.resetState();
         FlowerHealth flowerHealth = gameObject.GetComponent<FlowerHealth>();
         if (flowerHealth != null)
-            flowerHealth.resetStatus();
+            flowerHealth.resetState();
         BounceBulletMovement bounceBulletMovement = gameObject.GetComponent<BounceBulletMovement>();
         if (bounceBulletMovement != null)
         {
