@@ -8,10 +8,14 @@ public class PlayerAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {       
         GameObject go = collision.gameObject;
-        if(go.GetComponent<EnemyHealth>() != null)
+        if (go.GetComponent<EnemyHealth>() != null)
             go.GetComponent<EnemyHealth>().takeDamage(damage);
-        else if(go.GetComponent<FlowerHealth>() != null)
+        else if (go.GetComponent<FlowerHealth>() != null)
             go.GetComponent<FlowerHealth>().takeDamage(damage);
+        else if (collision.tag == "breakable")
+        {
+            collision.GetComponent<GroundDurability>().takeDamage(damage);
+        }
 
     }
 }

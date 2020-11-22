@@ -24,6 +24,7 @@ TagManager:
   - Spirit
   - Saw
   - Frog
+  - breakable
   layers:
   - Default
   - TransparentFX
