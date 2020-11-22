@@ -21,6 +21,8 @@ TagManager:
   - Spirit
   - Saw
   - Arm
+  - bigBlood
+  - smallBlood
   layers:
   - Default
   - TransparentFX
@@ -37,7 +39,7 @@ TagManager:
   - EneBullets
   - Them
   - Spike
-  - 
+  - Saw
   - 
   - 
   - 

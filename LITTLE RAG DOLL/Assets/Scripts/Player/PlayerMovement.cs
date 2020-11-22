@@ -6,12 +6,17 @@ using UnityEngine.Animations;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController2D controller2D;
-    public GameObject attack;
-    public GameObject grab;
-    public Animator animator;
     public float runSpeed = 35f;
+    public float jumpTime = 0.15f;
+    public Animator animator;
     public Animator headAnimator;
+
+    public AudioClip playerAttack;
+    public AudioClip playerJump;
+
+    private CharacterController2D controller2D;
+    private GameObject attack;
+    private GameObject grabShoot;    
 
     private float hormove = 0f;
     private float vermove = 0f;
@@ -22,22 +27,20 @@ public class PlayerMovement : MonoBehaviour
     private bool isClimbing = false;
     private bool isSliding = false;
     private bool isAttacking = false;
-    [HideInInspector] public bool isRetracting = false;
     private bool isWallJumping = false;
 
     private bool highJump = false;
     private float jumpCounter = 0;
-    public float jumpTime = 0.15f;
-
-
 
     private float attackTimeRate = 0.3f;
     private float attackTimeLimit = 0;
 
-    public AudioClip playerAttack;
-    public AudioClip playerJump;
-
-    [HideInInspector] public GameObject currentBullet;
+    private void Start()
+    {
+        controller2D = GetComponent<CharacterController2D>();
+        attack = transform.Find("Attack").gameObject;
+        grabShoot = transform.Find("GrabShoot").gameObject;
+    }
 
     // Update is called once per frame
     void Update()
@@ -68,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetButtonDown("Jump") && isClinging && !isWallJumping)
         {
+            AudioManager.instance.PlaySound(playerJump, transform.position);
             isWallJumping = true;
             highJump = true;
             jumpCounter = jumpTime;
@@ -104,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Attack") && !attack.activeSelf)
         {
             AudioManager.instance.PlaySound(playerAttack, transform.position);
-            Debug.Log("Attack");
             isAttacking = true;
             setAnimParameter("trgAttack");
             attack.SetActive(true);
@@ -119,8 +122,7 @@ public class PlayerMovement : MonoBehaviour
                 attack.transform.localScale = new Vector2(-1, 1);
                 attack.transform.localPosition = new Vector2(-0.5f, 0);
             }
-            
-                
+
         }
         if (Time.time >= attackTimeLimit)
         {
@@ -133,53 +135,26 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region GrabHandler
-
-        if (currentBullet == null)
+        if (Input.GetButtonDown("Grab/Shoot"))
         {
-            if (Input.GetButtonDown("Grab/Shoot") && !grab.activeSelf)
+            PlayerGrabShoot pGrab = grabShoot.GetComponent<PlayerGrabShoot>();
+
+            Vector2 shootDir = transform.localScale;
+            Vector2 grabDir = Vector2.one;
+            Vector2 offset = Vector2.zero;
+            if (isDucking)
+                offset = new Vector2(0, -0.4f);
+            else if (isClinging)
             {
-                grab.SetActive(true);
-                PlayerGrab pGrab = grab.GetComponent<PlayerGrab>();
-                pGrab.caughted = false;
-
-                pGrab.setOffset(Vector2.zero);
-                grab.transform.localScale = new Vector2(1, 1);
-                if (isDucking)
-                    pGrab.setOffset(new Vector2(0, -0.4f));
-                else if (isClinging)
-                {
-                    grab.transform.localScale = new Vector2(-1, 1);
-                    pGrab.setOffset(Vector2.zero);
-                }
-
+                shootDir = new Vector2(-1 * transform.localScale.x, 1);
+                grabDir = new Vector2(-1, 1);
+                offset = Vector2.zero;
             }
-            
-        }
-        else
-        {
-            if (Input.GetButtonDown("Grab/Shoot"))
-            {
-                currentBullet.transform.position = transform.position;                
 
-                Vector2 dir = transform.localScale;
-                if(currentBullet.tag == "StraightBullet")
-                {
-                    currentBullet.SetActive(true);
-                    currentBullet.GetComponent<StraightBulletMovement>().SetDirection(new Vector2(dir.x, 0));//ban ngang
-                }
-                if (currentBullet.tag == "BounceBullet")
-                {
-                    currentBullet.GetComponent<BounceBulletMovement>().SetDirection(new Vector2(dir.x, 0));
-                    currentBullet.GetComponent<BounceBulletMovement>().activate();
-                }
-                GameManager.GM.GameUI
-                .transform
-                .Find("CurrentBullet")
-                .gameObject.SetActive(false);
-                currentBullet = null;
-            }
+            pGrab.grabOrShoot(offset, grabDir, shootDir);
         }
-        
+        if (grabShoot.activeSelf && isClinging)
+            vermove = 0;
         #endregion
 
         #region ClingHandler

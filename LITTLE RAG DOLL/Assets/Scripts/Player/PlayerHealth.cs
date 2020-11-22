@@ -12,9 +12,16 @@ public class PlayerHealth : Heath
     public AudioClip playerDamage;
     public AudioClip addFullBlood;
 
+    public float immuneTime = 2f;
+    private bool immune = false;
+    private Animator anim;
+    private Animator headAnim;
+
     private void Awake()
     {
         resetState();
+        anim = GetComponent<PlayerMovement>().animator;
+        headAnim = GetComponent<PlayerMovement>().headAnimator;
     }
 
     override
@@ -26,11 +33,31 @@ public class PlayerHealth : Heath
     override
     public void takeDamage(int damage)
     {
-        AudioManager.instance.PlaySound(playerDamage, transform.position);
-        HP = Mathf.Clamp(HP - damage,0,HPmax);
-        if (HP == 0)
-            die();
+        if (!immune)
+        {
+            StartCoroutine(hurtBlink());
+            AudioManager.instance.PlaySound(playerDamage, transform.position);
+            HP = Mathf.Clamp(HP - damage, 0, HPmax);
+            if (HP == 0)
+                die();
+        }
             
+    }
+    
+    IEnumerator hurtBlink()
+    {
+        //start blink animation
+        anim.SetBool("isBlinking",true);
+        headAnim.SetBool("isBlinking",true);
+        immune = true;
+
+        //wait for imune to end
+        yield return new WaitForSeconds(immuneTime);
+
+        //stop blink animton and re-enable collision        
+        anim.SetBool("isBlinking", false);
+        headAnim.SetBool("isBlinking", false);
+        immune = false;
     }
 
     public void addBlood(int blood)

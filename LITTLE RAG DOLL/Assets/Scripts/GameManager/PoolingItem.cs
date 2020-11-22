@@ -28,7 +28,8 @@ public class PoolingItem : MonoBehaviour
         if (bounceBulletMovement != null)
         {
             bounceBulletMovement.SetDirection(Vector2.zero);
-            gameObject.GetComponent<TrailRenderer>().Clear();
+            gameObject.GetComponent<TrailRenderer>().time = 0;
+            gameObject.GetComponent<TrailRenderer>().time = 0.5f;
         }
         StraightBulletMovement straightBulletMovement = gameObject.GetComponent<StraightBulletMovement>();
         if (straightBulletMovement != null)

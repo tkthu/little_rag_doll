@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 2151621877201610737}
   - component: {fileID: 3753339691969598813}
   m_Layer: 0
-  m_Name: attack
+  m_Name: Attack
   m_TagString: Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2151621877201610743
 Transform:
   m_ObjectHideFlags: 0
@@ -96,8 +96,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.0749369, y: 0.41387957}
+  m_Offset: {x: -0.093557365, y: 0.057173442}
+  m_Size: {x: 1.2620544, y: 0.5282311}
   m_Direction: 1
 --- !u!114 &3753339691969598813
 MonoBehaviour:
@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 2151621879023751987}
   - component: {fileID: 7145290370771909243}
   - component: {fileID: 2151621879023751984}
+  - component: {fileID: 2933802662993355079}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -474,17 +475,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee9e95df479da44daa69c260f286bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller2D: {fileID: 2151621879023751991}
-  attack: {fileID: 2151621877201610740}
-  grab: {fileID: 4021720141695627176}
-  animator: {fileID: 2151621879023751989}
   runSpeed: 30
-  headAnimator: {fileID: 2151621878649956253}
-  isRetracting: 0
   jumpTime: 0.15
+  animator: {fileID: 2151621879023751989}
+  headAnimator: {fileID: 2151621878649956253}
   playerAttack: {fileID: 8300000, guid: 2eaa124b444c7c046a60b9b6a8429892, type: 3}
   playerJump: {fileID: 8300000, guid: 01e3494abdd1bda4e8d30eed9f4e67fa, type: 3}
-  currentBullet: {fileID: 0}
 --- !u!114 &7145290370771909243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +499,7 @@ MonoBehaviour:
   playerDeath: {fileID: 8300000, guid: b40fcc353d55d2642b50bacbcefb2729, type: 3}
   playerDamage: {fileID: 8300000, guid: 02aedae20d621dc47a4feb3d5c511577, type: 3}
   addFullBlood: {fileID: 8300000, guid: cab410e14cf6e1c47b71dc83a9942eeb, type: 3}
+  immuneTime: 2
 --- !u!70 &2151621879023751984
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -519,6 +516,14 @@ CapsuleCollider2D:
   m_Offset: {x: -0.03409195, y: -0.14428943}
   m_Size: {x: 0.27940845, y: 0.71142113}
   m_Direction: 0
+--- !u!81 &2933802662993355079
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151621879023751995}
+  m_Enabled: 1
 --- !u!1 &4021720141695627176
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +538,7 @@ GameObject:
   - component: {fileID: 5311780128745173622}
   - component: {fileID: 1917591988962952194}
   m_Layer: 0
-  m_Name: Grab
+  m_Name: GrabShoot
   m_TagString: Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,10 +636,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929ad2e9c0b676e42aa45d80e2de3c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  caughted: 0
-  offset: {x: 0, y: 0}
+  isRetracting: 0
   grabLength: 2.5
   armSpeed: 10
+  playerGrab: {fileID: 8300000, guid: cfd33a24b30da7e4ba7ad4cd6f83501e, type: 3}
+  playerShoot: {fileID: 8300000, guid: 2630b3c4b6b5e2341bb399c70c484881, type: 3}
 --- !u!120 &1917591988962952194
 LineRenderer:
   m_ObjectHideFlags: 0
