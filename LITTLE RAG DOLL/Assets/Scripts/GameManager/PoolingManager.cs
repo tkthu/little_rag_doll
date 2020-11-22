@@ -15,14 +15,8 @@ public class PoolingManager : MonoBehaviour
 	private int PlayerStraightBulletsNo = 15;
 	private List<GameObject> pooledPlayerBounceBullets;
 	private int PlayerBounceBulletsNo = 15;
-	private List<GameObject> pooledPlayerExplodeBullets;
-	private int PlayerExplodeBulletsNo = 5;
 	private List<GameObject> pooledPlayerPistils;
 	private int PlayerPistilsNo = 5;
-	private List<GameObject> pooledPlayerBatterys;
-	private int PlayerBatterysNo = 5;
-	private List<GameObject> pooledPlayerBatteryDeads;
-	private int PlayerBatteryDeadsNo = 5;
 
 	// Enemies
 	private List<GameObject> pooledBat;
@@ -33,8 +27,6 @@ public class PoolingManager : MonoBehaviour
 	private int FairyNo = 15;
 	private List<GameObject> pooledBubbleBlower;
 	private int BubbleBlowerNo = 15;
-	private List<GameObject> pooledFrog;
-	private int FrogNo = 5;
 
 	// Interactable
 	private List<GameObject> pooledFlower;
@@ -70,34 +62,25 @@ public class PoolingManager : MonoBehaviour
 		//khoi tao cac pool cho bullets cua Player
 		pooledPlayerStraightBullets = instantiatePool("Prefabs/Bullets/StraightBullet_Player", PlayerStraightBulletsNo, "PlayerStraightBullets");
 		pooledPlayerBounceBullets = instantiatePool("Prefabs/Bullets/BounceBullet_Player", PlayerBounceBulletsNo, "PlayerBounceBullets");
-		pooledPlayerExplodeBullets = instantiatePool("Prefabs/Bullets/ExplodeBullet_Player", PlayerExplodeBulletsNo, "PlayerExplodeBullets");
 		pooledPlayerPistils = instantiatePool("Prefabs/Bullets/Pistil_Player", PlayerPistilsNo, "PlayerPistils");
-		pooledPlayerBatterys = instantiatePool("Prefabs/Bullets/Battery_Player", PlayerBatterysNo, "PlayerBatterys");
-		pooledPlayerBatteryDeads = instantiatePool("Prefabs/Bullets/Battery_dead_Player", PlayerBatteryDeadsNo, "PlayerBatteryDeads");
 		listOfPool.Add(pooledPlayerStraightBullets);
 		listOfPool.Add(pooledPlayerBounceBullets);
-		listOfPool.Add(pooledPlayerExplodeBullets);
 		listOfPool.Add(pooledPlayerPistils);
-		listOfPool.Add(pooledPlayerBatterys);
-		listOfPool.Add(pooledPlayerBatteryDeads);
 
 		//Khoi tao Enemies
 		pooledBat = instantiatePool("Prefabs/Enemies/Bat", BatNo, "Bats");
 		pooledSnail = instantiatePool("Prefabs/Enemies/Snail", SnailNo, "Snails");
 		pooledFairy = instantiatePool("Prefabs/Enemies/Fairy", FairyNo, "Fairies");
 		pooledBubbleBlower = instantiatePool("Prefabs/Enemies/BubbleBlower", BubbleBlowerNo, "BubbleBlowers");
-		pooledFrog = instantiatePool("Prefabs/Bullets/ExplodeBullet", FrogNo, "Frogs");
 		listOfPool.Add(pooledBat);
 		listOfPool.Add(pooledSnail);
 		listOfPool.Add(pooledFairy);
 		listOfPool.Add(pooledBubbleBlower);
-		listOfPool.Add(pooledFrog);
 
 		listOfEnemisePool.Add(pooledBat);
 		listOfEnemisePool.Add(pooledSnail);
 		listOfEnemisePool.Add(pooledFairy);
 		listOfEnemisePool.Add(pooledBubbleBlower);
-		listOfEnemisePool.Add(pooledFrog);
 
 		//Khoi tao Interactable
 		pooledFlower = instantiatePool("Prefabs/Interactables/Flower", FlowerNo, "Flowers");
@@ -148,21 +131,9 @@ public class PoolingManager : MonoBehaviour
 	{
 		return getPooledObject(pooledPlayerBounceBullets, PlayerBounceBulletsNo);
 	}
-	public GameObject getPlayerExplodeBullets()
-	{
-		return getPooledObject(pooledPlayerExplodeBullets, PlayerExplodeBulletsNo);
-	}
 	public GameObject getPlayerPistils()
 	{
 		return getPooledObject(pooledPlayerPistils, PlayerPistilsNo);
-	}
-	public GameObject getPlayerBatterys()
-	{
-		return getPooledObject(pooledPlayerBatterys, PlayerBatterysNo);
-	}
-	public GameObject getPlayerBatteryDeads()
-	{
-		return getPooledObject(pooledPlayerBatteryDeads, PlayerBatteryDeadsNo);
 	}
 	#endregion
 
@@ -183,10 +154,6 @@ public class PoolingManager : MonoBehaviour
 	public GameObject getBubbleBlower()
 	{
 		return getPooledObject(pooledBubbleBlower, BubbleBlowerNo);
-	}
-	public GameObject getFrog()
-	{
-		return getPooledObject(pooledFrog, FrogNo);
 	}
 	#endregion
 

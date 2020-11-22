@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4705368795356210253}
   - component: {fileID: 6519068724738700004}
   - component: {fileID: 1413106289823013597}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpikeDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}

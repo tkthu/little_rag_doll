@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class FlowerHealth : MonoBehaviour
+public class FlowerHealth : Heath
 {
     public int HPmax;
     private int HP;
@@ -14,10 +12,11 @@ public class FlowerHealth : MonoBehaviour
     public float respawnTime = 5f;
     private void Awake()
     {
-        resetStatus();
+        resetState();
     }
 
-    public void resetStatus()
+    override
+    public void resetState()
     {
         isFreezed = true;
         isDeaded = false;
@@ -32,6 +31,7 @@ public class FlowerHealth : MonoBehaviour
         isFreezed = false;
     }
 
+    override
     public void takeDamage(int damage)
     {
         HP = HP - damage;

@@ -16,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
         {
             collision.GetComponent<GroundDurability>().takeDamage(damage);
         }
+        else if (go.layer == LayerMask.NameToLayer("EneBullets") && (collision.transform.parent.parent == null || collision.transform.parent.parent.tag != "Helmet"))
+            go.SetActive(false);
 
     }
 }
