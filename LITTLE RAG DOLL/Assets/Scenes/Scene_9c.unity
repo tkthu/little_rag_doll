@@ -5242,7 +5242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214827602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7784529, y: -1.9081416, z: -4.0742188}
+  m_LocalPosition: {x: -1.7784529, y: -1.9081416, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2066596588}
@@ -5499,8 +5499,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camSmooth: 5
   followPlayer: 0
-  freezeY: 0
-  freezeX: 0
 --- !u!1001 &485234814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6045,7 +6043,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.25276208, y: 1.1027417}
+  m_Offset: {x: 0.5175253, y: 1.1027417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6056,7 +6054,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5454602, y: 0.33474064}
+  m_Size: {x: 3.0749867, y: 0.33474064}
   m_EdgeRadius: 0
 --- !u!4 &819684386
 Transform:
@@ -6066,7 +6064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819684382}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.64, y: 3.08, z: 0}
+  m_LocalPosition: {x: -5.18, y: 3.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7012,7 +7010,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241769771}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.081559, y: -1.9764105, z: -21.211912}
+  m_LocalPosition: {x: -6.081559, y: -1.9764105, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 340069921}
@@ -20142,7 +20140,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.25276208, y: -1.1396034}
+  m_Offset: {x: 0.61055017, y: -1.1396034}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -20153,7 +20151,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5454602, y: 0.5280447}
+  m_Size: {x: 3.2610364, y: 0.5280447}
   m_EdgeRadius: 0
 --- !u!4 &1790480745
 Transform:
@@ -20163,7 +20161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790480741}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.62, y: -3.22, z: 0}
+  m_LocalPosition: {x: -5.24, y: -3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -24,6 +24,7 @@ TagManager:
   - Arm
   - bigBlood
   - smallBlood
+  - Border
   layers:
   - Default
   - TransparentFX
