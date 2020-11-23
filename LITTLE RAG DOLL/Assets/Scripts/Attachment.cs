@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Attachment : MonoBehaviour
 {
     public GameObject attachment;
@@ -9,12 +10,7 @@ public class Attachment : MonoBehaviour
     void Start()
     {
         attachment = Instantiate(attachment, transform.localPosition, Quaternion.identity);
-        attachment.transform.SetParent(transform.parent);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        attachment.transform.localPosition = transform.localPosition;
+        attachment.transform.SetParent(transform);
+        attachment.transform.localPosition = Vector2.zero;
     }
 }

@@ -206,7 +206,6 @@ GameObject:
   m_Component:
   - component: {fileID: 48610302}
   - component: {fileID: 48610301}
-  - component: {fileID: 48610300}
   - component: {fileID: 48610303}
   m_Layer: 0
   m_Name: Main Camera
@@ -215,14 +214,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &48610300
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48610299}
-  m_Enabled: 0
 --- !u!20 &48610301
 Camera:
   m_ObjectHideFlags: 0
@@ -294,8 +285,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camSmooth: 5
   followPlayer: 0
-  freezeY: 0
-  freezeX: 0
 --- !u!1001 &101674174
 PrefabInstance:
   m_ObjectHideFlags: 0

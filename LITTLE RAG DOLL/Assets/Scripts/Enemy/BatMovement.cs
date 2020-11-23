@@ -5,7 +5,7 @@ using UnityEngine;
 public class BatMovement : MonoBehaviour
 {
     public float speed = 0.65f;
-    public float stoppingDistance = 0.3f;
+    public float stoppingDistance = 0.1f;
 
     private Transform target;
     private GameObject player;
