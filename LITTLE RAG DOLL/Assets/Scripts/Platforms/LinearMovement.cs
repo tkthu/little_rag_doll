@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 
-public class MovingFlatform : MonoBehaviour
+public class LinearMovement : MonoBehaviour
 {
     public GameObject[] pos;
 
-    public float speed;
-    public int currentIndex;
-    //public GameObject movingPlatform;
+    public float speed = 5f;
+    public int currentIndex = 0;
     Vector3 nextPos;
     
     // Start is called before the first frame update

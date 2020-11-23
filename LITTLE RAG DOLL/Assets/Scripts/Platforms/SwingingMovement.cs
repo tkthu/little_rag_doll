@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class SwingingChain : MonoBehaviour
+public class SwingingMovement : MonoBehaviour
 {
     private Transform root;
     private Transform end;    
@@ -41,7 +41,7 @@ public class SwingingChain : MonoBehaviour
         while(l > chainDistance)
         {
             l = l - chainDistance;
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/Platfroms/ChainLink");
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/Platfroms/Attachable/ChainLink");
             GameObject chain = Instantiate(prefab);
             chain.transform.SetParent(transform);
             dictOfLen.Add(chain.transform, l);

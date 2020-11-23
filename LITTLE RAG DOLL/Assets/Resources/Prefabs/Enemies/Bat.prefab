@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5876192166062715397}
   - component: {fileID: 6884540149236248195}
   - component: {fileID: 538044700967553023}
+  - component: {fileID: 2729824439025827088}
   - component: {fileID: 4847573541361654160}
   - component: {fileID: 7091953787587237472}
-  - component: {fileID: 2729824439025827088}
   m_Layer: 10
   m_Name: Bat
   m_TagString: Bat
@@ -105,6 +105,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &2729824439025827088
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741050933996983557}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.6941337, y: 0.24047497}
+  m_Direction: 1
 --- !u!114 &4847573541361654160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.65
-  stoppingDistance: 0.3
+  stoppingDistance: 0.1
 --- !u!114 &7091953787587237472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,19 +152,3 @@ MonoBehaviour:
   isFreezed: 0
   isDeaded: 0
   enemyDeath: {fileID: 8300000, guid: 17212611d4320fc46a92b5087a66686f, type: 3}
---- !u!70 &2729824439025827088
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4741050933996983557}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.6941337, y: 0.24047497}
-  m_Direction: 1

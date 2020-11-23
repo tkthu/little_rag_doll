@@ -5,23 +5,16 @@ using UnityEngine;
 public class BulletDamage : MonoBehaviour
 {
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(gameObject.layer == LayerMask.NameToLayer("PlayerBullets"))
+        if(gameObject.layer == LayerMask.NameToLayer("PlayerBullets"))// PlayerBullets khong collide voi Player duoc. Vi Collider Matrix
         {
-            Heath heath = collision.GetComponent<EnemyHealth>();
+            Heath heath = collision.GetComponent<Heath>();
             if (heath != null)
                 heath.takeDamage(1);
             if(collision.gameObject.layer == LayerMask.NameToLayer("EneBullets") && (collision.transform.parent.parent == null || collision.transform.parent.parent.tag != "Helmet"))
                 collision.gameObject.SetActive(false);
-        }
-        if (gameObject.layer == LayerMask.NameToLayer("EneBullets"))
+        }else if (gameObject.layer == LayerMask.NameToLayer("EneBullets"))
         {
             if(collision.tag != "Arm")
             {
@@ -31,11 +24,5 @@ public class BulletDamage : MonoBehaviour
             }
             
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

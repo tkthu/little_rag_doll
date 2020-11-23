@@ -14,7 +14,7 @@ public class BounceBulletMovement : MonoBehaviour
         _direction = direction;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 position = transform.position;
 

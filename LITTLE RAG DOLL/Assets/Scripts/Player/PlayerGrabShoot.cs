@@ -11,6 +11,7 @@ public class PlayerGrabShoot : MonoBehaviour
     private BoxCollider2D col;
     private Vector2 offset = Vector2.zero;
     public bool isRetracting = false;
+    public bool caughted = false;
     public float grabLength = 2.5f;
     public float armSpeed = 10f;
     public AudioClip playerGrab;
@@ -25,7 +26,7 @@ public class PlayerGrabShoot : MonoBehaviour
         col.isTrigger = true;
         bulletHolder = GameManager.GM.GameUI.transform.Find("CurrentBullet");
     }
-    private void Update()
+    private void FixedUpdate()
     {
         startPos = GameManager.GM.player.transform.position + new Vector3(offset.x, offset.y, 0);
         endPos = transform.position;
@@ -45,7 +46,7 @@ public class PlayerGrabShoot : MonoBehaviour
             StartCoroutine(grabing(grabDir));
             AudioManager.instance.PlaySound(playerGrab, transform.position);
         }
-        else if ( currentBullet != null )
+        else if (currentBullet != null)
         {
             shoot(shootDir);
             AudioManager.instance.PlaySound(playerShoot, transform.position);
@@ -77,6 +78,7 @@ public class PlayerGrabShoot : MonoBehaviour
         {
             changeCurrentBullet(child.gameObject);
             Destroy(child.gameObject);
+            caughted = false;
         }
         gameObject.SetActive(false);
     }
@@ -84,18 +86,19 @@ public class PlayerGrabShoot : MonoBehaviour
     public void shoot(Vector2 dir)
     {
         currentBullet.transform.position = GameManager.GM.player.transform.position + new Vector3(offset.x, offset.y, 0);
-        if (currentBullet.tag == "StraightBullet")
+        switch (currentBullet.tag)
         {
-            currentBullet.SetActive(true);
-            currentBullet.GetComponent<StraightBulletMovement>().SetDirection(new Vector2(dir.x, 0));//ban ngang
-        }
-        if (currentBullet.tag == "BounceBullet")
-        {
-            currentBullet.GetComponent<BounceBulletMovement>().SetDirection(new Vector2(dir.x, 0));
-            currentBullet.GetComponent<BounceBulletMovement>().activate();
+            case "StraightBullet":
+                currentBullet.SetActive(true);
+                currentBullet.GetComponent<StraightBulletMovement>().SetDirection(new Vector2(dir.x, 0));//ban ngang
+                break;
+            case "BounceBullet":
+                currentBullet.GetComponent<BounceBulletMovement>().SetDirection(new Vector2(dir.x, 0));
+                currentBullet.GetComponent<BounceBulletMovement>().activate();
+                break;
         }
         bulletHolder.gameObject.SetActive(false);
-        currentBullet = null;      
+        currentBullet = null;
     }
 
     public void setOffset(Vector2 offset)
@@ -107,15 +110,16 @@ public class PlayerGrabShoot : MonoBehaviour
     private void changeCurrentBullet(GameObject go)
     {
         bulletHolder.gameObject.SetActive(true);
-        if (go.tag == "BounceBullet")
+        switch (go.tag)
         {
-            currentBullet = GameManager.GM.poolingManager.getPlayerBounceBullets();
-            bulletHolder.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Sprites/Bullets/bouncing_fire_player");
-
-        }else if (go.CompareTag("StraightBullet"))
-        {
-            currentBullet = GameManager.GM.poolingManager.getPlayerStraightBullets();
-            bulletHolder.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Sprites/Bullets/fire_player__SpriteSheet");
+            case "StraightBullet":
+                currentBullet = GameManager.GM.poolingManager.getPlayerStraightBullets();
+                bulletHolder.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Sprites/Bullets/fire_player__SpriteSheet");
+                break;
+            case "BounceBullet":
+                currentBullet = GameManager.GM.poolingManager.getPlayerBounceBullets();
+                bulletHolder.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Sprites/Bullets/bouncing_fire_player");
+                break;
         }
     }
 
@@ -123,17 +127,18 @@ public class PlayerGrabShoot : MonoBehaviour
     {
         float lineLength = Vector3.Distance(startPos, endPos); // length of line
         col.size = new Vector3(lineLength, 0.1f, 1f); // size of collider is set where X is length of line, Y is width of line, Z will be set as per requirement
-        if(0 < transform.localPosition.x)
-            col.offset = new Vector2(- lineLength/2, 0); // setting position of collider object
+        if (0 < transform.localPosition.x)
+            col.offset = new Vector2(-lineLength / 2, 0); // setting position of collider object
         else
-            col.offset = new Vector2(lineLength/2, 0); // setting position of collider object
+            col.offset = new Vector2(lineLength / 2, 0); // setting position of collider object
     }
 
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("EneBullets") && !isRetracting)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("EneBullets") && !caughted)
         {
+            caughted = true;
             isRetracting = true;
             GameObject caughtedBullet = null;
             transform.position = collision.transform.position;
