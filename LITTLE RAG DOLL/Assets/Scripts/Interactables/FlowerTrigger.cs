@@ -20,6 +20,8 @@ public class FlowerTrigger : MonoBehaviour
     private Animator anim;
     private FlowerHealth health;
 
+    public AudioClip flowerAttack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class FlowerTrigger : MonoBehaviour
         {
             if (Time.time > timeRate)
             {
+                AudioManager.instance.PlaySound(flowerAttack, transform.position);
                 bulletBounce = GameManager.GM.poolingManager.getBounceBullets();
                 if (bulletBounce != null)
                 {

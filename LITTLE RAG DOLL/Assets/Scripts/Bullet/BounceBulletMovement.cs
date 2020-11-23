@@ -4,7 +4,7 @@ public class BounceBulletMovement : MonoBehaviour
 {
     private Vector3 _direction;
     private bool firstBounce = true;
-    private float speed = 2f;
+    public float speed = 2f;
     private float aliveTime = 10f;
    
 
@@ -14,7 +14,7 @@ public class BounceBulletMovement : MonoBehaviour
         _direction = direction;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 position = transform.position;
 

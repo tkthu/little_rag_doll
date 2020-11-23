@@ -5,8 +5,6 @@ public class CameraMovement : MonoBehaviour
 {
     public float camSmooth = 5;
     public bool followPlayer = true;
-    public bool freezeY = false;
-    public bool freezeX = false;
 
     private GameObject player;
     private Camera cam;
@@ -81,20 +79,29 @@ public class CameraMovement : MonoBehaviour
         }
 
     }
+
     private void LateUpdate()
     {
         if (followPlayer)
         {
             Vector3 playerPos = player.GetComponent<Transform>().position;
-            Vector3 targetPos;
-            if (freezeX)
-                targetPos = new Vector3(transform.position.x, playerPos.y, -10);
-            else if(freezeY)
-                targetPos = new Vector3(playerPos.x, transform.position.y, -10);
-            else
-                targetPos = new Vector3(playerPos.x, playerPos.y, -10);
+            Vector3 targetPos = new Vector3(playerPos.x, playerPos.y, -10);
             transform.position = Vector3.Lerp(transform.position, targetPos, camSmooth * Time.deltaTime);
+
+            GameObject border = GameObject.FindGameObjectWithTag("Border");
+            if(border != null)
+            {
+                float xMin = border.transform.Find("TopLeft").position.x + cam.orthographicSize * cam.aspect;
+                float xMax = border.transform.Find("BottomRight").position.x - cam.orthographicSize * cam.aspect;
+                float yMin = border.transform.Find("BottomRight").position.y + cam.orthographicSize;
+                float yMax = border.transform.Find("TopLeft").position.y - cam.orthographicSize;
+
+                float newX = Mathf.Clamp(transform.position.x, xMin, xMax);
+                float newY = Mathf.Clamp(transform.position.y, yMin, yMax);
+                transform.position = new Vector3(newX, newY, -10);
+            }
         }       
             
     }
+
 }

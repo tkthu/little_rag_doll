@@ -117,8 +117,7 @@ public class SceneLoader : MonoBehaviour
     {
         GameObject holder = GameObject.FindGameObjectWithTag("EnemiesHolder");
         if (holder != null)
-        {
-            
+        {            
             foreach (Transform child in holder.transform)
             {
                 GameObject go = child.gameObject;
@@ -136,14 +135,16 @@ public class SceneLoader : MonoBehaviour
                     case "BubbleBlower":
                         go = GameManager.GM.poolingManager.getBubbleBlower();
                         break;
-                    case "Frog":
-                        go = GameManager.GM.poolingManager.getFrog();
-                        break;
 
                 }                
                 go.SetActive(true);
                 go.transform.GetComponent<EnemyHealth>().respawnPos = child.position;
                 go.transform.position = child.position;
+                Attachment attachmentComponent = child.GetComponent<Attachment>();
+                if (attachmentComponent != null)
+                {
+                    go.AddComponent<Attachment>().attachment = attachmentComponent.attachment;
+                }
                 Destroy(child.gameObject);   
             }
             Destroy(holder);

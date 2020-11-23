@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Animations;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController2D controller2D;
-    public GameObject attack;
+    public float runSpeed = 35f;
+    public float jumpTime = 0.15f;
     public Animator animator;
-    public float runSpeed = 40f;
     public Animator headAnimator;
+
+    public AudioClip playerAttack;
+    public AudioClip playerJump;
+
+    private CharacterController2D controller2D;
+    private GameObject attack;
+    private GameObject grabShoot;    
 
     private float hormove = 0f;
     private float vermove = 0f;
@@ -24,12 +31,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool highJump = false;
     private float jumpCounter = 0;
-    public float jumpTime = 0.35f;
-
-
 
     private float attackTimeRate = 0.3f;
-    private float attackTimeLimit = 0; 
+    private float attackTimeLimit = 0;
+
+    private void Start()
+    {
+        controller2D = GetComponent<CharacterController2D>();
+        attack = transform.Find("Attack").gameObject;
+        grabShoot = transform.Find("GrabShoot").gameObject;
+    }
 
     // Update is called once per frame
     void Update()
@@ -53,12 +64,14 @@ public class PlayerMovement : MonoBehaviour
         
         else if (!Input.GetButton("Duck") &&  Input.GetButtonDown("Jump") && controller2D.m_Grounded)
         {
+            AudioManager.instance.PlaySound(playerJump, transform.position);
             isJumping = true;
             highJump = true;
             jumpCounter = jumpTime;
         }
         else if (Input.GetButtonDown("Jump") && isClinging && !isWallJumping)
         {
+            AudioManager.instance.PlaySound(playerJump, transform.position);
             isWallJumping = true;
             highJump = true;
             jumpCounter = jumpTime;
@@ -70,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             highJump = false;
         }
         if (Input.GetButton("Jump") && highJump)
-        {
+        {            
             if (jumpCounter > 0)
             {
                 jumpCounter -= Time.deltaTime;
@@ -94,10 +107,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Attack") && !attack.activeSelf)
         {
+            AudioManager.instance.PlaySound(playerAttack, transform.position);
             isAttacking = true;
             setAnimParameter("trgAttack");
             attack.SetActive(true);
             attackTimeLimit = Time.time + attackTimeRate;
+            
             attack.transform.localPosition = new Vector2(0.5f, 0);
             attack.transform.localScale = new Vector2(1, 1);
             if (isDucking)
@@ -107,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
                 attack.transform.localScale = new Vector2(-1, 1);
                 attack.transform.localPosition = new Vector2(-0.5f, 0);
             }
-                
+
         }
         if (Time.time >= attackTimeLimit)
         {
@@ -117,7 +132,30 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking && isClinging)
             vermove = 0;
-        #endregion        
+        #endregion
+
+        #region GrabHandler
+        if (Input.GetButtonDown("Grab/Shoot"))
+        {
+            PlayerGrabShoot pGrab = grabShoot.GetComponent<PlayerGrabShoot>();
+
+            Vector2 shootDir = transform.localScale;
+            Vector2 grabDir = Vector2.one;
+            Vector2 offset = Vector2.zero;
+            if (isDucking)
+                offset = new Vector2(0, -0.4f);
+            else if (isClinging)
+            {
+                shootDir = new Vector2(-1 * transform.localScale.x, 1);
+                grabDir = new Vector2(-1, 1);
+                offset = Vector2.zero;
+            }
+
+            pGrab.grabOrShoot(offset, grabDir, shootDir);
+        }
+        if (grabShoot.activeSelf && isClinging)
+            vermove = 0;
+        #endregion
 
         #region ClingHandler
 
@@ -146,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
         setAnimParameter("isAttacking", isAttacking);
         #endregion
     }
+    
 
     private void setAnimParameter(string name,bool value)
     {

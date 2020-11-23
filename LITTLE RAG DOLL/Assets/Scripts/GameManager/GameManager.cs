@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 	private SceneLoader sceneLoader;
 	[HideInInspector] public GameTimer gameTimer;
 	[HideInInspector] public PoolingManager poolingManager;
+	[HideInInspector] public MusicManager musicManager;
 
 	private Text scoreSpirit;
 
@@ -31,12 +32,15 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public GameObject GameUI;
 	[HideInInspector] public GameObject PauseMenu;
 	[HideInInspector] public GameObject GameOverMenu;
+	[HideInInspector] public GameObject audioManager;
 
 	private bool firstTime = true;
 
 	private GameData gameData;
 
 	[HideInInspector] public bool testing = false;
+
+	
 
 
 	void Awake()
@@ -65,10 +69,12 @@ public class GameManager : MonoBehaviour
 		sceneLoader = GetComponent<SceneLoader>();
 		poolingManager = GetComponent<PoolingManager>();
 		gameTimer = GetComponent<GameTimer>();
+		musicManager = transform.Find("Audio Manager").GetComponent<MusicManager>();
 
 		GameUI = transform.Find("GameUI").gameObject;
 		PauseMenu = transform.Find("PauseMenu").gameObject;
 		GameOverMenu = transform.Find("GameOverMenu").gameObject;
+		audioManager = transform.Find("Audio Manager").gameObject;
 
 		scoreSpirit = GameUI.transform.Find("SpiritText").gameObject.GetComponent<Text>() ;
 
@@ -160,6 +166,7 @@ public class GameManager : MonoBehaviour
 		setGameData(SaveSystem.loadData(gameData.filenumber));
 		startGame();		
 		GameOverMenu.SetActive(false);
+		audioManager.SetActive(true);
 
 	}
 	public void gameover()
@@ -167,12 +174,14 @@ public class GameManager : MonoBehaviour
 		isGameover = true;
 		gameTimer.TimerStop();
 		GameOverMenu.SetActive(true);
+		audioManager.SetActive(false);
 	}
 	public void resume()
 	{
 		gameTimer.TimerStart(gameTimer.getCurrentStopTime());		
 		GameIsPaused = false;
 		PauseMenu.SetActive(false);
+		audioManager.SetActive(true);
 	}
 
 	public void pause()
@@ -180,6 +189,7 @@ public class GameManager : MonoBehaviour
 		gameTimer.TimerStop();
 		GameIsPaused = true;
 		PauseMenu.SetActive(true);
+		audioManager.SetActive(false);
 	}
 
 }

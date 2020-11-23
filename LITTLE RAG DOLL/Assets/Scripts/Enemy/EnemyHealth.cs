@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : Heath
 {
     public int HPmax;
     private int HP;
@@ -8,12 +8,15 @@ public class EnemyHealth : MonoBehaviour
     [HideInInspector] public Vector2 respawnPos = Vector2.one * 10000;
     [HideInInspector] public bool isFreezed;
     [HideInInspector] public bool isDeaded;
+
+    public AudioClip enemyDeath;
     private void Awake()
     {
-        resetStatus();
+        resetState();
     }
 
-    public void resetStatus()
+    override
+    public void resetState()
     {
         isFreezed = true;
         isDeaded = false;
@@ -27,6 +30,7 @@ public class EnemyHealth : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    override
     public void takeDamage(int damage)
     {
         HP = HP - damage;
@@ -41,5 +45,6 @@ public class EnemyHealth : MonoBehaviour
 
         isDeaded = true;
         gameObject.SetActive(false);
+        AudioManager.instance.PlaySound(enemyDeath, transform.position);
     }
 }

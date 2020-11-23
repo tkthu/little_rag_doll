@@ -297,17 +297,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &113382525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59b8d34172567347a54f04be9dc6a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startGame: {fileID: 8300000, guid: cab410e14cf6e1c47b71dc83a9942eeb, type: 3}
 --- !u!114 &269167187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,6 +1269,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: _GM
       objectReference: {fileID: 0}
+    - target: {fileID: 5685956739460138720, guid: 3b8b928e851de2d429689484fe510e1b,
+        type: 3}
+      propertyPath: mainTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: 428fe5984e517ce4aabbb1a01bf5d4c3, type: 3}
     - target: {fileID: 5977687541561953961, guid: 3b8b928e851de2d429689484fe510e1b,
         type: 3}
       propertyPath: m_textInfo.characterCount
