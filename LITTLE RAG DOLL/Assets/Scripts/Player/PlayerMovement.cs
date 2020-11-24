@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
         #region AttackHandler
 
-        if (Input.GetButtonDown("Attack") && !attack.activeSelf)
+        if (Input.GetButtonDown("Attack") && !attack.activeSelf && !grabShoot.activeSelf)
         {
             AudioManager.instance.PlaySound(playerAttack, transform.position);
             isAttacking = true;
@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region GrabHandler
-        if (Input.GetButtonDown("Grab/Shoot"))
+        if (Input.GetButtonDown("Grab/Shoot") && !attack.activeSelf)
         {
             PlayerGrabShoot pGrab = grabShoot.GetComponent<PlayerGrabShoot>();
 

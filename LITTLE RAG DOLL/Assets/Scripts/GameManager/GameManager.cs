@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
 		loadScene(gameData.sceneHasPlayer);
 		PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 		playerHealth.HPmax = gameData.HPmax;
-		playerHealth.HP = gameData.HPmax;
+		playerHealth.resetState();
 		score = gameData.score;
 		player.transform.position = new Vector2(gameData.playerPos[0], gameData.playerPos[1]);
 		gameTimer.TimerStart(gameData.stopTime);
@@ -121,13 +121,14 @@ public class GameManager : MonoBehaviour
 
     public void startGame()
     {
+		
+		
 		if (firstTime) 
 		{
 			firstTime = false;
-
 			GameObject playerPrefabs = Resources.Load<GameObject>("Prefabs/Player/Player");
 			player = Instantiate(playerPrefabs);
-			player.SetActive(false);
+			player.SetActive(false);			
 			GameObject parentObject = new GameObject("GameObjects");
 			player.AddComponent<PoolingItem>().setOriginalParent(parentObject.transform);
 			DontDestroyOnLoad(parentObject);

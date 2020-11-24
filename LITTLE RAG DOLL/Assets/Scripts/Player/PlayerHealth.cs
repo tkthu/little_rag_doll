@@ -28,6 +28,7 @@ public class PlayerHealth : Heath
     public void resetState()
     {
         HP = HPmax;
+        immune = false;
     }
 
     override
@@ -78,14 +79,12 @@ public class PlayerHealth : Heath
         // Hồi máu
         if (other.tag == "smallBlood")
         {
-            Debug.Log("smallBlood");
             addBlood(1);
             other.gameObject.SetActive(false);
         }
         // Hồi full máu
         if (other.tag == "bigBlood")
         {
-            Debug.Log("bigBlood");
             HP = HPmax;
             other.gameObject.SetActive(false);
         }
