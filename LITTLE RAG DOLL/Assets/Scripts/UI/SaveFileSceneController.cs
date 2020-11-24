@@ -67,7 +67,6 @@ public class SaveFileSceneController : MonoBehaviour
         }
         else//file cần tải không tồn tại => tạo mới
         {
-            // hiện bảng hỏi: có chắc muốn tạo file mới ? create, cancel
             SaveSystem.saveData(filenumber);
             GameData gameData = SaveSystem.loadData(filenumber);
             GameManager.GM.setGameData(gameData);
