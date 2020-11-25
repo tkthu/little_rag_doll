@@ -8,7 +8,7 @@ public class SwingingMovement : MonoBehaviour
 {
     private Transform root;
     private Transform end;    
-    public float slowDown = 0.01f;
+    public float speed = 0.01f;
 
     private float len;
     private float angle;
@@ -59,7 +59,7 @@ public class SwingingMovement : MonoBehaviour
         }
         
 
-        aAcc = - Time.fixedDeltaTime * Mathf.Sin(angle) / len * slowDown;
+        aAcc = - Time.fixedDeltaTime * Mathf.Sin(angle) / len * speed;
 
         aVel += aAcc;
         angle += aVel;
