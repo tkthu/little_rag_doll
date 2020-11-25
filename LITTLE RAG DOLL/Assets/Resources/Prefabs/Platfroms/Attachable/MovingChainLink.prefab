@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69b10dfea8a268478dabc019e6031da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachment: {fileID: 1747354557988163618, guid: 276bd60fd0c14a04db1138ee98d93adb,
-    type: 3}
+  attachment: {fileID: 0}
 --- !u!114 &5022238185782410190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pos: []
-  speed: 5
+  speed: 2.5
   currentIndex: 0
 --- !u!1001 &6240457459201047866
 PrefabInstance:

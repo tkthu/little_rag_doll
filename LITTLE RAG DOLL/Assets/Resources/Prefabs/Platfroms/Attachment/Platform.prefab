@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2927559727199934304}
   - component: {fileID: 168615924751455423}
   m_Layer: 13
-  m_Name: MovingPlatform
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,14 +121,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9375, y: 0.3125}
+    oldSize: {x: 1.25, y: 0.3125}
     newSize: {x: 0.265625, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9375, y: 0.09159815}
+  m_Size: {x: 1.2292833, y: 0.09159815}
   m_EdgeRadius: 0
 --- !u!50 &2927559727199934304
 Rigidbody2D:

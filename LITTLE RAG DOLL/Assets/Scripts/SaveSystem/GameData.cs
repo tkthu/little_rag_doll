@@ -25,11 +25,11 @@ public class GameData
     {
         score = 0;
         HPmax = 5;//????
-        sceneHasPlayer = SceneName.Scene_8.ToString();
+        sceneHasPlayer = SceneName.Scene_1.ToString();
 
         playerPos = new float[2];
-        playerPos[0] = -4;
-        playerPos[1] = -7.5f;
+        playerPos[0] = -30f;
+        playerPos[1] = -3f;
 
         stopTime = 0;
 
