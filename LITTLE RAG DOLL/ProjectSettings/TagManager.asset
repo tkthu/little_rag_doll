@@ -25,6 +25,7 @@ TagManager:
   - bigBlood
   - smallBlood
   - Border
+  - CollectablesHolder
   layers:
   - Default
   - TransparentFX

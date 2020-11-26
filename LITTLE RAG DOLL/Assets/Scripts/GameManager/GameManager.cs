@@ -106,23 +106,17 @@ public class GameManager : MonoBehaviour
 	
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape) && !isGameover)
+		if (Input.GetKeyDown(KeyCode.Escape) && !isGameover && player.activeSelf)
 		{
 			if (GameIsPaused)
-			{
 				resume();
-			}
 			else
-			{
 				pause();
-			}
 		}
 	}
 
     public void startGame()
     {
-		
-		
 		if (firstTime) 
 		{
 			firstTime = false;
