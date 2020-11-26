@@ -42,6 +42,24 @@ public class PlayerMovement : MonoBehaviour
         grabShoot = transform.Find("GrabShoot").gameObject;
     }
 
+    public void resetAction()
+    {
+            hormove = 0f;
+            vermove = 0f;
+            isRunning = false;
+            isDucking = false;
+            isJumping = false;
+            isClinging = false;
+            isClimbing = false;
+            isSliding = false;
+            isAttacking = false;
+            isWallJumping = false;
+
+            highJump = false;
+            jumpCounter = 0;
+
+    }
+
     // Update is called once per frame
     void Update()
     {

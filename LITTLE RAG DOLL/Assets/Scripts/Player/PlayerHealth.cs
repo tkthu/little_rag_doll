@@ -81,12 +81,14 @@ public class PlayerHealth : Heath
         {
             addBlood(1);
             other.gameObject.SetActive(false);
+            AudioManager.instance.PlaySound(eatSpirit, transform.position);
         }
         // Hồi full máu
         if (other.tag == "bigBlood")
         {
             HP = HPmax;
             other.gameObject.SetActive(false);
+            AudioManager.instance.PlaySound(eatSpirit, transform.position);
         }
         // Ăn spirit
         if (other.tag == "Spirit")
@@ -98,7 +100,7 @@ public class PlayerHealth : Heath
         // Thêm mạng
         if (other.tag == "Heart")
         {
-            HPmax += 1;
+            HPmax = Mathf.Clamp(HPmax + 1, 0, 10);
             addBlood(HPmax);
             other.gameObject.SetActive(false);
             AudioManager.instance.PlaySound(addFullBlood, transform.position);

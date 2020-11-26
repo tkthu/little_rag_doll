@@ -7,8 +7,10 @@ public class SceneTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
-        {
-            GameManager.GM.loadScene(toScene);
+        {            
+            collision.GetComponent<PlayerMovement>().resetAction();
+            collision.attachedRigidbody.velocity = Vector2.zero;
+            GameManager.GM.loadScene(toScene);            
         }
     }
 }
