@@ -104,6 +104,14 @@ public class SceneLoader : MonoBehaviour
             if(GameManager.GM.player != null)
                 GameManager.GM.player.SetActive(false);
         }
+        else if (equal(currentScene, SceneName.Win))
+        {
+            GameManager.GM.GameUI.SetActive(false);
+            GameManager.GM.PauseMenu.SetActive(false);
+            GameManager.GM.GameOverMenu.SetActive(false);
+            if (GameManager.GM.player != null)
+                GameManager.GM.player.SetActive(false);
+        }
         else
         {
             GameManager.GM.GameUI.SetActive(true);
