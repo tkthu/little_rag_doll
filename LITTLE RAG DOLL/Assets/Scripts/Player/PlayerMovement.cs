@@ -64,8 +64,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         #region RunHandler
-        hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        vermove = Input.GetAxisRaw("Vertical") * runSpeed;
+        hormove = 0;
+        if (Input.GetKey(GameManager.GM.left))
+            hormove = -1 * runSpeed;
+        else if (Input.GetKey(GameManager.GM.right))
+            hormove = 1 * runSpeed;
+        vermove = 0;
+        if (Input.GetKey(GameManager.GM.down))
+            vermove = -1 * runSpeed;
+        else if (Input.GetKey(GameManager.GM.up))
+            vermove = 1 * runSpeed;
+
+        //hormove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        //vermove = Input.GetAxisRaw("Vertical") * runSpeed;
 
         isRunning = false;
         if (hormove != 0 && controller2D.m_Grounded)
@@ -74,20 +85,20 @@ public class PlayerMovement : MonoBehaviour
 
         #region DuckHandler
         isDucking = false;
-        if (Input.GetButton("Duck") && controller2D.m_Grounded)
+        if (Input.GetKey(GameManager.GM.down) && controller2D.m_Grounded)
             isDucking = true;
         #endregion
 
         #region JumpHandler
         
-        else if (!Input.GetButton("Duck") &&  Input.GetButtonDown("Jump") && controller2D.m_Grounded)
+        else if (!Input.GetKey(GameManager.GM.down) &&  Input.GetKeyDown(GameManager.GM.jump) && controller2D.m_Grounded)
         {
             AudioManager.instance.PlaySound(playerJump, transform.position);
             isJumping = true;
             highJump = true;
             jumpCounter = jumpTime;
         }
-        else if (Input.GetButtonDown("Jump") && isClinging && !isWallJumping)
+        else if (Input.GetKeyDown(GameManager.GM.jump) && isClinging && !isWallJumping)
         {
             AudioManager.instance.PlaySound(playerJump, transform.position);
             isWallJumping = true;
@@ -96,11 +107,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetKeyUp(GameManager.GM.jump))
         {
             highJump = false;
         }
-        if (Input.GetButton("Jump") && highJump)
+        if (Input.GetKey(GameManager.GM.jump) && highJump)
         {            
             if (jumpCounter > 0)
             {
@@ -123,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
 
         #region AttackHandler
 
-        if (Input.GetButtonDown("Attack") && !attack.activeSelf && !grabShoot.activeSelf)
+        if (Input.GetKeyDown(GameManager.GM.attack) && !attack.activeSelf && !grabShoot.activeSelf)
         {
             AudioManager.instance.PlaySound(playerAttack, transform.position);
             isAttacking = true;
@@ -153,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region GrabHandler
-        if (Input.GetButtonDown("Grab/Shoot") && !attack.activeSelf)
+        if (Input.GetKeyDown(GameManager.GM.eatShoot) && !attack.activeSelf)
         {
             PlayerGrabShoot pGrab = grabShoot.GetComponent<PlayerGrabShoot>();
 
