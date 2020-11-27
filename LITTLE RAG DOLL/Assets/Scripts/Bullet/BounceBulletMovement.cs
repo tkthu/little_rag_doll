@@ -64,7 +64,11 @@ public class BounceBulletMovement : MonoBehaviour
                 
         }
     }
-
+    private void OnDisable()
+    {
+        CancelInvoke();
+        firstBounce = true;
+    }
     void outOfTime()
     {
         firstBounce = true;

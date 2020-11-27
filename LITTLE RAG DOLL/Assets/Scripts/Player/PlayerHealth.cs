@@ -69,42 +69,50 @@ public class PlayerHealth : Heath
     private void die()
     {
         Debug.Log("Player is dead");
-        //GameManager.GM.gameover();
-        //AudioManager.instance.PlaySound(playerDeath, transform.position);
+        GameManager.GM.gameover();
+        
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
-    {        
-        // Hồi máu
-        if (other.tag == "smallBlood")
+    {
+        if (other.gameObject.activeSelf)
         {
-            addBlood(1);
-            other.gameObject.SetActive(false);
-            AudioManager.instance.PlaySound(eatSpirit, transform.position);
+            // Hồi máu
+            if (other.tag == "smallBlood")
+            {
+                GameManager.GM.addToCollection(other.gameObject);
+                addBlood(1);
+                other.gameObject.SetActive(false);
+                AudioManager.instance.PlaySound(eatSpirit, transform.position);
+            }
+            // Hồi full máu
+            if (other.tag == "bigBlood")
+            {
+                GameManager.GM.addToCollection(other.gameObject);
+                HP = HPmax;
+                other.gameObject.SetActive(false);
+                AudioManager.instance.PlaySound(eatSpirit, transform.position);
+            }
+            // Ăn spirit
+            if (other.tag == "Spirit")
+            {
+                GameManager.GM.addToCollection(other.gameObject);
+                other.gameObject.SetActive(false);                
+                GameManager.GM.addScore(1);
+                AudioManager.instance.PlaySound(eatSpirit, transform.position);
+            }
+            // Thêm mạng
+            if (other.tag == "Heart")
+            {
+                GameManager.GM.addToCollection(other.gameObject);
+                HPmax = Mathf.Clamp(HPmax + 1, 0, 10);
+                addBlood(HPmax);
+                other.gameObject.SetActive(false);
+                AudioManager.instance.PlaySound(addFullBlood, transform.position);
+            }
         }
-        // Hồi full máu
-        if (other.tag == "bigBlood")
-        {
-            HP = HPmax;
-            other.gameObject.SetActive(false);
-            AudioManager.instance.PlaySound(eatSpirit, transform.position);
-        }
-        // Ăn spirit
-        if (other.tag == "Spirit")
-        {
-            GameManager.GM.addScore(1);
-            other.gameObject.SetActive(false);
-            AudioManager.instance.PlaySound(eatSpirit, transform.position);
-        }
-        // Thêm mạng
-        if (other.tag == "Heart")
-        {
-            HPmax = Mathf.Clamp(HPmax + 1, 0, 10);
-            addBlood(HPmax);
-            other.gameObject.SetActive(false);
-            AudioManager.instance.PlaySound(addFullBlood, transform.position);
-        }
+        
 
     }
 }

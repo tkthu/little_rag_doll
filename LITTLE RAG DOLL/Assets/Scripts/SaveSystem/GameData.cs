@@ -19,7 +19,7 @@ public class GameData
     public string sceneHasPlayer;
     public float[] playerPos;
     public float stopTime;
-    //public List<SceneData> arrSceneData;
+    public List<SceneData> arrSceneData;
 
     public GameData()//Khởi tạo save file (lúc nhấn vào nút tạo mới save file)
     {
@@ -33,21 +33,7 @@ public class GameData
 
         stopTime = 0;
 
-        //dummy
-        /*
-        SceneData sd = new SceneData();
-        sd.sceneName = SceneName.Scene_8.ToString();
-        sd.collectedSpiritPos_x = new float[2];
-        sd.collectedSpiritPos_y = new float[2];
-        sd.collectedSpiritPos_x[0] = 0;
-        sd.collectedSpiritPos_x[1] = 4;
-        sd.collectedSpiritPos_y[0] = 1;
-        sd.collectedSpiritPos_y[1] = 1;
-
         arrSceneData = new List<SceneData>();
-        arrSceneData.Add(sd);
-        */
-
     }
     public GameData(GameManager GM)//tạo save file từ GameManager
     {
@@ -61,6 +47,16 @@ public class GameData
         playerPos[1] = GM.player.transform.position.y;
 
         stopTime = GM.gameTimer.getCurrentTime();
+
+        arrSceneData = new List<SceneData>();
+
+        Dictionary<string, SceneData> dict = GM.tempSavedSceneData;
+        Debug.Log("dict.Count " + dict.Count);
+        foreach (KeyValuePair<string, SceneData> pair in dict)
+        {
+            arrSceneData.Add(pair.Value);
+        }        
+        
     }
 
 

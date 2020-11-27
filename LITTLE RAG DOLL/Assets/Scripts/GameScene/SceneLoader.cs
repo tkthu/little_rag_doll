@@ -87,6 +87,7 @@ public class SceneLoader : MonoBehaviour
         }
         loadEnemies();
         loadInteractables();
+        loadCollectables();
 
         Debug.Log("New scene loaded: "+ previousSceneName + " -> "+ currentScene.name);
         previousSceneName = currentScene.name;
@@ -110,6 +111,32 @@ public class SceneLoader : MonoBehaviour
             GameManager.GM.GameOverMenu.SetActive(false);
             GameManager.GM.player.SetActive(true);
         }
+    }
+
+    private void loadCollectables()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("CollectablesHolder");
+        if (holder != null)
+        {
+            foreach (Transform child in holder.transform)
+            {
+                SceneData sd = new SceneData();
+                bool hasSaved = GameManager.GM.tempSavedSceneData.TryGetValue(SceneManager.GetActiveScene().name, out sd);
+                if (hasSaved)
+                {
+                    for (int i = 0; i < sd.collectedSpiritPos_x.Length; i++)
+                    {
+                        if (child.position.x == sd.collectedSpiritPos_x[i] && child.position.y == sd.collectedSpiritPos_y[i])
+                        {
+                            child.gameObject.SetActive(false);
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+
     }
 
     private void loadEnemies()

@@ -10,7 +10,8 @@ public class SceneTrigger : MonoBehaviour
         {            
             collision.GetComponent<PlayerMovement>().resetAction();
             collision.attachedRigidbody.velocity = Vector2.zero;
-            GameManager.GM.loadScene(toScene);            
+            GameManager.GM.saveTemp();
+            GameManager.GM.loadScene(toScene);
         }
     }
 }
