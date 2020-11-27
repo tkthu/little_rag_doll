@@ -13,15 +13,6 @@ public static class SaveSystem
         GameData gameData = new GameData();
         gameData.filenumber = number;
 
-        Debug.Log("saveData"
-                + " - gameData.filenumber " + gameData.filenumber
-                + " - gameData.score " + gameData.score
-                + " - gameData.HPmax " + gameData.HPmax
-                + " - gameData.sceneHasPlayer " + gameData.sceneHasPlayer
-                + " - gameData.playerPos " + gameData.playerPos[0] + " " + gameData.playerPos[1]
-                
-                ) ;
-
         formatter.Serialize(stream, gameData);
         stream.Close();
     }
@@ -32,15 +23,7 @@ public static class SaveSystem
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameData gameData = new GameData(GM);
-
-        Debug.Log("saveData"
-                + " - gameData.filenumber " + gameData.filenumber
-                + " - gameData.score " + gameData.score
-                + " - gameData.HPmax " + gameData.HPmax
-                + " - gameData.sceneHasPlayer " + gameData.sceneHasPlayer
-                + " - gameData.playerPos " + gameData.playerPos[0] + " " + gameData.playerPos[1]
-
-                );
+        
 
         formatter.Serialize(stream, gameData);
         stream.Close();
@@ -57,15 +40,6 @@ public static class SaveSystem
             GameData gameData = formatter.Deserialize(stream) as GameData;
 
             stream.Close();
-            Debug.Log("saveData"
-                + " - gameData.filenumber " + gameData.filenumber
-                + " - gameData.score " + gameData.score
-                + " - gameData.HPmax " + gameData.HPmax
-                + " - gameData.sceneHasPlayer " + gameData.sceneHasPlayer
-                + " - gameData.playerPos " + gameData.playerPos[0] + " " + gameData.playerPos[1]
-                + " - gameData.stopTime " + gameData.stopTime
-                
-                );
             return gameData;
         }
         else

@@ -18,7 +18,7 @@ public class PlatformController : MonoBehaviour
     {
         // Press S and K to go down
         
-        if(Input.GetButton("Duck") && Input.GetButton("Jump"))
+        if(Input.GetKey(GameManager.GM.down) && Input.GetKey(GameManager.GM.jump))
         {
             effector.rotationalOffset = 180f;
            

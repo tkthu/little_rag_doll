@@ -9,8 +9,11 @@ public class Attachment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attachment = Instantiate(attachment, transform.localPosition, Quaternion.identity);
-        attachment.transform.SetParent(transform);
-        attachment.transform.localPosition = Vector2.zero;
+        if(transform.childCount == 0)
+        {
+            attachment = Instantiate(attachment, transform.localPosition, Quaternion.identity);
+            attachment.transform.SetParent(transform);
+            attachment.transform.localPosition = Vector2.zero;
+        }        
     }
 }

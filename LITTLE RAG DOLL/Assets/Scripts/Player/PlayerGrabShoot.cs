@@ -150,9 +150,6 @@ public class PlayerGrabShoot : MonoBehaviour
                 case "StraightBullet":
                     caughtedBullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullets/StraightBullet_Dummy"));
                     break;
-                case "Pistil":
-                    caughtedBullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullets/Pistil_Dummy"));
-                    break;
             }
             caughtedBullet.transform.position = transform.position;
             caughtedBullet.transform.SetParent(transform);

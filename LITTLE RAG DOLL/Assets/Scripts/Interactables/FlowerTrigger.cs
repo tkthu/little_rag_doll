@@ -6,7 +6,7 @@ public class FlowerTrigger : MonoBehaviour
 {
     private Transform GunBounceBullet;
     //Time rate
-    public float fireRate = 5f;
+    public float fireRate = 10f;
     private float timeRate;
     private GameObject bulletBounce;
     //Xu li dan bay 4 huong

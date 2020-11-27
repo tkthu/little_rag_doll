@@ -5,16 +5,15 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     bool save = false;
-    public AudioClip checkPoint;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //AudioManager.instance.PlaySound(checkPoint, transform.position);
             if (!save)
             {
                 GameManager.GM.player.GetComponent<PlayerHealth>().addBlood(100);
+                GameManager.GM.saveTemp();
                 SaveSystem.saveData(GameManager.GM);
                 Debug.Log("Saving...");
                 save = true;

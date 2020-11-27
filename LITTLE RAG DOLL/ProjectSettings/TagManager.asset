@@ -25,6 +25,8 @@ TagManager:
   - bigBlood
   - smallBlood
   - Border
+  - CollectablesHolder
+  - Pistil
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -38,10 +39,10 @@ public class GameManager : MonoBehaviour
 
 	private GameData gameData;
 
+	[HideInInspector] public List<GameObject> collected;
+	[HideInInspector] public Dictionary<string,SceneData> tempSavedSceneData;
+
 	[HideInInspector] public bool testing = false;
-
-	
-
 
 	void Awake()
 	{
@@ -58,7 +59,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jumpKey", "K"));
-		interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interactKey", "I"));
 		eatShoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("eatShootKey", "L"));
 		attack = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("attackKey", "J"));
 		up = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("upKey", "W"));
@@ -78,6 +78,62 @@ public class GameManager : MonoBehaviour
 
 		scoreSpirit = GameUI.transform.Find("SpiritText").gameObject.GetComponent<Text>() ;
 
+		collected = new List<GameObject>();
+		tempSavedSceneData = new Dictionary<string, SceneData>();
+	}
+
+	public void addToCollection(GameObject go)
+    {
+		collected.Add(go);
+	}
+	
+	public void saveTemp()
+    {
+		SceneData sd = new SceneData();
+		bool hasSaved = GameManager.GM.tempSavedSceneData.TryGetValue(SceneManager.GetActiveScene().name, out sd);
+		if (!hasSaved)
+		{
+			List<float> collected_x = new List<float>();
+			List<float> collected_y = new List<float>();
+			foreach (GameObject go in collected)
+			{
+				collected_x.Add(go.transform.position.x);
+				collected_y.Add(go.transform.position.y);
+			}
+			sd = new SceneData();
+			sd.sceneName = SceneManager.GetActiveScene().name;
+			sd.collectedSpiritPos_x = collected_x.ToArray();
+			sd.collectedSpiritPos_y = collected_y.ToArray();
+
+			tempSavedSceneData.Add(sd.sceneName, sd);
+			collected = new List<GameObject>();
+		}
+		else
+		{
+			Debug.Log("sd.collectedSpiritPos_x.Length "+ sd.collectedSpiritPos_x.Length);
+			List<float> collected_x = new List<float>();
+			List<float> collected_y = new List<float>();
+			foreach (GameObject go in collected)
+			{
+				collected_x.Add(go.transform.position.x);
+				collected_y.Add(go.transform.position.y);
+			}
+
+			for (int i = 0; i < sd.collectedSpiritPos_x.Length; i++)
+			{
+				collected_x.Add(sd.collectedSpiritPos_x[i]);
+				collected_y.Add(sd.collectedSpiritPos_y[i]);
+			}
+
+			sd = new SceneData();
+			sd.sceneName = SceneManager.GetActiveScene().name;
+			sd.collectedSpiritPos_x = collected_x.ToArray();
+			sd.collectedSpiritPos_y = collected_y.ToArray();
+
+			tempSavedSceneData[sd.sceneName] = sd;
+			collected = new List<GameObject>();
+		}
+		
 	}
 
 	public void setGameData(GameData gameData)
@@ -92,42 +148,48 @@ public class GameManager : MonoBehaviour
 	public void loadGameData()
 	{
 		gameTimer.TimerStop();
+		tempSavedSceneData = new Dictionary<string, SceneData>();
+		List<SceneData> list = gameData.arrSceneData;
+		Debug.Log("list " + list.Count);
+		foreach (SceneData sd in list)
+		{
+			Debug.Log("sceneName "+sd.sceneName);
+			tempSavedSceneData.Add(sd.sceneName, sd);
+		}
 		loadAtCheckpoint = true;
 		loadScene(gameData.sceneHasPlayer);
 		PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 		playerHealth.HPmax = gameData.HPmax;
-		playerHealth.HP = gameData.HPmax;
+		playerHealth.resetState();
 		score = gameData.score;
 		player.transform.position = new Vector2(gameData.playerPos[0], gameData.playerPos[1]);
+		player.GetComponent<PoolingItem>().resetParent();
 		gameTimer.TimerStart(gameData.stopTime);
+
 
 		scoreSpirit.text = ""+score;
 	}
 	
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape) && !isGameover)
+		if (Input.GetKeyDown(KeyCode.Escape) && !isGameover && player.activeSelf)
 		{
 			if (GameIsPaused)
-			{
 				resume();
-			}
 			else
-			{
 				pause();
-			}
 		}
 	}
 
     public void startGame()
     {
+		collected = new List<GameObject>();
 		if (firstTime) 
 		{
 			firstTime = false;
-
 			GameObject playerPrefabs = Resources.Load<GameObject>("Prefabs/Player/Player");
 			player = Instantiate(playerPrefabs);
-			player.SetActive(false);
+			player.SetActive(false);			
 			GameObject parentObject = new GameObject("GameObjects");
 			player.AddComponent<PoolingItem>().setOriginalParent(parentObject.transform);
 			DontDestroyOnLoad(parentObject);
@@ -156,6 +218,7 @@ public class GameManager : MonoBehaviour
 
 	public void addScore(int amount)
 	{
+
 		score = score + amount;
 		scoreSpirit.text = "" + score;
 	}

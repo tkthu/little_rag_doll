@@ -6,17 +6,15 @@ public class PoolingManager : MonoBehaviour
 {
 	// Enemys bullets
 	private List<GameObject> pooledStraightBullets;
-	private int StraightBulletsNo = 15;
+	private int StraightBulletsNo = 20;
 	private List<GameObject> pooledBounceBullets;
-	private int BounceBulletsNo = 15;
+	private int BounceBulletsNo = 20;
 
 	// Player bullets
 	private List<GameObject> pooledPlayerStraightBullets;
-	private int PlayerStraightBulletsNo = 15;
+	private int PlayerStraightBulletsNo = 10;
 	private List<GameObject> pooledPlayerBounceBullets;
-	private int PlayerBounceBulletsNo = 15;
-	private List<GameObject> pooledPlayerPistils;
-	private int PlayerPistilsNo = 5;
+	private int PlayerBounceBulletsNo = 10;
 
 	// Enemies
 	private List<GameObject> pooledBat;
@@ -62,10 +60,8 @@ public class PoolingManager : MonoBehaviour
 		//khoi tao cac pool cho bullets cua Player
 		pooledPlayerStraightBullets = instantiatePool("Prefabs/Bullets/StraightBullet_Player", PlayerStraightBulletsNo, "PlayerStraightBullets");
 		pooledPlayerBounceBullets = instantiatePool("Prefabs/Bullets/BounceBullet_Player", PlayerBounceBulletsNo, "PlayerBounceBullets");
-		pooledPlayerPistils = instantiatePool("Prefabs/Bullets/Pistil_Player", PlayerPistilsNo, "PlayerPistils");
 		listOfPool.Add(pooledPlayerStraightBullets);
 		listOfPool.Add(pooledPlayerBounceBullets);
-		listOfPool.Add(pooledPlayerPistils);
 
 		//Khoi tao Enemies
 		pooledBat = instantiatePool("Prefabs/Enemies/Bat", BatNo, "Bats");
@@ -130,10 +126,6 @@ public class PoolingManager : MonoBehaviour
 	public GameObject getPlayerBounceBullets()
 	{
 		return getPooledObject(pooledPlayerBounceBullets, PlayerBounceBulletsNo);
-	}
-	public GameObject getPlayerPistils()
-	{
-		return getPooledObject(pooledPlayerPistils, PlayerPistilsNo);
 	}
 	#endregion
 
