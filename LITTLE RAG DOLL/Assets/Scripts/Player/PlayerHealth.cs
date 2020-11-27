@@ -29,6 +29,8 @@ public class PlayerHealth : Heath
     {
         HP = HPmax;
         immune = false;
+        transform.Find("GrabShoot").gameObject.SetActive(false);
+        transform.Find("Attack").gameObject.SetActive(false);
     }
 
     override
