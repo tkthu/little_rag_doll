@@ -8,7 +8,7 @@ public class SaveFileSceneController : MonoBehaviour
 {
     /*
      * khi mới vào chơi (khi nhấn Play), người dùng phải chọn chổ để lưu tiến trình (lưu HPmax, spirits,....).
-     * Rồi trong lúc chơi, khi người chơi đi ngang qua checkpoint (bình đôm đốm), 
+     * Rồi trong lúc chơi, khi người chơi đi ngang qua checkpoint, 
      * game sẽ tự động lưu tiến trình của người chơi vào đúng cái chỗ đó.
      */
 

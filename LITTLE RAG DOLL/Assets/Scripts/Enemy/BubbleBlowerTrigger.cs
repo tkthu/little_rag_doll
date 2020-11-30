@@ -47,12 +47,11 @@ public class BubbleBlowerTrigger : MonoBehaviour
             if (Time.time > timeRate)
             {
                 AudioManager.instance.PlaySound(bubbleAttack, transform.position);
-                bulletStraight = GameManager.GM.poolingManager.getStraightBullets();
-                if (bulletStraight != null)
+                bulletStraight = GameManager.GM.poolingManager.getStraightBullets();// Lấy đạn chưa dùng trong pool
+                if (bulletStraight != null)// tìm thấy đạn
                 {
                     anim.SetTrigger("Shoot");
                     bulletStraight.transform.position = GunStraightBullet.position;
-                    bulletStraight.transform.rotation = GunStraightBullet.rotation;
                     bulletStraight.SetActive(true);
 
                     timeRate = Time.time + fireRate;

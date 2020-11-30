@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class SceneData
 {
     public string sceneName;
-    public float[] collectedSpiritPos_x;
-    public float[] collectedSpiritPos_y;
+    public float[] collectedPos_x;
+    public float[] collectedPos_y;
 }
 
 [System.Serializable]
@@ -21,10 +21,10 @@ public class GameData
     public float stopTime;
     public List<SceneData> arrSceneData;
 
-    public GameData()//Khởi tạo save file (lúc nhấn vào nút tạo mới save file)
+    public GameData()//Khởi tạo save file (lúc nhấn vào nút "Empty slot")
     {
         score = 0;
-        HPmax = 5;//????
+        HPmax = 5;
         sceneHasPlayer = SceneName.Scene_1.ToString();
 
         playerPos = new float[2];
@@ -51,7 +51,6 @@ public class GameData
         arrSceneData = new List<SceneData>();
 
         Dictionary<string, SceneData> dict = GM.tempSavedSceneData;
-        Debug.Log("dict.Count " + dict.Count);
         foreach (KeyValuePair<string, SceneData> pair in dict)
         {
             arrSceneData.Add(pair.Value);

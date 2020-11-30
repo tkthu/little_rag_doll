@@ -173,7 +173,6 @@ public class PoolingManager : MonoBehaviour
 	public List<List<GameObject>> getlistOfEnemiesPool()
     {
 		return listOfEnemisePool;
-
 	}
 	public List<List<GameObject>> getListOfInteractablesPool()
 	{

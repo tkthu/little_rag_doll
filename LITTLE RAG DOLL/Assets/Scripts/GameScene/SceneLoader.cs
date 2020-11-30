@@ -54,23 +54,6 @@ public class SceneLoader : MonoBehaviour
 
     private void onSceneLoaded(Scene currentScene, LoadSceneMode loadSceneMode)
     {
-        #region for testing
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject go in gos)
-        {
-            if (go != GameManager.GM.player)
-                Destroy(go);
-        }
-
-        if (previousSceneName == "" && equal(currentScene, SceneName.SampleScene))
-        {
-            GameManager.GM.testing = true;
-            GameManager.GM.startGame();
-            GameManager.GM.player.SetActive(true);
-            
-        }
-        #endregion
-
         UIShowing(currentScene);
         
         if (GameManager.GM.loadAtCheckpoint)
@@ -131,10 +114,10 @@ public class SceneLoader : MonoBehaviour
                 SceneData sd = new SceneData();
                 bool hasSaved = GameManager.GM.tempSavedSceneData.TryGetValue(SceneManager.GetActiveScene().name, out sd);
                 if (hasSaved)
-                {
-                    for (int i = 0; i < sd.collectedSpiritPos_x.Length; i++)
+                { 
+                    for (int i = 0; i < sd.collectedPos_x.Length; i++)
                     {
-                        if (child.position.x == sd.collectedSpiritPos_x[i] && child.position.y == sd.collectedSpiritPos_y[i])
+                        if (child.position.x == sd.collectedPos_x[i] && child.position.y == sd.collectedPos_y[i])
                         {
                             child.gameObject.SetActive(false);
                             break;

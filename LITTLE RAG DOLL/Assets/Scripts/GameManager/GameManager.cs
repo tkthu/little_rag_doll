@@ -89,51 +89,39 @@ public class GameManager : MonoBehaviour
 	
 	public void saveTemp()
     {
+		List<float> collected_x = new List<float>();
+		List<float> collected_y = new List<float>();
 		SceneData sd = new SceneData();
-		bool hasSaved = GameManager.GM.tempSavedSceneData.TryGetValue(SceneManager.GetActiveScene().name, out sd);
-		if (!hasSaved)
+		bool alreadySaved = tempSavedSceneData.TryGetValue(SceneManager.GetActiveScene().name, out sd);
+		if (!alreadySaved)// SceneData này chưa được lưu => lưu SceneData
+		{			
+			foreach (GameObject go in collected)
+			{
+				collected_x.Add(go.transform.position.x);
+				collected_y.Add(go.transform.position.y);
+			}			
+		}
+		else// SceneData này đã được lưu => update SceneData
 		{
-			List<float> collected_x = new List<float>();
-			List<float> collected_y = new List<float>();
 			foreach (GameObject go in collected)
 			{
 				collected_x.Add(go.transform.position.x);
 				collected_y.Add(go.transform.position.y);
 			}
-			sd = new SceneData();
-			sd.sceneName = SceneManager.GetActiveScene().name;
-			sd.collectedSpiritPos_x = collected_x.ToArray();
-			sd.collectedSpiritPos_y = collected_y.ToArray();
-
-			tempSavedSceneData.Add(sd.sceneName, sd);
-			collected = new List<GameObject>();
-		}
-		else
-		{
-			Debug.Log("sd.collectedSpiritPos_x.Length "+ sd.collectedSpiritPos_x.Length);
-			List<float> collected_x = new List<float>();
-			List<float> collected_y = new List<float>();
-			foreach (GameObject go in collected)
+			for (int i = 0; i < sd.collectedPos_x.Length; i++)
 			{
-				collected_x.Add(go.transform.position.x);
-				collected_y.Add(go.transform.position.y);
+				collected_x.Add(sd.collectedPos_x[i]);
+				collected_y.Add(sd.collectedPos_y[i]);
 			}
-
-			for (int i = 0; i < sd.collectedSpiritPos_x.Length; i++)
-			{
-				collected_x.Add(sd.collectedSpiritPos_x[i]);
-				collected_y.Add(sd.collectedSpiritPos_y[i]);
-			}
-
-			sd = new SceneData();
-			sd.sceneName = SceneManager.GetActiveScene().name;
-			sd.collectedSpiritPos_x = collected_x.ToArray();
-			sd.collectedSpiritPos_y = collected_y.ToArray();
-
-			tempSavedSceneData[sd.sceneName] = sd;
-			collected = new List<GameObject>();
+			tempSavedSceneData.Remove(sd.sceneName);
 		}
-		
+		sd = new SceneData();
+		sd.sceneName = SceneManager.GetActiveScene().name;
+		sd.collectedPos_x = collected_x.ToArray();
+		sd.collectedPos_y = collected_y.ToArray();
+
+		tempSavedSceneData.Add(sd.sceneName, sd);
+		collected = new List<GameObject>();
 	}
 
 	public void setGameData(GameData gameData)
@@ -150,7 +138,6 @@ public class GameManager : MonoBehaviour
 		gameTimer.TimerStop();
 		tempSavedSceneData = new Dictionary<string, SceneData>();
 		List<SceneData> list = gameData.arrSceneData;
-		Debug.Log("list " + list.Count);
 		foreach (SceneData sd in list)
 		{
 			Debug.Log("sceneName "+sd.sceneName);
