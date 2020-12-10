@@ -171,12 +171,14 @@ public class PlayerMovement : MonoBehaviour
             Vector2 shootDir = transform.localScale;
             Vector2 grabDir = Vector2.one;
             Vector2 offset = Vector2.zero;
+            grabShoot.GetComponent<SpriteRenderer>().flipX = false;
             if (isDucking)
                 offset = new Vector2(0, -0.4f);
             else if (isClinging)
             {
                 shootDir = new Vector2(-1 * transform.localScale.x, 1);
                 grabDir = new Vector2(-1, 1);
+                grabShoot.GetComponent<SpriteRenderer>().flipX = true;
                 offset = Vector2.zero;
             }
 

@@ -49,7 +49,7 @@ public class SaveFileSceneController : MonoBehaviour
             }
             else
             {// đây là update lại giao diện của một slot (khi nhấn xóa)
-                SaveSlots[i].transform.Find("Text").GetComponent<Text>().text = "Empty Slot " + i;
+                SaveSlots[i].transform.Find("Text").GetComponent<Text>().text = "Empty Slot " + (i + 1);
                 SaveSlots[i].transform.Find("GameUI").gameObject.SetActive(false);
 
             }
